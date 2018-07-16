@@ -1,0 +1,61 @@
+* SUMMARY
+  Từ phiên bản 16.3 trở đi, React đã có lifecycle mới tuy nhiên vẫn hỗ trợ life cycle cũ.
+  Từ phiên bản 17 thì lifecycle cũ không được hỗ trợ nữa nên ở bài này chỉ để cập đến lifecyle hook mới của React.
+  
+  Ở lifecycle cũ phát sinh nhiều vấn đề nhất là naming của lifecycle hook, gây hiểu nhầm!
+
+  Người ta thường dùng constructor, componentWillMount, comonentWillReceiveProps để
+  init state dựa trệ props, Vì vậy nhiều khi gây dupicate code. Đó là lý do mà getDiviredStateFromProps sinh ra
+  để xoá sự khó khiểu đó đi.
+
+  Hoặc bạn muốn get thông tin nào đó của các ref trước khi render chẳng hạn, và sử dụng nó sau khi nó sau khi render lại.
+  Đó là lý do mà getSnapshotBeforeUpdate ra đời để thay thế componentWillUpdate, và componentDidUpdate có thêm một param
+  mới là snapshoot.
+  
+  Tóm lại lifecycle mới sẽ có dạng tóm tắt như sau:
+  - Mounting: constructor => getDiviredStateFromProps => render => componentDidMount
+  - Updating: getDiviredStateFromProps => shouldComponentUpdate => render => getSnapshootBeforeUpdate => componentDidUpdate
+  - Unmouting: componentWillUnmount
+----------------------------------------------------------------------------------------------------------------
+
+
+ * NỘI DUNG
+ - Mounting(Sinh ra)
+  + contructor(props): void
+    ++ Ở ES6 thì thường dùng để tạo init state, bind context(this) cho các function, event handling.
+  + static getDiviredStateFromProps(props, state): object
+    ++ Trước đây, với lifecycle cũ, người ta thường tính toán state thông qua props trong hàm constructor
+       Và khi components update props thì dùng kèm với componentWillReceiveProps để set lại state.
+       Hook này sinh ra để thay thế việc này.
+    ++ return về một object chính là state.
+  + render(): ReactNode
+  + componentDidMount(prevProps, prevState): void
+    ++ render lần đầu, lúc này thích hợp để tương tác với Tree Node
+ 
+ - Updating(Lớn lên)
+  + static getDiviredStateFromProps(nextProps, state): object
+    ++ Khi props thay đổi thì hook này mới được gọi
+    ++ state thay đổi thì hook này không được gọi
+  + shouldComponentUpdate(nextProps, nextState): boolean
+    ++ Khi prop hoặc state thay đổi thì hook này được gọi
+    ++ Với PureComponent thì dev không thể định nghĩ lại. Mặc định là shallow compare.
+    ++ Với Component thì dev có thể định nghĩ lại, Mặc định là referent compare.
+    ++ Nếu xác định component này chỉ render 1 lần thì return false. Chống render(Đối với Component).
+    ++ Nếu return false thì sẽ không render nữa.
+  + render(): ReactNode
+  + getSnapshootBeforeUpdate(prevProps, prevState): object
+    ++ Thường thì get một số thông tin của props, state, hoặc ref trước khi re-render
+  + componentDidUpdate(prevProps, prevState, snapshoot): void
+    ++ Lúc này thích hợp để tương tác với Tree Node.
+  
+ - Unmounting(Chết đi)
+  + componentWillUnmount: void
+    ++ Thường thì chạy một function nào đó, ví dụ như clear interval, delete rác. Ít khi sử dụng.
+    ++ Không nên setState tại đây, Vì nó chết rồi không sống lại nữa.
+----------------------------------------------------------------------------------------------------------------
+
+
+* Một vài chia sẻ thêm
+ - Hiện tại là phiên bản 16.4.1 Lifecycle hook khá nhiều vì phải hỗ trợ cả hai. Khuyến khích nên sử dụng lifecycle mới.
+ - Khuyến khích sử dụng coding standar của airbnb cho React.
+ - Khuyến khích sử dụng class ES7 thay thế cho ES6 để tránh việc bind this, init state, v.v.
