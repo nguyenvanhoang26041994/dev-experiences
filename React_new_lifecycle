@@ -13,6 +13,7 @@
     ++ return về một object chính là state.
   + render(): ReactNode
   + componentDidMount(prevProps, prevState): void
+    ++ render lần đầu, lúc này thích hợp để tương tác với Tree Node
  
  - Updating(Lớn lên)
   + static getDiviredStateFromProps(nextProps, state): object
@@ -23,9 +24,17 @@
     ++ Với PureComponent thì dev không thể định nghĩ lại. Mặc định là shallow compare.
     ++ Với Component thì dev có thể định nghĩ lại, Mặc định là referent compare.
     ++ Nếu xác định component này chỉ render 1 lần thì return false. Chống render(Đối với Component).
+    ++ Nếu return false thì sẽ không render nữa.
   + render(): ReactNode
-  + getSnapshootBeforeUpdate(prevProps, prevState): void
+  + getSnapshootBeforeUpdate(prevProps, prevState): object
+    ++ Thường thì get một số thông tin của props, state, hoặc ref trước khi re-render
   + componentDidUpdate(prevProps, prevState, snapshoot): void
+    ++ Lúc này thích hợp để tương tác với Tree Node.
+  
+ - Unmounting(Chết đi)
+  + componentWillUnmount: void
+    ++ Thường thì chạy một function nào đó, ví dụ như clear interval, delete rác. Ít khi sử dụng.
+    ++ Không nên setState tại đây, Vì nó chết rồi không sống lại nữa.
 
 * Một vài chia sẽ thêm
   - Hiện tại ở là phiên bản 16.4.1 Lifecycle hook khá nhiêu vì phải hỗ trợ cả hai. Khuyến khích nên sử dụng lifecycle mới.
