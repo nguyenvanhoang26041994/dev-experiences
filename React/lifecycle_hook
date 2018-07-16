@@ -87,7 +87,7 @@
 
       Hãy chuyển sang lifecycle mới, nó sẽ trông như thế nào?. Như này
       class DemoComponent extends React.Component {
-        static getDiviredStateFromProps(props, state) {
+        static getDerivedStateFromProps(props, state) {
           return {
             fullName: `${props.lastName} ${props.firstName}`,
           };
@@ -125,4 +125,4 @@
 * Một vài chia sẻ thêm
  - Hiện tại là phiên bản 16.4.1 Lifecycle hook khá nhiều vì phải hỗ trợ cả hai. Khuyến khích nên sử dụng lifecycle mới.
  - Khuyến khích sử dụng coding standar của airbnb cho React.
- - Khuyến khích sử dụng class ES7 thay thế cho ES6 để tránh việc bind this, init state, v.v.
+ - Khuyến khích sử dụng class ES7 thay thế cho ES6 để tránh việc bind this, init state, propTypes, defaultPropTypes
