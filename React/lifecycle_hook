@@ -43,7 +43,7 @@
         }
       }
    
-  ☆ static getDiviredStateFromProps(props, state): object
+  ☆ static getDerivedStateFromProps(props, state): object
     ++ Trước đây, với lifecycle cũ, người ta thường tính toán state thông qua props trong hàm constructor
        Và khi components update props thì dùng kèm với componentWillReceiveProps để set lại state.
        Hook này sinh ra để thay thế việc này.
