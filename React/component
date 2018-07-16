@@ -1,0 +1,118 @@
+* SUMMARY
+- Hiện tại các bài giảng trên youtube hoặc nhiều nơi khác đang sử dụng React.Component chứ họ không quan tâm hoặc không
+  biết rằng còn có React.PureComponent và nhiều khi bạn không biết khi nào sử dụng React.Component hay Functional Component
+  
+  Bài viết này sẽ giúp các bạn nắm rõ hơn khi nào dùng và khi nào không nên dùng
+-----------------------------------------------------------------------------------------------------------------------
+ 
+* NỘI DUNG:
+- Hiện tại thì có 3 loại component là
+☆ Functional Component
+  Ví dụ
+  function DemoComponent() {
+    return (
+      <div>
+        Hello world!
+      </div>
+    );
+  }
+  
+  hoặc ngắn gọn hơn là const DemoComponent = () => <div>Hello world</div>;
+  
+ ☆ React Component
+   Ví dụ
+   class DemoComponent extends React.Component {
+    render() {
+      return (
+        <div>
+          Hello world!
+        </div>
+      );
+    }
+   }
+   
+ ☆ React PureComponent
+   Ví dụ
+   class DemoComponent extends React.PureComponent {
+    render() {
+      return (
+        <div>
+          Hello world!
+        </div>
+      );
+    }
+   }
+   
+   
+   - Đặc điểm:
+    + Functional Component
+      ++ Nó đơn giản chỉ là một function return về một React Element mà thôi.
+      ++ Nó không implement React lifecycle hook nên nói về tốc độ render là nó nhanh nhất.
+      
+    + React Component
+      ++ Khá nhiều bạn code thằng này nhưng rất ít bạn hiểu sâu vào nó.
+         Để hiểu sâu vào nó thì mình sẽ so sánh sự khác nhau giữa nó với thằng anh em sinh đôi nhưng thông minh của nó
+         là React PureComponent
+      ++ Bạn hoàn toàn có thể định nghĩa shouldComponentUpdate hook để tối đa performance.
+      
+    + React PureComponent
+      ++ Dường như rất ít bạn không hề biết nó tồn tại. Không sử dụng nó. Nó hoàn toàn giống với React Component, chỉ
+         khác một chút ở shouldComponentUpdate hook. Chính sự khác nhau nhỏ này khiến React PureComponent thông minh hơn.
+      ++ Bạn không thể định nghĩa shouldComponentUpdate. Mình đã thử định nghĩa hàm hàm và nhận lại error.
+      
+   - Sự khác nhau giữa Component và PureComponent.
+    + Như đã nói ở trên, sự khác nhau giữa 2 thằng này quanh quẩn ở shoulComponentUpdate.
+      PureComponent thì nó là shallow comparre.
+      Component thì nó là reference compare(mặc định) và có thể định nghĩa lại để tối đa perpormance.
+      
+      Để ví dụ cho sự khác nhau này, mình sẽ có một vị dụ.
+      
+      class DemoComponent extends React.Component {
+        constructor(props) {
+          super(props);
+          
+          this.state = {
+            myEXGirlFriend = 'KMS',
+          };
+        }
+        
+        componentDidMount() {
+          this.setState({ myEXGirlFriend: 'KMS' });
+        }
+        
+        componentDidUpdate() {
+          console.log('Hello world');
+        }
+       
+        render() {
+          return (
+            <span>{this.state.myEXGirlFriend}</span>
+          );
+        }
+      }
+      
+      class DemoPureComponent extends React.PureComponent {
+        constructor(props) {
+          super(props);
+          
+          this.state = {
+            myEXGirlFriend = 'KMS',
+          };
+        }
+        
+        componentDidMount() {
+          this.setState({ myEXGirlFriend: 'KMS' });
+        }
+        
+        componentDidUpdate() {
+          console.log('Hello world');
+        }
+       
+        render() {
+          return (
+            <span>{this.state.myEXGirlFriend}</span>
+          );
+        }
+      }
+      
+      Thì bạn sẽ thấy với PureComponent thì ....
