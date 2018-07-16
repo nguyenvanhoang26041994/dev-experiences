@@ -5,7 +5,7 @@
   Ở lifecycle cũ phát sinh nhiều vấn đề nhất là naming của lifecycle hook, gây hiểu nhầm!
 
   Người ta thường dùng constructor, componentWillMount, comonentWillReceiveProps để
-  init state dựa trệ props, Vì vậy nhiều khi gây dupicate code. Đó là lý do mà getDiviredStateFromProps sinh ra
+  init state dựa trên props, Vì vậy nhiều khi gây dupicate code. Đó là lý do mà getDiviredStateFromProps sinh ra
   để xoá sự khó khiểu đó đi.
 
   Hoặc bạn muốn get thông tin nào đó của các ref trước khi render chẳng hạn, và sử dụng nó sau khi nó sau khi render lại.
@@ -23,11 +23,78 @@
  - Mounting(Sinh ra)
   + contructor(props): void
     ++ Ở ES6 thì thường dùng để tạo init state, bind context(this) cho các function, event handling.
+      Ví dụ: 
+  
+      class DemoComponent extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {};
+          this.handleClick = this.handleClick.bind(this);
+        }
+        
+        handleClick() {
+          this.setState({});
+        }
+        
+        render() {
+          return (
+            <button onClick={this.handleClick}>Click</button>
+          );
+        }
+      }
+   
   + static getDiviredStateFromProps(props, state): object
     ++ Trước đây, với lifecycle cũ, người ta thường tính toán state thông qua props trong hàm constructor
        Và khi components update props thì dùng kèm với componentWillReceiveProps để set lại state.
        Hook này sinh ra để thay thế việc này.
     ++ return về một object chính là state.
+      Ví dụ với lifecycle cũ
+      class DemoComponent extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            fullName: `${props.lastName} ${props.firstName}`,
+          };
+        }
+    
+        componentWillReceiveProps(nextProps, state) {
+          this.setState({ fullName: `${nextProps.lastName} ${nextProps.firstName}` });
+        }
+        ....
+      }
+      
+      hoặc 
+     
+      class DemoComponent extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            fullName: '',
+          };
+        }
+        
+        componentWillMount() {}
+          this.setState({ fullName: `${this.props.lastName} ${this.props.firstName}` });
+        }
+    
+        componentWillReceiveProps(nextProps, state) {
+          this.setState({ fullName: `${nextProps.lastName} ${nextProps.firstName}` });
+        }
+        ....
+      }
+      
+      => Cực
+
+      Hãy chuyển sang lifecycle mới, nó sẽ trông như thế nào?. Như này
+      class DemoComponent extends React.Component {
+        static getDiviredStateFromProps(props, state) {
+          return {
+            fullName: `${props.lastName} ${props.firstName}`,
+          };
+        }
+        ....
+      }
+  
   + render(): ReactNode
   + componentDidMount(prevProps, prevState): void
     ++ render lần đầu, lúc này thích hợp để tương tác với Tree Node
