@@ -5,8 +5,8 @@
   Ở lifecycle cũ phát sinh nhiều vấn đề nhất là naming của lifecycle hook, gây hiểu nhầm!
 
   Người ta thường dùng constructor, componentWillMount, comonentWillReceiveProps để
-  init state dựa trên props, Vì vậy nhiều khi gây dupicate code. Đó là lý do mà getDiviredStateFromProps sinh ra
-  để xoá sự khó khiểu đó đi.
+  init state dựa trên props, Vì vậy nhiều khi gây dupicate code. Đó là lý do mà getDerivedStateFromProps sinh ra
+  để xoá sự khó hiểu đó đi.
 
   Hoặc bạn muốn get thông tin nào đó của các ref trước khi render chẳng hạn, và sử dụng nó sau khi nó sau khi render lại.
   Đó là lý do mà getSnapshotBeforeUpdate ra đời để thay thế componentWillUpdate, và componentDidUpdate có thêm một param
@@ -14,7 +14,7 @@
   
   Tóm lại lifecycle mới sẽ có dạng tóm tắt như sau:
   - Mounting: constructor => getDiviredStateFromProps => render => componentDidMount
-  - Updating: getDiviredStateFromProps => shouldComponentUpdate => render => getSnapshootBeforeUpdate => componentDidUpdate
+  - Updating: getDerivedStateFromProps => shouldComponentUpdate => render => getSnapshootBeforeUpdate => componentDidUpdate
   - Unmouting: componentWillUnmount
 ----------------------------------------------------------------------------------------------------------------
 
@@ -100,7 +100,7 @@
     ++ render lần đầu, lúc này thích hợp để tương tác với Tree Node
  
  - Updating(Lớn lên)
-  ☆ static getDiviredStateFromProps(nextProps, state): object
+  ☆ static getDerivedStateFromProps(nextProps, state): object
     ++ Khi props thay đổi thì hook này mới được gọi
     ++ state thay đổi thì hook này không được gọi
   ☆ shouldComponentUpdate(nextProps, nextState): boolean
