@@ -21,7 +21,7 @@
 
  * NỘI DUNG
  - Mounting(Sinh ra)
-  + contructor(props): void
+  ☆ contructor(props): void
     ++ Ở ES6 thì thường dùng để tạo init state, bind context(this) cho các function, event handling.
       Ví dụ: 
   
@@ -43,7 +43,7 @@
         }
       }
    
-  + static getDiviredStateFromProps(props, state): object
+  ☆ static getDiviredStateFromProps(props, state): object
     ++ Trước đây, với lifecycle cũ, người ta thường tính toán state thông qua props trong hàm constructor
        Và khi components update props thì dùng kèm với componentWillReceiveProps để set lại state.
        Hook này sinh ra để thay thế việc này.
@@ -95,28 +95,28 @@
         ....
       }
   
-  + render(): ReactNode
-  + componentDidMount(prevProps, prevState): void
+  ☆ render(): ReactNode
+  ☆ componentDidMount(prevProps, prevState): void
     ++ render lần đầu, lúc này thích hợp để tương tác với Tree Node
  
  - Updating(Lớn lên)
-  + static getDiviredStateFromProps(nextProps, state): object
+  ☆ static getDiviredStateFromProps(nextProps, state): object
     ++ Khi props thay đổi thì hook này mới được gọi
     ++ state thay đổi thì hook này không được gọi
-  + shouldComponentUpdate(nextProps, nextState): boolean
+  ☆ shouldComponentUpdate(nextProps, nextState): boolean
     ++ Khi prop hoặc state thay đổi thì hook này được gọi
     ++ Với PureComponent thì dev không thể định nghĩ lại. Mặc định là shallow compare.
     ++ Với Component thì dev có thể định nghĩ lại, Mặc định là referent compare.
     ++ Nếu xác định component này chỉ render 1 lần thì return false. Chống render(Đối với Component).
     ++ Nếu return false thì sẽ không render nữa.
-  + render(): ReactNode
-  + getSnapshootBeforeUpdate(prevProps, prevState): object
+  ☆ render(): ReactNode
+  ☆ getSnapshootBeforeUpdate(prevProps, prevState): object
     ++ Thường thì get một số thông tin của props, state, hoặc ref trước khi re-render
-  + componentDidUpdate(prevProps, prevState, snapshoot): void
+  ☆ componentDidUpdate(prevProps, prevState, snapshoot): void
     ++ Lúc này thích hợp để tương tác với Tree Node.
   
  - Unmounting(Chết đi)
-  + componentWillUnmount: void
+  ☆ componentWillUnmount: void
     ++ Thường thì chạy một function nào đó, ví dụ như clear interval, delete rác. Ít khi sử dụng.
     ++ Không nên setState tại đây, Vì nó chết rồi không sống lại nữa.
 ----------------------------------------------------------------------------------------------------------------
