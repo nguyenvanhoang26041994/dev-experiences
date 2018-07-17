@@ -104,7 +104,7 @@
     - Nếu return false thì sẽ tới hook re-render tiếp theo.
     
     Note: Để thấy được sự khác nhau giữa PureComponent và Component, hãy vào link dưới:
-      https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/component
+      https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/how_many_component_types
   
   ☆ render(): ReactNode
   ☆ getSnapshootBeforeUpdate(prevProps, prevState): object
