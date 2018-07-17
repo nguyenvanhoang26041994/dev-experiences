@@ -60,19 +60,12 @@
         componentWillReceiveProps(nextProps, state) {
           this.setState({ fullName: `${nextProps.lastName} ${nextProps.firstName}` });
         }
-        ....
+        ...
       }
       
       hoặc 
      
       class DemoComponent extends React.Component {
-        constructor(props) {
-          super(props);
-          this.state = {
-            fullName: '',
-          };
-        }
-        
         componentWillMount() {}
           this.setState({ fullName: `${this.props.lastName} ${this.props.firstName}` });
         }
@@ -80,7 +73,7 @@
         componentWillReceiveProps(nextProps, state) {
           this.setState({ fullName: `${nextProps.lastName} ${nextProps.firstName}` });
         }
-        ....
+        ...
       }
       
       => Cực
@@ -92,7 +85,7 @@
             fullName: `${props.lastName} ${props.firstName}`,
           };
         }
-        ....
+        ...
       }
   
   ☆ render(): ReactNode
