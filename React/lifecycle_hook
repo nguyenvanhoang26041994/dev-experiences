@@ -129,3 +129,5 @@
  
  - Khuyến khích sử dụng class ES7 thay thế cho ES6 để tránh việc bind this, init state, propTypes, defaultPropTypes,
    createRef()
+   
+Tác giả: Nguyễn Văn Hoàng
