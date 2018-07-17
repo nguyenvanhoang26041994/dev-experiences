@@ -80,6 +80,7 @@
 
       Hãy chuyển sang lifecycle mới, nó sẽ trông như thế nào?. Như này
       class DemoComponent extends React.Component {
+        state = {};
         static getDerivedStateFromProps(props, state) {
           return {
             fullName: `${props.lastName} ${props.firstName}`,
