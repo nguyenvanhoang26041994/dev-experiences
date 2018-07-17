@@ -22,7 +22,7 @@
  ≪NỘI DUNG≫
  ☞ Mounting(Sinh ra)
   ☆ contructor(props): void
-    - Ở ES6 thì thường dùng để tạo init state, bind context(this) cho các function, event handling.
+    - Ở ES6 thì thường dùng để tạo init state, bind context(this) cho các function, event handling, createRef().
       Ví dụ: 
   
       class DemoComponent extends React.Component {
@@ -127,4 +127,5 @@
  - Khuyến khích sử dụng coding standar của airbnb cho React.
     https://github.com/airbnb/javascript/tree/master/react
  
- - Khuyến khích sử dụng class ES7 thay thế cho ES6 để tránh việc bind this, init state, propTypes, defaultPropTypes
+ - Khuyến khích sử dụng class ES7 thay thế cho ES6 để tránh việc bind this, init state, propTypes, defaultPropTypes,
+   createRef()
