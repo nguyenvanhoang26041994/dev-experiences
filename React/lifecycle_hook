@@ -105,6 +105,7 @@
     
     Note: Để thấy được sự khác nhau giữa PureComponent và Component, hãy vào link dưới:
       https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/how_many_component_types
+      https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/component_vs_purecomponent
   
   ☆ render(): ReactNode
   ☆ getSnapshootBeforeUpdate(prevProps, prevState): object
