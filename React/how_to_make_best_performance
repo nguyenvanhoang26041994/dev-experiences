@@ -1,1 +1,21 @@
 Đang còn viết...
+≪SUMMARY≫
+  Lúc còn mới tập tành code React file bundle của mình thường lên tới từ 1Mb đến 6Mb. Chạy lần đầu trên product chậm rì
+  chậm rịt. Sau gần 1 năm dùng React thì bản thân cũng rút ra một cố cách dùng để cải thiện performance.
+  
+  Bài viết này sẽ xoanh quanh vấn đề làm sao để app chạy nhanh nhất ngay cả lần đầu vào trang web.
+  Các kỹ thuật mình nói trong bài viết sẽ bao gồm:
+  ☆ Code splitting, đây là kỹ thuật trọng điểm trong bài này.
+  ☆ Production build(with webpack)
+  ☆ Nén file với gzip
+  ☆ Server-side-rendering
+  ☆ CDN(Content Delivery Network)
+--------------------------------------------------------------------------------------------------------------
+
+
+≪NỘI DUNG≫
+☆ Code splitting
+☆ Production build
+☆ gzip
+☆ Server-side-rendering(SSR)
+☆ Sử dụng CDN(Content Delivery Network)
