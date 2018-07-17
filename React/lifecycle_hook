@@ -13,7 +13,7 @@
   mới là snapshoot.
   
   Tóm lại lifecycle mới sẽ có dạng tóm tắt như sau:
-  - Mounting: constructor => getDiviredStateFromProps => render => componentDidMount
+  - Mounting: constructor => getDerivedStateFromProps => render => componentDidMount
   - Updating: getDerivedStateFromProps => shouldComponentUpdate => render => getSnapshootBeforeUpdate => componentDidUpdate
   - Unmouting: componentWillUnmount
 ----------------------------------------------------------------------------------------------------------------
@@ -97,7 +97,7 @@
   
   ☆ render(): ReactNode
   ☆ componentDidMount(prevProps, prevState): void
-    ++ render lần đầu, lúc này thích hợp để tương tác với Tree Node
+    ++ Lúc này đã render lần đầu, lúc này thích hợp để tương tác với Tree Node
  
  - Updating(Lớn lên)
   ☆ static getDerivedStateFromProps(nextProps, state): object
@@ -113,7 +113,7 @@
   ☆ getSnapshootBeforeUpdate(prevProps, prevState): object
     ++ Thường thì get một số thông tin của props, state, hoặc ref trước khi re-render
   ☆ componentDidUpdate(prevProps, prevState, snapshoot): void
-    ++ Lúc này thích hợp để tương tác với Tree Node.
+    ++ Lúc này đã re-render, thích hợp để tương tác với Tree Node.
   
  - Unmounting(Chết đi)
   ☆ componentWillUnmount: void
