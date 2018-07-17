@@ -20,7 +20,7 @@
 
 
  ≪NỘI DUNG≫
- ☞ Mounting(Sinh ra)
+ ☞ Mounting(Sinh ra)---------------------------
   ☆ contructor(props): void
     - Ở ES6 thì thường dùng để tạo init state, bind context(this) cho các function, event handling, createRef().
       Ví dụ: 
@@ -92,7 +92,7 @@
   ☆ componentDidMount(prevProps, prevState): void
     - Lúc này đã render lần đầu, lúc này thích hợp để tương tác với Tree Node
  
- ☞ Updating(Lớn lên)
+ ☞ Updating(Lớn lên)-------------------------------------
   ☆ static getDerivedStateFromProps(nextProps, state): object
     - Khi props thay đổi (hoặc mouting) thì hook này mới được gọi
     - state thay đổi thì hook này không được gọi
@@ -113,7 +113,7 @@
     - Lúc này đã re-render, thích hợp để tương tác với Tree Node.
     - Với lifecycle mới thì có thêm param snapshoot, snapshoot là output của getSnapshootBeforeUpdate hook
   
- ☞ Unmounting(Chết đi)
+ ☞ Unmounting(Chết đi)------------------------------------
   ☆ componentWillUnmount: void
     - Thường thì chạy một function nào đó, ví dụ như clear interval, delete rác. Ít khi sử dụng.
     - Không nên setState tại đây, Vì nó chết rồi không sống lại nữa.
