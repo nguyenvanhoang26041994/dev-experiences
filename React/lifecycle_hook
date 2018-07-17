@@ -120,7 +120,7 @@
 ----------------------------------------------------------------------------------------------------------------
 
 
-≪Một vài chia sẻ thêm≫
+≪MỘT VÀI CHIA SẺ THÊM≫
  - Hiện tại là phiên bản 16.4.1 Lifecycle hook khá nhiều vì phải hỗ trợ cả hai. Khuyến khích nên sử dụng lifecycle mới.
     https://reactjs.org/docs/react-component.html
  
