@@ -129,5 +129,9 @@
 
 ≪Một vài chia sẻ thêm≫
  - Hiện tại là phiên bản 16.4.1 Lifecycle hook khá nhiều vì phải hỗ trợ cả hai. Khuyến khích nên sử dụng lifecycle mới.
+    https://reactjs.org/docs/react-component.html
+ 
  - Khuyến khích sử dụng coding standar của airbnb cho React.
+    https://github.com/airbnb/javascript/tree/master/react
+ 
  - Khuyến khích sử dụng class ES7 thay thế cho ES6 để tránh việc bind this, init state, propTypes, defaultPropTypes
