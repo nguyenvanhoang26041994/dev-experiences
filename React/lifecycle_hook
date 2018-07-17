@@ -101,14 +101,18 @@
  
  ☞ Updating(Lớn lên)
   ☆ static getDerivedStateFromProps(nextProps, state): object
-    - Khi props thay đổi thì hook này mới được gọi
+    - Khi props thay đổi (hoặc mouting) thì hook này mới được gọi
     - state thay đổi thì hook này không được gọi
   ☆ shouldComponentUpdate(nextProps, nextState): boolean
-    - Khi prop hoặc state thay đổi thì hook này được gọi
-    - Với PureComponent thì dev không thể định nghĩ lại. Mặc định là shallow compare.
-    - Với Component thì dev có thể định nghĩ lại, Mặc định là referent compare.
-    - Nếu xác định component này chỉ render 1 lần thì return false. Chống render(Đối với Component).
-    - Nếu return false thì sẽ không render nữa.
+    - Khi props hoặc state thay đổi thì hook này được gọi
+    - Với PureComponent thì dev không thể định nghĩa lại. Mặc định là shallow compare.
+    - Với Component thì dev có thể định nghĩa lại để chống render không cần thiết. Mặc định là reference compare.
+    - Nếu xác định component này chỉ render 1 lần thì return false, chống render(Đối với Component).
+    - Nếu return false thì sẽ tới hook re-render tiếp theo.
+    
+    Note: Để thấy được sự khác nhau giữa PureComponent và Component, hãy vào link dưới:
+      https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/component
+  
   ☆ render(): ReactNode
   ☆ getSnapshootBeforeUpdate(prevProps, prevState): object
     - Thường thì get một số thông tin của props, state, hoặc ref trước khi re-render, và sử dụng nó sau khi render.
