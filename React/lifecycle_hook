@@ -101,7 +101,7 @@
     - Với PureComponent thì dev không thể định nghĩa lại. Mặc định là shallow compare.
     - Với Component thì dev có thể định nghĩa lại để chống render không cần thiết. Mặc định là reference compare.
     - Nếu xác định component này chỉ render 1 lần thì return false, chống render(Đối với Component).
-    - Nếu return false thì sẽ tới hook re-render tiếp theo.
+    - Nếu return false thì sẽ không tới hook re-render tiếp theo.
     
     Note: Để thấy được sự khác nhau giữa PureComponent và Component, hãy vào link dưới:
       https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/how_many_component_types
