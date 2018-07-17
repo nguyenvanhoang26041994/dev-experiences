@@ -103,11 +103,13 @@
   }
   
   Lúc nãy thì dòng "Component này đã render lại với state.myName: Hoang" sẽ xuất hiện ở màn hình console. Đây là một
-  trong những nhược điểm của PureComponent. Lúc này Component sẽ là thích hợp hơn vì nó fexible, tuỳ dev.
-  
+  trong những nhược điểm của PureComponent. Lúc này Component sẽ là thích hợp hơn vì nó flexible, tuỳ dev.
+----------------------------------------------------------------------------------------------------
   
   
 ≪MỘT VÀI CHIA SẺ THÊM≫
-  - Dùng PureComponent hay Component cũng được, chỉ cần bạn biết bạn đang code cái gì và lý do bạn code cái đó.
-  
+  - Hồi xưa cũng toàn dùng React.Component thôi chứ chả dùng Functional hay PureComponent đâu. Từ khi bật source code
+    một số thư viện thì thấy PureComponent và Functional Component nên cũng đặt câu hỏi tại sao họ code vậy?.
+    
+
 Tác giả: Nguyễn Văn Hoàng  
