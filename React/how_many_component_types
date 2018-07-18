@@ -13,7 +13,8 @@
   - Các Component chỉ có props(hoặc chỉ render html tĩnh), không có state, những prop thường là truyền cứng, ít thay đổi
     thì dùng Functional Component.
   - Các Component mà cần định nghĩa shouldComponentUpdate để chống render không cần thiết(tăng performance) thì sử dụng
-    React.Component, nếu bạn không đụng đến shouldComponentUpdate thì không cần dùng.
+    React.Component, nếu bạn không đụng đến shouldComponentUpdate thì không cần dùng. Đôi khi người ta return true hoặc
+    false cho shouldComponentUpdate luôn để render cho nhanh. Cái này nói kỹ ở bài component_vs_p
  -----------------------------------------------------------------------------------------------------------------------------
  
  
