@@ -8,6 +8,15 @@
     định re-render lại hay không.
   - React.PureComponent không cho phép dev overide lại shouldComponentUpdate hook, nếu bạn cố tình overide thì bạn sẽ
     ăn ngay warning. Hook này shallow compare để quyết định re-render lại hay không.
+  - Đôi khi nếu thấy Component render chậm, hãy thử set shouldComponentUpdate hook return true hoặc return false.
+    class Demo extends React.Component {
+      ...
+      shouldComponentUpdate() {
+        return true; // Chỉ cần props hoặc state thay đổi thì cho tới hook re-render luôn. Không cần kiểm tra gì ở đây!
+        // return false; Chỉ cho render 1 lần ở mouting. Nghĩa là component này chỉ render ra HTML tĩnh, không thay đổi
+      }
+      ...
+    }
 -----------------------------------------------------------------------------------------------------------------
 
 
