@@ -119,6 +119,7 @@
 ≪MỘT VÀI CHIA SẺ THÊM≫
   - Hồi xưa cũng toàn dùng React.Component thôi chứ chả dùng Functional hay PureComponent đâu. Từ khi bật source code
     một số thư viện thì thấy PureComponent và Functional Component nên cũng đặt câu hỏi tại sao họ code vậy?.
+    Trên đây hoàn toàn là từ kinh nghiệm cá nhân, có thể sai hoặc thiếu sót. Mong các bạn góp ý qua cho mình. Thanks!
     
 
 Tác giả: Nguyễn Văn Hoàng  
