@@ -27,8 +27,7 @@
   Ví dụ, bạn có trang chủ: localhost:3000/ chứa link tới các trang /login, /about, /khuyenmai
   
   Tương ứng với mỗi route đó là các React.Component sau:
-  - HomePage cho trang chủ.
-  - Login cho trang /login
+  - HomePage cho trang chủ /
   - CompanyInfo cho /about
   - KhuyenMai cho /khuyenmai
   
@@ -57,14 +56,14 @@
   
   ReactDOM.render(<App />, document.getElementById('app'));
   
-  Xong, chạy app lên bạn sễ thấy file bundle của bạn nặng 2Mb(gỉa sử). Trong có soure code của HomePage tầm 300kB,
-  CompanyInfo tầm 200Kb, KhuyenMai tầm 500Kb và mấy cái viện như React, Lodash... tầm 1Mb đi chẳng hạn.
+  Xong, chạy app lên bạn sễ thấy file bundle của bạn nặng 2Mb(giả sử). Trong có soure code của HomePage tầm 300kB,
+  CompanyInfo tầm 200Kb, KhuyenMai tầm 500Kb, mấy cái viện như React, Lodash tổng cộng... tầm 1Mb đi chẳng hạn.
   
   Câu hỏi đặt ra là: Ủa tại sao tôi vào Trang Chủ mà bắt tôi tải soure của mấy trang Khuyến Mãi, rồi Thông tin công ty
   làm gì vậy hè?. Hoặc tôi vào localhost:3000/khuyenmai thì chỉ càn tải source của Trang khuyến mãi thôi chứ tải Trang Chủ
   làm gì?.
   
-  Okay!, tiếp nào. Thì đây chính ta soure code sau khi sử dụng code splitting(Sử dụng một thư viên là react-loadable)
+  Okay!, tiếp nào. Thì đây chính là code sau khi sử dụng code splitting(Sử dụng một thư viên là react-loadable)
     https://github.com/jamiebuilds/react-loadable
 ☞ Step 2:(App.js)
   import React from 'react';
@@ -101,14 +100,14 @@
   - about.chunk.js nặng 200Kb
   - khuyenmai.chunk.js nặng 500Kb
   
-  Khi bạn vào localhost:3000/ thì bạn bật F12 lên(google chorme chế đố cho dev debug, ai không biết không phải font-end dev)
+  Khi bạn vào localhost:3000/ thì bạn bật F12 lên(google chorme chế độ cho dev debug)
   Bên phần network thì bạn sẽ thấy nó tải main.js 1Mb trước sau đó nó tải tiếp homepage.chunk.js 300Kb sau.
   Vậy là ta chỉ cần tải tổng cộng 1.3Mb để vào được trang chủ thay vì 2Mb với cách không sử dụng code splitting(☞ Step 1).
   
   Tiếp, bạn click vào link "Về chúng tôi" thì bạn sẽ thấy network tải thêm phần about.chunk.js 200Kb, Tải xong thì bạn sẽ
   thấy nội dung About vơi link localhost:3000/about
   
-  Tiếp, bạn quay vê trang chủ và click vào "Nhận khuyến mãi ngay" thì bạn đẻ ý network tải tiếp file khuyenmai.chunkjs 500Kb
+  Tiếp, bạn quay vê trang chủ và click vào "Nhận khuyến mãi ngay" thì bạn để ý network tải tiếp file khuyenmai.chunkjs 500Kb
   Tải xong bạn sẽ thấy nội dung của KhuyenMai với link localhost:3000/khuyenmai
   
   Và bạn có để ý thì các file about.chunk.js, homepage.chunk.js và khuyenmai.chunk.js được file main.js gọi, từ đây bạn cũng
@@ -197,4 +196,28 @@
     }
   - Về Server-side-rendering mình sẽ có bài riêng về nó.
     https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/server_side_rendering
+  - Khi sử dụng react-loadable, bạn không nên code như mình ở ☞ Step 2 như vậy. Rất khó tái sử dụng.
+    Với ☞ Step 2 thì mình sẽ refactor như này.
+    - components
+      - HomePage
+        - index.js
+        - Loadable.js
+      - About
+        - index.js
+        - Loadable.js
+      - KhuyenMai
+        - index.js
+        - Loadable.js
+    Khi sử dụng mình chỉ cần import HomePage from '../path/to/components/HomePage/Loadable';
+    
+    Hoặc bạn cũng có thể refactor theo kiểu
+      - components
+        - HomePage.js
+        - About.js
+        - KhuyenMai.js
+        - Loadable
+          - HomePage.js
+          - About.js
+          - KhuyenMai.js
+    Khi sử dụng chỉ cần import HomePage from '../path/to/components/Loadable/HomePage';
 
