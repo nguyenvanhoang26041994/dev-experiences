@@ -165,11 +165,37 @@
     
   Khi sử dụng SSR bạn nên sử dụng ReactDOM.hydrate thay cho ReactDOM.render, vì nó sẽ tối đa performace render hơn, vì
   dù sau cũng render một phần HTML ở server rồi mà. Việc còn lại chỉ là render ở Browser để có React Application.
+  Tuy nhiên vì cái này khá khó nên 1, 2 câu không thể nói hết được. Sẽ viết ở bài sau:
+    https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/server_side_rendering
   
 ☆ Sử dụng CDN(Content Delivery Network)
+  Bài viết này mình đọc sơ qua: https://techtalk.vn/cdn-chi-1-giay-lam-doi-thay-tam-tri-khach-hang.html
+  
+  Nếu bạn nhác đọc thì mình có thể tóm tắt ở ngay đây:
+  Giả sử server của mình ở VN, những người dùng ở Mỹ sẽ phải request nữa vòng trái đấy để lấy file bundle.js
+  
+  CDN sẽ giúp những người ở Mỹ request lấy file bundle.js ngay tại Mỹ, ví dụ http://cdn-whatever.com/nvh26041994/bundle.js
+  chẳng hạn. Vì CDN có cơ sở hạ tầng rộng khắp thế giới nên bạn có thể yên tâm dùng. À mà cũng phaỉ chịu chi tí.
+  
+  Nếu bạn giàu, cho bundle.js lên CDN.
+  Nếu bạn giàu mà bạn bạn muốn chơi game không nạp card?. Vẫn chơi CDN được vì những thư viên phổ biến đều có link CDN hết.
+  Nếu bạn nghèo?. Kệ bạn!. Nó không ảnh hưởng nhiều đến việc ham học của bạn!. *Just for fun*
   
 ☆ Web worker
     Mình chưa có kinh nghiệm với thằng này.
+    
 
-
+≪MỘT VÀI CHIA SẺ THÊM≫
+  - Đối với production build và CDN, bạn nên chia ra các môi trường như development, production cho webpack
+    webpack.prob.babel.js
+    webpack.dev.babel.js
+  - WEBPACK 4 hỗ trợ tách các third-party ra file riêng vendor-main.chunk.js(Cái này chắc cho vào phần code splitting).
+    webpackConfig: {
+      ...
+      optimization: {
+        splitChunks: { chunks: 'all' }
+      }
+    }
+  - Về Server-side-rendering mình sẽ có bài riêng về nó.
+    https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/server_side_rendering
 
