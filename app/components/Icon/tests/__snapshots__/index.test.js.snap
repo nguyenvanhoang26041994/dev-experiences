@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`<Icon /> Snapshoot 1`] = `
-<span
-  className="anticon app-icon-sometype someclassname"
-/>
-`;
