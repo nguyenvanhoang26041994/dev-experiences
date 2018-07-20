@@ -221,3 +221,5 @@
           - KhuyenMai.js
     Khi sử dụng chỉ cần import HomePage from '../path/to/components/Loadable/HomePage';
 
+
+Tác giả: Nguyễn Văn Hoàng
