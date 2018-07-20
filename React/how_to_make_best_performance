@@ -10,6 +10,7 @@
   ☆ Nén file với gzip
   ☆ Server-side-rendering
   ☆ CDN(Content Delivery Network)
+  ☆ Web worker
   
   Và tất nhiên mình không giới thiệu một cách detail. Mình chỉ nói để các bạn hiểu những kĩ thuật đó là gì, tại sao
   phải sử dụng nó, sử dụng khi nào. Chứ trên google hướng dẫn rất cụ thể rồi mình không nói lại.
@@ -119,6 +120,7 @@
 ☆ Production build
   Yeah!, nó thật ra đơn giản lắm. File bundle của bạn ban đầu lớn một phần là do code bạn có nhiều comment qúa chẳng hạn,
   hoặc tên biến dài, hoặc ký tự Enter thì vô vàn, blabla. WEBPACK thần thánh sẽ giúp bạn minimize code lại.
+    https://webpack.js.org/guides/production/
 ☆ gzip
   Cái này thì như kiểu như này.
   - Browser: Ê Server, bundle.js nặng đấy, gửi tao file nén đi.
@@ -135,7 +137,39 @@
   Để check trang web của bạn đã sử dụng gzip chưa thì F12 kiểm tra phần network. Nó có ghi dung lượng đấy.
   
 ☆ Server-side-rendering(SSR)
+  Cái này nó không có gì phức tạp hết, làm thực tế mới khó đấy.
+  Mình miêu tả nó đơn giản thế này thôi nhé: Mang tiếng là Server-side-rendering nhưng thật chất nó vẫn là
+  Client-side-rendering đấy, rất là lừa tình. Nó render ra HTML tĩnh trên server rồi gửi cho Browser
+  nhằm tiết kiệm băng thông thôi, nó vẫn render lại ở client như bình thường thôi à. Vì HTML của một phần nào đó
+  cho người dùng thấy nên cảm giác nó nhanh chứ thực tế nó lấy đi sức lao động của server nhiều hơn.
+    https://reactjs.org/docs/react-dom-server.html
+    
+  Ví dụ với server node.
+  import HomePage from '../path/to/components/HomePage'; // Ví dụ const HomePage = () => <div>This is HomePage</div>;
+  app.get('/homepage', (res, req) => res.send(`
+    <html>
+      <body>
+        <div id="app">${ReactDOMServer.renderToString(<HomePage />)}</div>
+        <script src="/bundle.js"></script>
+      </body>
+    </html>
+  `));
+  
+  lúc này: nếu bạn F12 và check phần network và xem respone của localhost:3000/ bạn sẽ thấy như này
+    <html>
+      <body>
+        <div id="app"><div>This is HomePage</div></div>
+        <script src="/bundle.js"></script>
+      </body>
+    </html>
+    
+  Khi sử dụng SSR bạn nên sử dụng ReactDOM.hydrate thay cho ReactDOM.render, vì nó sẽ tối đa performace render hơn, vì
+  dù sau cũng render một phần HTML ở server rồi mà. Việc còn lại chỉ là render ở Browser để có React Application.
+  
 ☆ Sử dụng CDN(Content Delivery Network)
+  
+☆ Web worker
+    Mình chưa có kinh nghiệm với thằng này.
 
 
 
