@@ -18,7 +18,124 @@
 
 ≪NỘI DUNG≫
 ☆ Code splitting
+  Đây là nòng cốt của bất kỳ bạn front-end nào cần phải biết. Câu chuyện là hồi xưa mình thường dùng webpack để bundle
+  ra một file duy nhất là bundle.js rồi import nó vào trang index.html qua thẻ <script>.
+  Chuyện cũng không có gì cho đến một thời gian sau code mình càng ngày càng lớn khiến file bundle càng ngày càng nặng.
+  Bạn đầu cũng 200kb, rồi 1Mb, rồi lên tới 2Mb. Chắc nhiều bạn mới cũng gặp cái bí này. Và rồi thông qua techtalk.vn
+  (hay viblo gì đó không nhớ) mình biết tới code spliting.
+  
+  Ví dụ, bạn có trang chủ: localhost:3000/ chứa link tới các trang /login, /about, /khuyenmai
+  
+  Tương ứng với mỗi route đó là các React.Component sau:
+  - HomePage cho trang chủ.
+  - Login cho trang /login
+  - CompanyInfo cho /about
+  - KhuyenMai cho /khuyenmai
+  
+  Okay!, giờ code cho mấy cái route này nào.
+☞ Step 1:(App.js)
+  import React from 'react';
+  import ReactDOM from 'react-dom';
+  import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+  
+  import HomePage from '../path/to/components/HomePage';
+  import About from '../path/to/components/About';
+  import KhuyenMai from '../path/to/components/KhuyenMai';
+  
+  const App = () => (
+    <Router>
+      <div>
+        <Link to="/">Trang chủ</Link>
+        <Link to="/about">Về chúng tôi</Link>
+        <Link to="/khuyenmai">Nhận khuyến mãi ngay</Link>
+        <Route exact component={HomePage} />
+        <Route component={CompanyInfo} />
+        <Route component={KhuyenMai} />
+      </div>
+    </Router>
+  );
+  
+  ReactDOM.render(<App />, document.getElementById('app'));
+  
+  Xong, chạy app lên bạn sễ thấy file bundle của bạn nặng 2Mb(gỉa sử). Trong có soure code của HomePage tầm 300kB,
+  CompanyInfo tầm 200Kb, KhuyenMai tầm 500Kb và mấy cái viện như React, Lodash... tầm 1Mb đi chẳng hạn.
+  
+  Câu hỏi đặt ra là: Ủa tại sao tôi vào Trang Chủ mà bắt tôi tải soure của mấy trang Khuyến Mãi, rồi Thông tin công ty
+  làm gì vậy hè?. Hoặc tôi vào localhost:3000/khuyenmai thì chỉ càn tải source của Trang khuyến mãi thôi chứ tải Trang Chủ
+  làm gì?.
+  
+  Okay!, tiếp nào. Thì đây chính ta soure code sau khi sử dụng code splitting(Sử dụng một thư viên là react-loadable)
+    https://github.com/jamiebuilds/react-loadable
+☞ Step 2:(App.js)
+  import React from 'react';
+  import Loadable from 'react-loadable';
+  import ReactDOM from 'react-dom';
+  import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+  
+  const Spinner = () => <span className="spinner" />; // Một cái icon xoay xoay loading thôi
+  
+  const HomePage = Loadable({ loader: () => import('../path/to/components/HomePage'), loading: Spinner });
+  const About = Loadable({ loader: () => import('../path/to/components/About'), loading: Spinner });
+  const KhuyenMai = Loadable({ loader: () => import('../path/to/components/KhuyenMai'), loading: Spinner });
+  // loader có nghĩa là đã load xong sẽ trả về Component trong cái import
+  // loading có nghĩa đang load soure chưa xong tạm thời load component nào đó tạm. Ở đây là Spinner
+  
+  const App = () => (
+    <Router>
+      <div>
+        <Link to="/">Trang chủ</Link>
+        <Link to="/about">Về chúng tôi</Link>
+        <Link to="/khuyenmai">Nhận khuyến mãi ngay</Link>
+        <Route exact component={HomePage} />
+        <Route component={CompanyInfo} />
+        <Route component={KhuyenMai} />
+      </div>
+    </Router>
+  );
+  
+  ReactDOM.render(<App />, document.getElementById('app'));
+  
+  Xong, bây giờ thì từ 1 file bundle.js nặng 2Mb ta có các file sau chẳng hạn.
+  - main.js(File chứa soure thư viện như React, Lodash... và file đầu tiên App.) năng 1Mb
+  - homepage.chunk.js nặng 300Kb
+  - about.chunk.js nặng 200Kb
+  - khuyenmai.chunk.js nặng 500Kb
+  
+  Khi bạn vào localhost:3000/ thì bạn bật F12 lên(google chorme chế đố cho dev debug, ai không biết không phải font-end dev)
+  Bên phần network thì bạn sẽ thấy nó tải main.js 1Mb trước sau đó nó tải tiếp homepage.chunk.js 300Kb sau.
+  Vậy là ta chỉ cần tải tổng cộng 1.3Mb để vào được trang chủ thay vì 2Mb với cách không sử dụng code splitting(☞ Step 1).
+  
+  Tiếp, bạn click vào link "Về chúng tôi" thì bạn sẽ thấy network tải thêm phần about.chunk.js 200Kb, Tải xong thì bạn sẽ
+  thấy nội dung About vơi link localhost:3000/about
+  
+  Tiếp, bạn quay vê trang chủ và click vào "Nhận khuyến mãi ngay" thì bạn đẻ ý network tải tiếp file khuyenmai.chunkjs 500Kb
+  Tải xong bạn sẽ thấy nội dung của KhuyenMai với link localhost:3000/khuyenmai
+  
+  Và bạn có để ý thì các file about.chunk.js, homepage.chunk.js và khuyenmai.chunk.js được file main.js gọi, từ đây bạn cũng
+  biết thêm một điều rằng file js cũng có thể gọi file js khác chứ không nhất thiết phải sử dụng thẻ <script>
+  
+  Mình sẽ nói tiếp một tí về phần kinh nghiệm của mình khi spliting ở phần CHIA SẺ THÊM về phần này.
+  
 ☆ Production build
+  Yeah!, nó thật ra đơn giản lắm. File bundle của bạn ban đầu lớn một phần là do code bạn có nhiều comment qúa chẳng hạn,
+  hoặc tên biến dài, hoặc ký tự Enter thì vô vàn, blabla. WEBPACK thần thánh sẽ giúp bạn minimize code lại.
 ☆ gzip
+  Cái này thì như kiểu như này.
+  - Browser: Ê Server, bundle.js nặng đấy, gửi tao file nén đi.
+  - Server: Okay chú, để anh nén đã.... Okay của chú đây.
+  - Browser: Ukm, lấy được rồi, để tao giải nén rồi chạy lên cho người dùng.
+  
+  Giả sử file bundle.js của bạn nặng 2Mb đi, khá tốn băng thông. Server sẽ nén lại với khoảng đâu có 300Kb, Browser
+  sẽ tải về và giải nén ra 2Mb lại thôi. Giải nén xong rồi đọc.
+  
+  Mình không chắc các trình duyệt cũ có hỗ trợ cái này hay không nữa. Bên server mình dùng express thì mình dùng
+  kèm compression. Tài liệu:
+    https://expressjs.com/en/advanced/best-practice-performance.html#use-gzip-compression
+
+  Để check trang web của bạn đã sử dụng gzip chưa thì F12 kiểm tra phần network. Nó có ghi dung lượng đấy.
+  
 ☆ Server-side-rendering(SSR)
 ☆ Sử dụng CDN(Content Delivery Network)
+
+
+
