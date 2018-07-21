@@ -95,8 +95,8 @@
  
  ☞ Updating(Lớn lên)-------------------------------------
   ☆ static getDerivedStateFromProps(nextProps, state): object
-    - Khi props thay đổi (hoặc mouting) thì hook này mới được gọi
-    - state thay đổi thì hook này không được gọi
+    - Khi props hoặc state thay đổi thì hook này được gọi(Từ phiên bản 16.4 
+      trở đi thì state hay props thay đổi thì hook này được gọi)
   ☆ shouldComponentUpdate(nextProps, nextState): boolean
     - Khi props hoặc state thay đổi thì hook này được gọi
     - Với PureComponent thì dev không thể định nghĩa lại. Mặc định là shallow compare.
