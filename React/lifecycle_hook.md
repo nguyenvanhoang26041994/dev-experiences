@@ -34,52 +34,52 @@ class DemoComponent extends React.Component {
   }
 }
 ``` 
-2. ☆ static getDerivedStateFromProps(props, state): object
-    - Trước đây, với lifecycle cũ, người ta thường tính toán state thông qua props trong hàm constructor
-       Và khi components update props thì dùng kèm với componentWillReceiveProps để set lại state.
-       Hook này sinh ra để thay thế việc này.
-    - return về một object chính là state.
-      Ví dụ với lifecycle cũ
-      class DemoComponent extends React.Component {
-        constructor(props) {
-          super(props);
-          this.state = {
-            fullName: `${props.lastName} ${props.firstName}`,
-          };
-        }
-    
-        componentWillReceiveProps(nextProps, state) {
-          this.setState({ fullName: `${nextProps.lastName} ${nextProps.firstName}` });
-        }
-        ...
-      }
-      
-      hoặc 
-     
-      class DemoComponent extends React.Component {
-        componentWillMount() {}
-          this.setState({ fullName: `${this.props.lastName} ${this.props.firstName}` });
-        }
-    
-        componentWillReceiveProps(nextProps, state) {
-          this.setState({ fullName: `${nextProps.lastName} ${nextProps.firstName}` });
-        }
-        ...
-      }
-      
-      => Cực
+2. `static getDerivedStateFromProps(props, state): object`
+- Trước đây, với lifecycle cũ, người ta thường tính toán state thông qua props trong hàm `constructor`. Và khi components update `props` thì dùng kèm với `componentWillReceiveProps` để set lại `state`. Hook này sinh ra để thay thế việc này.
+- Return về một object chính là `state`.<br/>
+Và khi components update props thì dùng kèm với `componentWillReceiveProps` để set lại `state`.<br/>
+Ví dụ với lifecycle cũ:
+```
+class DemoComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      fullName: `${props.lastName} ${props.firstName}`,
+    };
+  }
 
-      Hãy chuyển sang lifecycle mới, nó sẽ trông như thế nào?. Như này
-      class DemoComponent extends React.Component {
-        state = {};
-        static getDerivedStateFromProps(props, state) {
-          return {
-            fullName: `${props.lastName} ${props.firstName}`,
-          };
-        }
-        ...
-      }
-  
+  componentWillReceiveProps(nextProps, state) {
+    this.setState({ fullName: `${nextProps.lastName} ${nextProps.firstName}` });
+  }
+  ...
+}
+
+hoặc 
+
+class DemoComponent extends React.Component {
+  componentWillMount() {}
+    this.setState({ fullName: `${this.props.lastName} ${this.props.firstName}` });
+  }
+
+  componentWillReceiveProps(nextProps, state) {
+    this.setState({ fullName: `${nextProps.lastName} ${nextProps.firstName}` });
+  }
+  ...
+}
+```   
+> `=> Cực`
+> Hãy chuyển sang lifecycle mới, nó sẽ trông như thế nào?. Như này:
+```
+class DemoComponent extends React.Component {
+  state = {};
+  static getDerivedStateFromProps(props, state) {
+    return {
+      fullName: `${props.lastName} ${props.firstName}`,
+    };
+  }
+  ...
+}
+```
 3. ☆ render(): ReactNode
 4. ☆ componentDidMount(prevProps, prevState): void
     - Lúc này đã render lần đầu, lúc này thích hợp để tương tác với Tree Node
