@@ -11,7 +11,7 @@ _**Bài viết này sẽ xoanh quanh vấn đề làm sao để app chạy nhanh
   
 > _Và tất nhiên mình không giới thiệu một cách detail. Mình chỉ nói để các bạn hiểu những kĩ thuật đó là gì, tại sao phải sử dụng nó, sử dụng khi nào. Chứ trên google hướng dẫn rất cụ thể rồi mình không nói lại._  
 ### _♴ NỘI DUNG_
-**:one:_Code splitting_**  
+**:one: _Code splitting_**  
 > _Đây là nòng cốt của bất kỳ bạn front-end nào cần phải biết về tối đa performace. Câu chuyện là hồi xưa mình thường dùng `webpack` để bundle ra một file duy nhất là `bundle.js` rồi `import` nó vào trang `index.html` qua thẻ `<script>`. Chuyện cũng không có gì cho đến một thời gian sau code mình càng ngày càng lớn khiến file `bundle.js` càng ngày càng nặng. Ban đầu cũng 200kb, rồi 1Mb, rồi lên tới 2Mb. Chắc nhiều bạn mới cũng gặp cái bí này. Và rồi thông qua [techtalk.vn](https://techtalk.vn/) (hay [viblo.asia](https://viblo.asia/) gì đó không nhớ) mình biết tới code spliting._  
   
   Ví dụ, bạn có trang chủ: localhost:3000/ chứa link tới các trang /login, /about, /khuyenmai
@@ -105,10 +105,10 @@ _**Bài viết này sẽ xoanh quanh vấn đề làm sao để app chạy nhanh
   
   Mình sẽ nói tiếp một tí về phần kinh nghiệm của mình khi spliting ở phần CHIA SẺ THÊM về phần này.
   
-**:two:_Production build_**  
+**:two: _Production build_**  
 > _Yeah!, nó thật ra đơn giản lắm. File `bundle.js` của bạn ban đầu lớn một phần là do code bạn có nhiều comment qúa chẳng hạn, hoặc tên biến dài, hoặc ký tự Enter thì vô vàn, blabla. [webpack](https://webpack.js.org/) thần thánh sẽ giúp bạn minimize code lại._  
   
-**:three:_gzip**
+**:three: _gzip_**
   Cái này thì như kiểu như này.
   - Browser: Ê Server, bundle.js nặng đấy, gửi tao file nén đi.
   - Server: Okay chú, để anh nén đã.... Okay của chú đây.
@@ -123,7 +123,7 @@ _**Bài viết này sẽ xoanh quanh vấn đề làm sao để app chạy nhanh
 
   Để check trang web của bạn đã sử dụng gzip chưa thì F12 kiểm tra phần network. Nó có ghi dung lượng đấy.
   
-☆ Server-side-rendering(SSR)-------------------------------------------
+**:four: _Server-side-rendering(SSR)_**  
   Cái này nó không có gì phức tạp hết, làm thực tế mới khó đấy.
   Mình miêu tả nó đơn giản thế này thôi nhé: Mang tiếng là Server-side-rendering nhưng thật chất nó vẫn là
   Client-side-rendering đấy, rất là lừa tình. Nó render ra HTML tĩnh trên server rồi gửi cho Browser
@@ -155,7 +155,7 @@ _**Bài viết này sẽ xoanh quanh vấn đề làm sao để app chạy nhanh
   Tuy nhiên vì cái này khá khó nên 1, 2 câu không thể nói hết được. Sẽ viết ở bài sau:
     https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/server_side_rendering
   
-☆ Sử dụng CDN(Content Delivery Network)------------------------------------------
+**:five: _Sử dụng CDN(Content Delivery Network)_  
   Bài viết này mình đọc sơ qua: https://techtalk.vn/cdn-chi-1-giay-lam-doi-thay-tam-tri-khach-hang.html
   
   Nếu bạn nhác đọc thì mình có thể tóm tắt ở ngay đây:
@@ -172,20 +172,21 @@ _**Bài viết này sẽ xoanh quanh vấn đề làm sao để app chạy nhanh
     
 
 ### _♵ CHIA SẼ THÊM_
-  - Đối với production build và CDN, bạn nên chia ra các môi trường như development, production cho webpack
-    webpack.prob.babel.js
-    webpack.dev.babel.js
-  - WEBPACK 4 hỗ trợ tách các third-party ra file riêng vendor-main.chunk.js(Cái này chắc cho vào phần code splitting).
+- _Đối với production build và CDN, bạn nên chia ra các môi trường như `development`, `production` cho `webpack`:_
+ - `webpack.prob.babel.js`.
+ - `webpack.dev.babel.js`.
+- _`webpack` 4 hỗ trợ tách các third-party ra file riêng `vendor-main.chunk.js`(Cái này chắc cho vào phần code splitting)._
+```javascript
     webpackConfig: {
       ...
       optimization: {
         splitChunks: { chunks: 'all' }
       }
     }
-  - Về Server-side-rendering mình sẽ có bài riêng về nó.
-    https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/server_side_rendering
-  - Khi sử dụng react-loadable, bạn không nên code như mình ở ☞ Step 2 như vậy. Rất khó tái sử dụng.
-    Với ☞ Step 2 thì mình sẽ refactor như này.
+ ```
+- _Về Server-side-rendering mình sẽ có bài riêng về nó tại [Server side rendering](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/server_side_rendering)._
+    
+- _Khi sử dụng `react-loadable`, bạn không nên code như mình ở `☞ Step 2` như vậy. Rất khó tái sử dụng. Với `☞ Step 2` thì mình sẽ refactor như này._
     - components
       - HomePage
         - index.js
