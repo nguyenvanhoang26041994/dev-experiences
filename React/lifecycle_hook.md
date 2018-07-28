@@ -12,7 +12,7 @@
 ### ♴ NỘI DUNG
 **☞ Mounting(Sinh ra)**
 
-1. `contructor(props): void`
+**♳`contructor(props): void`**
 > *Ở ES6 thì thường dùng để tạo init `state`, bind context(`this`) cho các function, event handling, createRef().*<br/>
 Ví dụ:
 ```
@@ -34,9 +34,9 @@ class DemoComponent extends React.Component {
   }
 }
 ``` 
-2. `static getDerivedStateFromProps(props, state): object`
-- Trước đây, với lifecycle cũ, người ta thường tính toán state thông qua props trong hàm `constructor`. Và khi components update `props` thì dùng kèm với `componentWillReceiveProps` để set lại `state`. Hook này sinh ra để thay thế việc này.
-- Return về một object chính là `state`. Và khi components update props thì dùng kèm với `componentWillReceiveProps` để set lại `state`. Ví dụ với lifecycle cũ:
+**♴`static getDerivedStateFromProps(props, state): object`**
+- *Trước đây, với lifecycle cũ, người ta thường tính toán state thông qua props trong hàm `constructor`. Và khi components update `props` thì dùng kèm với `componentWillReceiveProps` để set lại `state`. Hook này sinh ra để thay thế việc này.*
+- *Return về một object chính là `state`. Và khi components update props thì dùng kèm với `componentWillReceiveProps` để set lại `state`. Ví dụ với lifecycle cũ:*
 ```
 class DemoComponent extends React.Component {
   constructor(props) {
@@ -77,50 +77,45 @@ class DemoComponent extends React.Component {
   ...
 }
 ```
-3. ☆ render(): ReactNode
-4. ☆ componentDidMount(prevProps, prevState): void
-    - Lúc này đã render lần đầu, lúc này thích hợp để tương tác với Tree Node
+**♵`render(): ReactNode`**
+**♶`componentDidMount(prevProps, prevState): void`**
+- *Lúc này đã render lần đầu, lúc này thích hợp để tương tác với Tree Node.*
  
 **☞ Updating(Lớn lên)**
 
-1. ☆ static getDerivedStateFromProps(nextProps, state): object
-    - Khi props hoặc state thay đổi thì hook này được gọi(Từ phiên bản 16.4 
-      trở đi thì state hay props thay đổi thì hook này được gọi)
-2. ☆ shouldComponentUpdate(nextProps, nextState): boolean
-    - Khi props hoặc state thay đổi thì hook này được gọi
-    - Với PureComponent thì dev không thể định nghĩa lại. Mặc định là shallow compare.
-    - Với Component thì dev có thể định nghĩa lại để chống render không cần thiết. Mặc định là reference compare.
-    - Nếu xác định component này chỉ render 1 lần thì return false, chống render(Đối với Component).
-    - Nếu return false thì sẽ không tới hook re-render tiếp theo.
-    
-    Note: Để thấy được sự khác nhau giữa PureComponent và Component, hãy vào link dưới:
-      https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/how_many_component_types
-      https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/component_vs_purecomponent
+**♳`static getDerivedStateFromProps(nextProps, state): object`**
+- *Khi props hoặc state thay đổi thì hook này được gọi(Từ phiên bản 16.4 trở đi thì state hay props thay đổi thì hook này được gọi).*
+**♴`shouldComponentUpdate(nextProps, nextState): boolean`**
+- *Khi props hoặc state thay đổi thì hook này được gọi.*
+- *Với PureComponent thì dev không thể định nghĩa lại. Mặc định là shallow compare.*
+- *Với Component thì dev có thể định nghĩa lại để chống render không cần thiết. Mặc định là reference compare.*
+- *Nếu xác định component này chỉ render 1 lần thì return false, chống render(Đối với Component).*
+- *Nếu return false thì sẽ không tới hook re-render tiếp theo. Note: Để thấy được sự khác nhau giữa `React.PureComponent` và `React.Component`, hãy vào link dưới:<br/>
+[Có bao nhiêu kiểu Component React](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/how_many_component_types.md)<br/>
+[Component vs PureComponent](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/component_vs_purecomponent.md)*.
   
-3. ☆ render(): ReactNode
-4. ☆ getSnapshootBeforeUpdate(prevProps, prevState): object
-    - Thường thì get một số thông tin của props, state, hoặc ref trước khi re-render, và sử dụng nó sau khi render.
-5. ☆ componentDidUpdate(prevProps, prevState, snapshoot): void
-    - Lúc này đã re-render, thích hợp để tương tác với Tree Node.
-    - Với lifecycle mới thì có thêm param snapshoot, snapshoot là output của getSnapshootBeforeUpdate hook
+**♵`render(): ReactNode`
+**♶`getSnapshootBeforeUpdate(prevProps, prevState): object`**
+- *Thường thì get một số thông tin của `props`, `state`, hoặc ref trước khi re-render, và sử dụng nó sau khi render.*
+**♷`componentDidUpdate(prevProps, prevState, snapshoot): void`**
+- *Lúc này đã re-render, thích hợp để tương tác với Tree Node.*
+- *Với lifecycle mới thì có thêm param snapshoot, `snapshoot` là output của `getSnapshootBeforeUpdate` hook.*
   
 **☞ Unmounting(Chết đi)**
 
-1. ☆ componentWillUnmount: void
-    - Thường thì chạy một function nào đó, ví dụ như clear interval, delete rác. Ít khi sử dụng.
-    - Không nên setState tại đây, Vì nó chết rồi không sống lại nữa.
-----------------------------------------------------------------------------------------------------------------
-
-
+**♳`componentWillUnmount: void`**
+- *Thường thì chạy một function nào đó, ví dụ như clear interval, delete rác. Ít khi sử dụng.*
+- *Không nên `setState` tại đây, Vì nó chết rồi không sống lại nữa.*
+----
 ### ♵ CHIA SẼ THÊM
- - Hiện tại là phiên bản 16.4.1 Lifecycle hook khá nhiều vì phải hỗ trợ cả hai. Khuyến khích nên sử dụng lifecycle mới.
-    https://reactjs.org/docs/react-component.html
+- *Hiện tại là phiên bản 16.4.1 Lifecycle hook khá nhiều vì phải hỗ trợ cả hai. Khuyến khích nên sử dụng lifecycle mới.
+    [https://reactjs.org/docs/react-component.html](https://reactjs.org/docs/react-component.html)*
  
- - Khuyến khích sử dụng coding standar của airbnb cho React.
-    https://github.com/airbnb/javascript/tree/master/react
+- Khuyến khích sử dụng coding standar của airbnb cho React.
+    [https://github.com/airbnb/javascript/tree/master/react](https://github.com/airbnb/javascript/tree/master/react)
  
- - Khuyến khích sử dụng class ES7 thay thế cho ES6 để tránh việc bind this, init state, propTypes, defaultPropTypes,
-   createRef()
+- Khuyến khích sử dụng class ES7 thay thế cho ES6 để tránh việc bind this, init `state`, `propTypes`, `defaultPropTypes`,
+   `createRef()`
    
 <br/>
 
