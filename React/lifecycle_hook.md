@@ -85,6 +85,7 @@ class DemoComponent extends React.Component {
 **☞ Updating(Lớn lên)**
 **♳`static getDerivedStateFromProps(nextProps, state): object`**
 - *Khi props hoặc state thay đổi thì hook này được gọi(Từ phiên bản 16.4 trở đi thì state hay props thay đổi thì hook này được gọi).*
+
 **♴`shouldComponentUpdate(nextProps, nextState): boolean`**
 - *Khi props hoặc state thay đổi thì hook này được gọi.*
 - *Với PureComponent thì dev không thể định nghĩa lại. Mặc định là shallow compare.*
@@ -93,7 +94,6 @@ class DemoComponent extends React.Component {
 - *Nếu return false thì sẽ không tới hook re-render tiếp theo. Note: Để thấy được sự khác nhau giữa `React.PureComponent` và `React.Component`, hãy vào link dưới:<br/>
 [Có bao nhiêu kiểu Component React](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/how_many_component_types.md)<br/>
 [Component vs PureComponent](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/component_vs_purecomponent.md)*.
-<br/>
 
 **♵`render(): ReactNode`**<br/>
 **♶`getSnapshootBeforeUpdate(prevProps, prevState): object`**
@@ -101,6 +101,7 @@ class DemoComponent extends React.Component {
 **♷`componentDidUpdate(prevProps, prevState, snapshoot): void`**
 - *Lúc này đã re-render, thích hợp để tương tác với Tree Node.*
 - *Với lifecycle mới thì có thêm param snapshoot, `snapshoot` là output của `getSnapshootBeforeUpdate` hook.*
+
 **☞ Unmounting(Chết đi)**<br/>
 **♳`componentWillUnmount: void`**
 - *Thường thì chạy một function nào đó, ví dụ như clear interval, delete rác. Ít khi sử dụng.*
