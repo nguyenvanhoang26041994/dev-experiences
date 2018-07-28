@@ -46,7 +46,7 @@ const App = () => (
 
 ReactDOM.render(<App />, document.getElementById('app'));
 ```
-> _Xong, chạy app lên bạn sễ thấy file `bundle.js` của bạn nặng 2Mb(giả sử). Trong có soure code của HomePage tầm 300kB, `CompanyInfo` tầm 200Kb, KhuyenMai tầm 500Kb, mấy cái viện như `react`, `lodash` tổng cộng... tầm 1Mb đi chẳng hạn.  
+> _Xong, chạy app lên bạn sễ thấy file `bundle.js` của bạn nặng 2Mb(giả sử). Trong có soure code của HomePage tầm 300kB, `CompanyInfo` tầm 200Kb, KhuyenMai tầm 500Kb, mấy cái viện như `react`, `lodash` tổng cộng... tầm 1Mb đi chẳng hạn._  
   
 > _Câu hỏi đặt ra là: Ủa tại sao tôi vào `Trang Chủ` mà bắt tôi tải soure của mấy trang `Khuyến Mãi`, rồi `Thông tin công ty` làm gì vậy hè?. Hoặc tôi vào `localhost:3000/khuyenmai` thì chỉ càn tải source của `Trang khuyến mãi` thôi chứ tải `Trang Chủ` làm gì?._  
   
@@ -101,29 +101,25 @@ ReactDOM.render(<App />, document.getElementById('app'));
 > _Yeah!, nó thật ra đơn giản lắm. File `bundle.js` của bạn ban đầu lớn một phần là do code bạn có nhiều comment qúa chẳng hạn, hoặc tên biến dài, hoặc ký tự Enter thì vô vàn, blabla. [webpack](https://webpack.js.org/) thần thánh sẽ giúp bạn minimize code lại._  
   
 **:three: _gzip_**
-  Cái này thì như kiểu như này.
-  - Browser: Ê Server, bundle.js nặng đấy, gửi tao file nén đi.
-  - Server: Okay chú, để anh nén đã.... Okay của chú đây.
-  - Browser: Ukm, lấy được rồi, để tao giải nén rồi chạy lên cho người dùng.
+> _Cái này thì như kiểu như này._
+```
+- Browser: Ê Server, bundle.js nặng đấy, gửi tao file nén đi!.
+- Server: Okay chú, để anh nén đã.... Okay của chú đây!.
+- Browser: Ukm, lấy được rồi, để tao giải nén rồi chạy lên cho người dùng.
+```
+> _Giả sử file `bundle.js` của bạn nặng 2Mb đi, khá tốn băng thông. Server sẽ nén lại với khoảng đâu có 300Kb, Browser sẽ tải về và giải nén ra 2Mb lại thôi._  
   
-  Giả sử file bundle.js của bạn nặng 2Mb đi, khá tốn băng thông. Server sẽ nén lại với khoảng đâu có 300Kb, Browser
-  sẽ tải về và giải nén ra 2Mb lại thôi. Giải nén xong rồi đọc.
+> _Mình không chắc các trình duyệt cũ có hỗ trợ cái này hay không nữa. Bên server mình dùng `express` thì mình dùng kèm `compression`. Tài liệu: https://expressjs.com/en/advanced/best-practice-performance.html#use-gzip-compression ._  
   
-  Mình không chắc các trình duyệt cũ có hỗ trợ cái này hay không nữa. Bên server mình dùng express thì mình dùng
-  kèm compression. Tài liệu:
-    https://expressjs.com/en/advanced/best-practice-performance.html#use-gzip-compression
-
-  Để check trang web của bạn đã sử dụng gzip chưa thì F12 kiểm tra phần network. Nó có ghi dung lượng đấy.
+> _Để check trang web của bạn đã sử dụng gzip chưa thì F12 kiểm tra phần network. Nó có ghi dung lượng đấy._
   
 **:four: _Server-side-rendering(SSR)_**  
-  Cái này nó không có gì phức tạp hết, làm thực tế mới khó đấy.
-  Mình miêu tả nó đơn giản thế này thôi nhé: Mang tiếng là Server-side-rendering nhưng thật chất nó vẫn là
-  Client-side-rendering đấy, rất là lừa tình. Nó render ra HTML tĩnh trên server rồi gửi cho Browser
-  nhằm tiết kiệm băng thông thôi, nó vẫn render lại ở client như bình thường thôi à. Vì HTML của một phần nào đó
-  cho người dùng thấy nên cảm giác nó nhanh chứ thực tế nó lấy đi sức lao động của server nhiều hơn.
-    https://reactjs.org/docs/react-dom-server.html
-    
-  Ví dụ với server node.
+> _Cái này nó không có gì phức tạp hết, **làm thực tế mới khó đấy**.  
+  
+> _Mình miêu tả nó đơn giản thế này thôi nhé: Mang tiếng là `Server-side-rendering` nhưng thật chất nó vẫn là `Client-side-rendering` đấy, rất là lừa tình. Nó render ra HTML tĩnh trên Server rồi gửi cho Browser nhằm tiết kiệm băng thông thôi, nó vẫn render lại ở client như bình thường thôi à. Vì HTML của một phần nào đó cho người dùng thấy nên cảm giác nó nhanh chứ thực tế nó lấy đi sức lao động của Server nhiều hơn. Nhưng được cái nó sẽ SEO tốt!. Tài liệi: [https://reactjs.org/docs/react-dom-server.html](https://reactjs.org/docs/react-dom-server.html). _  
+  
+> _**Ví dụ với server node.**_
+```javascript
   import HomePage from '../path/to/components/HomePage'; // Ví dụ const HomePage = () => <div>This is HomePage</div>;
   app.get('/homepage', (res, req) => res.send(`
     <html>
@@ -133,22 +129,21 @@ ReactDOM.render(<App />, document.getElementById('app'));
       </body>
     </html>
   `));
+```
   
-  lúc này: nếu bạn F12 và check phần network và xem respone của localhost:3000/ bạn sẽ thấy như này
+> _Lúc này: nếu bạn F12 và check phần network và xem `respone` của `localhost:3000/` bạn sẽ thấy như này:_
+```html
     <html>
       <body>
         <div id="app"><div>This is HomePage</div></div>
         <script src="/bundle.js"></script>
       </body>
     </html>
-    
-  Khi sử dụng SSR bạn nên sử dụng ReactDOM.hydrate thay cho ReactDOM.render, vì nó sẽ tối đa performace render hơn, vì
-  dù sau cũng render một phần HTML ở server rồi mà. Việc còn lại chỉ là render ở Browser để có React Application.
-  Tuy nhiên vì cái này khá khó nên 1, 2 câu không thể nói hết được. Sẽ viết ở bài sau:
-    https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/server_side_rendering
+```
+> _Khi sử dụng SSR bạn nên sử dụng `ReactDOM.hydrate` thay cho `ReactDOM.render` vì nó sẽ tối đa performace render hơn, vì dù sau cũng render một phần HTML ở server rồi mà. Việc còn lại chỉ là render ở Browser để có React Application. Tuy nhiên vì cái này khá khó nên 1, 2 câu không thể nói hết được. Sẽ viết ở bài [Server side rendering](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/server_side_rendering.md)._  
   
-**:five: _Sử dụng CDN(Content Delivery Network)_  
-  Bài viết này mình đọc sơ qua: https://techtalk.vn/cdn-chi-1-giay-lam-doi-thay-tam-tri-khach-hang.html
+**:five: _Sử dụng CDN(Content Delivery Network)_**  
+`Bài viết này mình đọc sơ qua: https://techtalk.vn/cdn-chi-1-giay-lam-doi-thay-tam-tri-khach-hang.html`
   
   Nếu bạn nhác đọc thì mình có thể tóm tắt ở ngay đây:
   Giả sử server của mình ở VN, những người dùng ở Mỹ sẽ phải request nữa vòng trái đấy để lấy file bundle.js
