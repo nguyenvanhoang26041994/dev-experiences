@@ -49,7 +49,7 @@ const Demo = props => <span>Hello world!</span>;
 <br/>
 
 ### ♵ CHIA SẼ THÊM
-- Bài này chỉ giới thiệu các loại component có trong React và đặc điểm cũng như cách sử dụng. Nên để hiểu rõ hơn về anh em `React.Component` và `React.PureComponent` thì bạn đọc bài sau để hiểu hơn khi nào nên dùng `React.Component`, khi nào nên dùng `React.PureComponent`. Thế nào là reference compare, thế nào là shallow compare, thế nào là deep compare. [Link Component và PureComponent](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/component_vs_purecomponent.md)
+> Bài này chỉ giới thiệu các loại component có trong React và đặc điểm cũng như cách sử dụng. Nên để hiểu rõ hơn về anh em `React.Component` và `React.PureComponent` thì bạn đọc bài sau để hiểu hơn khi nào nên dùng `React.Component`, khi nào nên dùng `React.PureComponent`. Thế nào là reference compare, thế nào là shallow compare, thế nào là deep compare. [Link Component và PureComponent](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/component_vs_purecomponent.md)
 
 <br/>
 
