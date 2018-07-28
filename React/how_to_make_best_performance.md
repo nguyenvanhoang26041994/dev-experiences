@@ -145,10 +145,10 @@ app.get('/homepage', (res, req) => res.send(`
 > _Khi sử dụng `Server-side-rendering` bạn nên sử dụng `ReactDOM.hydrate` thay cho `ReactDOM.render` vì nó sẽ tối đa performace render hơn, vì dù sau cũng render một phần HTML ở server rồi mà. Việc còn lại chỉ là render ở Browser để có React Application. Tuy nhiên vì cái này khá khó nên 1, 2 câu không thể nói hết được. Sẽ viết ở bài [Server side rendering](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/server_side_rendering.md)._  
   
 **:five: _Sử dụng CDN(`Content Delivery Network`)_**  
-> _Bài viết này mình đọc qua ở [techtalk.vn](https://techtalk.vn/cdn-chi-1-giay-lam-doi-thay-tam-tri-khach-hang.html)_  
+> _Bài viết này mình đọc qua ở_ [techtalk.vn](https://techtalk.vn/cdn-chi-1-giay-lam-doi-thay-tam-tri-khach-hang.html)  
   
 > _Nếu bạn nhác đọc thì mình có thể tóm tắt ở ngay đây:_  
-> _Giả sử server của mình ở VN, những người dùng ở Mỹ sẽ phải request **nữa vòng trái** đấy để lấy file `bundle.js`. CDN sẽ giúp những người ở Mỹ request lấy file `bundle.js` **ngay tại Mỹ**. Ví dụ http://cdn-whatever.com/nvh26041994/bundle.js chẳng hạn. Vì CDN có cơ sở hạ tầng rộng khắp thế giới nên bạn có thể yên tâm dùng. À mà cũng phaỉ chịu chi tí._  
+> _Giả sử server của mình ở VN, những người dùng ở Mỹ sẽ phải request **nữa vòng trái đất** để lấy file `bundle.js`. CDN sẽ giúp những người ở Mỹ request lấy file `bundle.js` **ngay tại Mỹ**. Ví dụ http://cdn-whatever.com/nvh26041994/bundle.js chẳng hạn. Vì CDN có cơ sở hạ tầng rộng khắp thế giới nên bạn có thể yên tâm dùng. À mà cũng phaỉ chịu chi tí._  
 > _Nếu bạn giàu, cho `bundle.js` lên CDN._
 > _Nếu bạn muốn **chơi game không nạp card?**. Vẫn chơi CDN được vì những thư viên phổ biến đều có link CDN hết._  
   
@@ -195,6 +195,6 @@ components
     About.js
     KhuyenMai.js
 ```
-> _Khi sử dụng chỉ cần import HomePage from '../path/to/components/Loadable/HomePage';_  
+> _Khi sử dụng chỉ cần `import HomePage from '../path/to/components/Loadable/HomePage;`_  
   
 > _Tác giả: [Nguyễn Văn Hoàng](https://www.facebook.com/nvh26041994)_
