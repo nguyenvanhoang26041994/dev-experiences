@@ -42,10 +42,9 @@ class Demo extends React.Component {
   }
 }
 ```
-Kết quả là ở màn hình console sẽ thấy dòng chữ "Component này đã render lại với state.myName: Hoang".
-Rõ ràng thì trước và sau render lại thì myName vẫn là 'Hoang' mà đúng không?. Tại sao phải re-render nữa làm
-gì cho tốn công?. Lý do nó render lại là do mặc đinh shouldComponentUpdate reference compare.
-Okay, để chống sự render không cần thiết này, mình sẽ overide lại shouldComponentUpdate hook.
+>> *Kết quả là ở màn hình console sẽ thấy dòng chữ "Component này đã render lại với state.myName: Hoang".
+>> Rõ ràng thì trước và sau render lại thì myName vẫn là 'Hoang' mà đúng không?. Tại sao phải re-render nữa làm gì cho tốn công?. Lý do nó render lại là do mặc đinh shouldComponentUpdate reference compare.
+>> Okay, để chống sự render không cần thiết này, mình sẽ overide lại shouldComponentUpdate hook.*
 
 ----
 ### ♵ CHIA SẼ THÊM
