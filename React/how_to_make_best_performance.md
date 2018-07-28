@@ -46,9 +46,9 @@ const App = () => (
 
 ReactDOM.render(<App />, document.getElementById('app'));
 ```
-_**Xong, chạy app lên bạn sễ thấy file `bundle.js` của bạn nặng 2Mb(giả sử). Trong có soure code của HomePage tầm 300kB, `CompanyInfo` tầm 200Kb, KhuyenMai tầm 500Kb, mấy cái viện như `react`, `lodash` tổng cộng... tầm 1Mb đi chẳng hạn.**_  
+_Xong, chạy app lên bạn sễ thấy file `bundle.js` của bạn nặng 2Mb(giả sử). Trong có soure code của HomePage tầm 300kB, `CompanyInfo` tầm 200Kb, KhuyenMai tầm 500Kb, mấy cái viện như `react`, `lodash` tổng cộng... tầm 1Mb đi chẳng hạn._  
   
-_Câu hỏi đặt ra là: Ủa tại sao tôi vào `Trang Chủ` mà bắt tôi tải soure của mấy trang `Khuyến Mãi`, rồi `Thông tin công ty` làm gì vậy hè?. Hoặc tôi vào `localhost:3000/khuyenmai` thì chỉ càn tải source của `Trang khuyến mãi` thôi chứ tải `Trang Chủ` làm gì?._  
+_**Câu hỏi đặt ra là: Ủa tại sao tôi vào `Trang Chủ` mà bắt tôi tải soure của mấy trang `Khuyến Mãi`, rồi `Thông tin công ty` làm gì vậy hè?. Hoặc tôi vào `localhost:3000/khuyenmai` thì chỉ càn tải source của `Trang khuyến mãi` thôi chứ tải `Trang Chủ` làm gì?.**_  
   
 _Okay!, tiếp nào. Thì đây chính là code sau khi sử dụng `code splitting`(Sử dụng một thư viên là `react-loadable`)_ [https://github.com/jamiebuilds/react-loadable](https://github.com/jamiebuilds/react-loadable)  
   
