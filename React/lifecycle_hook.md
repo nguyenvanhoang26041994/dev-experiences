@@ -93,8 +93,8 @@ class DemoComponent extends React.Component {
 - *Nếu return false thì sẽ không tới hook re-render tiếp theo. Note: Để thấy được sự khác nhau giữa `React.PureComponent` và `React.Component`, hãy vào link dưới:<br/>
 [Có bao nhiêu kiểu Component React](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/how_many_component_types.md)<br/>
 [Component vs PureComponent](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/component_vs_purecomponent.md)*.
-  
-**♵`render(): ReactNode`<br/>
+<br/>
+**♵`render(): ReactNode`**<br/>
 **♶`getSnapshootBeforeUpdate(prevProps, prevState): object`**
 - *Thường thì get một số thông tin của `props`, `state`, hoặc ref trước khi re-render, và sử dụng nó sau khi render.*
 **♷`componentDidUpdate(prevProps, prevState, snapshoot): void`**
