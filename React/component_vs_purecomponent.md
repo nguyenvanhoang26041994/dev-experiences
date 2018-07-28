@@ -3,9 +3,9 @@
 > Chắc không ít bạn cũng đã từng bị phỏng vấn câu này rồi, nhưng không ít bạn trả lời theo kiểu lý thuyết.
 > OK mình sẽ giúp các bạn hiểu sâu hơn một chút._  
 #### **☞ Tóm lại thì 2 thằng này khác nhau ở một số điểm sau:**
-- _`React.Component` cho phép dev override lại `shouldComponentUpdate` hook, mặc định hook này reference compare để quyết định re-render lại hay không.
-- `React.PureComponent` không cho phép dev overide lại `shouldComponentUpdate` hook, nếu bạn cố tình override thì bạn sẽ ăn ngay warning. Hook này shallow compare để quyết định re-render lại hay không.
-- Đôi khi nếu thấy `React.Component` render chậm, hãy thử set `shouldComponentUpdate` hook return true hoặc return false._
+- _`React.Component` cho phép dev override lại `shouldComponentUpdate` hook, mặc định hook này reference compare để quyết định re-render lại hay không._
+- _`React.PureComponent` không cho phép dev overide lại `shouldComponentUpdate` hook, nếu bạn cố tình override thì bạn sẽ ăn ngay warning. Hook này shallow compare để quyết định re-render lại hay không._
+- _Đôi khi nếu thấy `React.Component` render chậm, hãy thử set `shouldComponentUpdate` hook return true hoặc return false._
 ```javascript
 class Demo extends React.Component {
   ...
