@@ -13,7 +13,7 @@ _**Và tất nhiên mình không giới thiệu một cách detail. Mình chỉ 
 ### _♴ NỘI DUNG_
 **:one: _`Code splitting`_**  
 _Đây là **nòng cốt của bất kỳ bạn front-end nào cần phải biết về tối đa performace**. Câu chuyện là hồi xưa mình thường dùng `webpack` để bundle ra một file duy nhất là `bundle.js` rồi `import` nó vào trang `index.html` qua thẻ `<script>`. Chuyện cũng không có gì cho đến một thời gian sau code mình càng ngày càng lớn khiến file `bundle.js` càng ngày càng nặng. Ban đầu cũng 200kb, rồi 1Mb, rồi lên tới 2Mb. Chắc nhiều bạn mới cũng gặp cái bí này. Và rồi thông qua [techtalk.vn](https://techtalk.vn/) (hay [viblo.asia](https://viblo.asia/) gì đó không nhớ) mình biết tới `code spliting`._  
-  
+![alt text](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/images/code_spliting.png)
 _Ví dụ, bạn có trang chủ: `localhost:3000/` chứa link tới các trang `/login`, `/about`, `/khuyenmai`. Tương ứng với mỗi route đó là các `React.Component` sau:_
 - `HomePage` cho trang chủ `/`.
 - `CompanyInfo` cho `/about`.
