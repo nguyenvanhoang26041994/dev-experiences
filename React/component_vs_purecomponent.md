@@ -4,23 +4,22 @@
 > OK mình sẽ giúp các bạn hiểu sâu hơn một chút._  
 #### **☞ Tóm lại thì 2 thằng này khác nhau ở một số điểm sau:**
 - _`React.Component` cho phép dev override lại `shouldComponentUpdate` hook, mặc định hook này reference compare để quyết định re-render lại hay không._
-- _`React.PureComponent` không cho phép dev overide lại `shouldComponentUpdate` hook, nếu bạn cố tình override thì bạn sẽ ăn ngay warning. Hook này shallow compare để quyết định re-render lại hay không._
+- _`React.PureComponent` không cho phép dev override lại `shouldComponentUpdate` hook, nếu bạn cố tình override thì bạn sẽ ăn ngay warning. Hook này shallow compare để quyết định re-render lại hay không._
 - _Đôi khi nếu thấy `React.Component` render chậm, hãy thử set `shouldComponentUpdate` hook return true hoặc return false._
 ```javascript
 class Demo extends React.Component {
   ...
   shouldComponentUpdate() {
-    return true; // Props|State thay đổi thì re-render luôn. Không cần compare nữa!
+    return true; // props|state thay đổi thì re-render luôn. Không cần compare nữa!
     // return false; // Sẽ chặn không bao giờ cho Component re-render. Render HTML tĩnh.
   }
   ...
 }
 ```
-----
 ### _♴ NỘI DUNG_
 > _Để mình lấy một ví dụ đơn giản nhất, trước khi đọc bài này có lẽ bạn nên đọc một chút về [React 16.4.1 Lifecycle hook update](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/lifecycle_hook)_  
 
-**☞ Step 1:**
+**_☞ Step 1:_**
 ```javascript
 class Demo extends React.Component {
   state = { myName: 'Hoang' };
@@ -44,7 +43,7 @@ class Demo extends React.Component {
 > Rõ ràng thì trước và sau render lại thì myName vẫn là `Hoang` mà đúng không?. Tại sao phải re-render nữa làm gì cho tốn công?. Lý do nó render lại là do mặc đinh `shouldComponentUpdate` reference compare.
 > Okay, để chống sự render không cần thiết này, mình sẽ override lại `shouldComponentUpdate` hook._  
 
-**☞ Step 2:**
+**_☞ Step 2:_**
 ```javascript
 class Demo extends React.Component {
   state = { myName: 'Hoang' };
@@ -68,9 +67,9 @@ class Demo extends React.Component {
   }
 }
 ```
-> _Okay!, lần này nó đã không re-render lại nữa rồi. Nhưng, nhưng mà chả nhẽ có bao nhiêu state, bao nhiêu props thì mình phải so sánh cho hết ư?. Thế thì code lắm. hãy để `React.PureComponent` giải quyết một cách ngắn gọn._  
+> _Okay!, lần này nó đã không re-render lại nữa rồi. Nhưng, nhưng mà chả nhẽ có bao nhiêu `state`, bao nhiêu `props` thì mình phải so sánh cho hết ư?. Thế thì code chán lắm. hãy để `React.PureComponent` giải quyết một cách ngắn gọn._  
 
-**☞ Step 3:**
+**_☞ Step 3:_**
 ```javascript
 class Demo extends React.PureComponent {
   state = { myName: 'Hoang' };
@@ -95,7 +94,7 @@ class Demo extends React.PureComponent {
 > Nên `React.PureComponent` vẫn compare cả những props mình không cần quan tâm đến, khiến render vô tội vạ.
 > Ví dụ ở nơi nào đó sử dụng Component Demo như sau:_  
 
-**☞ Step 4:**
+**_☞ Step 4:_**
 ```javascript
 class WrapperComponent extends React.Component {
   state = { something: 'something' };
@@ -116,4 +115,4 @@ class WrapperComponent extends React.Component {
 ### _♵ CHIA SẼ THÊM_
 > _Hồi xưa cũng toàn dùng `React.Component` thôi chứ chả dùng `Functional Component` hay `React.PureComponent` đâu. Từ khi bật source code một số thư viện thì thấy `PureComponent` và `Functional Component` dùng nhiều nên cũng đặt câu hỏi tại sao họ code vậy?. Trên đây hoàn toàn là từ kinh nghiệm cá nhân, có thể sai hoặc thiếu sót. Mong các bạn góp ý qua cho mình. Thanks!_  
   
-> Tác giả: _[Nguyễn Văn Hoàng](https://www.facebook.com/nvh26041994)_
+> _Tác giả: [Nguyễn Văn Hoàng](https://www.facebook.com/nvh26041994)_
