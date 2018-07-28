@@ -83,7 +83,7 @@ class DemoComponent extends React.Component {
 **♶`componentDidMount(prevProps, prevState): void`**
 - *Lúc này đã render lần đầu, lúc này thích hợp để tương tác với Tree Node.*
 
-**☞ Updating(Lớn lên)**
+**☞ Updating(Lớn lên)**  
 **♳`static getDerivedStateFromProps(nextProps, state): object`**
 - *Khi props hoặc state thay đổi thì hook này được gọi(Từ phiên bản 16.4 trở đi thì state hay props thay đổi thì hook này được gọi).*
 
