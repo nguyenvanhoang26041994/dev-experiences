@@ -14,11 +14,7 @@
 > - *Các Component mà cần định nghĩa `shouldComponentUpdate` để chống render không cần thiết(tăng performance) thì sử dụng
     `React.Component`, nếu bạn không đụng đến `shouldComponentUpdate` thì không cần dùng. Đôi khi người ta return true hoặc
     false cho `shouldComponentUpdate` luôn để render cho nhanh. Cái này nói kỹ ở bài [Component vs PureComponent](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/component_vs_purecomponent.md)*
-
 ----
-
-<br/>
-
 ### ♴ NỘI DUNG
 **☞ Functional Component:**
 - *Nó đơn giản chỉ là một function return về React Element mà thôi.*
@@ -49,11 +45,7 @@ const Demo = props => <span>Hello world!</span>;
 - *Để sử dụng bạn cần extends `React.PureComponent`.*
 - *Nó là anh em sinh đôi nhưng thông minh hơn một chút nhờ sự khác biệt tại `shouldComponentUpdate`.*
 - *Bạn không thể override lại `shouldComponentUpdate` và nó là shallow compare. Nghĩa là các prop con của nextProps === các prop con của prevProps và các state con của nextState === các state con của prevState thì return false, return false thì sẽ không re-render nữa.*
-
 ----
-
-<br/>
-
 ### ♵ CHIA SẼ THÊM
 > *Bài này chỉ giới thiệu các loại component có trong React và đặc điểm cũng như cách sử dụng. Nên để hiểu rõ hơn về anh em `React.Component` và `React.PureComponent` thì bạn đọc bài sau để hiểu hơn khi nào nên dùng `React.Component`, khi nào nên dùng `React.PureComponent`. Thế nào là reference compare, thế nào là shallow compare, thế nào là deep compare. [Link Component và PureComponent](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/component_vs_purecomponent.md)*.
 
