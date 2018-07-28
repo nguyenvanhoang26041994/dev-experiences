@@ -1,8 +1,8 @@
 ### ♳ TỔNG QUAN
 > **Hiện tại, React hỗ trợ 3 cách viết component đó là:**
-> >> *`Functional Component`*
-> >> *`React.Component`*
-> >> *`React.PureComponent`*
+>> *`Functional Component`*<br/>
+>> *`React.Component`*<br/>
+>> *`React.PureComponent`*<br/>
   
   Bài viết này giúp các bạn hiểu rõ hơn về đặc điểm, cách sử dụng chúng trong dự án của mình cũng như một số thủ thuật ngắn
   gọn được tóm gọn như nhau:
