@@ -123,7 +123,6 @@ class WrapperComponent extends React.Component {
 ```
   
 > *Lúc nãy thì dòng `Component này đã render lại với state.myName: Hoang` sẽ xuất hiện ở màn hình console. Đây là một trong những nhược điểm của PureComponent. Lúc này Component sẽ là thích hợp hơn vì nó flexible, tuỳ dev.*
-
 ----
 ### ♵ CHIA SẼ THÊM
 > *Hồi xưa cũng toàn dùng `React.Component` thôi chứ chả dùng `Functional Component` hay `React.PureComponent` đâu. Từ khi bật source code một số thư viện thì thấy `PureComponent` và `Functional Component` dùng nhiều nên cũng đặt câu hỏi tại sao họ code vậy?. Trên đây hoàn toàn là từ kinh nghiệm cá nhân, có thể sai hoặc thiếu sót. Mong các bạn góp ý qua cho mình. Thanks!*
