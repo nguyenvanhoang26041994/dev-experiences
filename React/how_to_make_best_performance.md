@@ -50,7 +50,7 @@ ReactDOM.render(<App />, document.getElementById('app'));
   
 > _Câu hỏi đặt ra là: Ủa tại sao tôi vào `Trang Chủ` mà bắt tôi tải soure của mấy trang `Khuyến Mãi`, rồi `Thông tin công ty` làm gì vậy hè?. Hoặc tôi vào `localhost:3000/khuyenmai` thì chỉ càn tải source của `Trang khuyến mãi` thôi chứ tải `Trang Chủ` làm gì?._  
   
-> _Okay!, tiếp nào. Thì đây chính là code sau khi sử dụng code splitting(Sử dụng một thư viên là `react-loadable`) https://github.com/jamiebuilds/react-loadable _  
+> _Okay!, tiếp nào. Thì đây chính là code sau khi sử dụng code splitting(Sử dụng một thư viên là `react-loadable`)_ (https://github.com/jamiebuilds/react-loadable)[https://github.com/jamiebuilds/react-loadable]  
   
 **_☞ Step 2:(`App.js`)_**
 ```javascript
