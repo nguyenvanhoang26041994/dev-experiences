@@ -81,11 +81,11 @@ const App = () => (
 
 ReactDOM.render(<App />, document.getElementById('app'));
 ```
-> _Xong, bây giờ thì từ 1 file `bundle.js` nặng 2Mb ta có các file sau chẳng hạn._
-> - _`bundle.js`(File chứa soure thư viện như `react`, `lodash`... và file đầu tiên App) nặng 1Mb._
-> - _`homepage.chunk.js` nặng 300Kb._
-> - _`about.chunk.js` nặng 200Kb._
-> - _`khuyenmai.chunk.js` nặng 500Kb._
+_Xong, bây giờ thì từ 1 file `bundle.js` nặng 2Mb ta có các file sau chẳng hạn._
+- _`bundle.js`(File chứa soure thư viện như `react`, `lodash`... và file đầu tiên App) nặng 1Mb._
+- _`homepage.chunk.js` nặng 300Kb._
+- _`about.chunk.js` nặng 200Kb._
+- _`khuyenmai.chunk.js` nặng 500Kb._
   
 _Khi bạn vào `localhost:3000/` thì bạn bật F12 lên(google chorme chế độ cho dev debug). Bên phần network thì bạn sẽ thấy nó tải `bundle.js` 1Mb trước sau đó nó tải tiếp `homepage.chunk.js` 300Kb sau. Vậy là ta chỉ cần tải tổng cộng 1.3Mb để vào được trang chủ thay vì 2Mb với cách không sử dụng code splitting`(☞ Step 1)`._  
   
@@ -98,7 +98,7 @@ _Và bạn có để ý thì các file `about.chunk.js` `homepage.chunk.js` và 
 _**Mình sẽ nói tiếp một tí về phần kinh nghiệm của mình khi spliting ở phần CHIA SẺ THÊM về phần này.**_
   
 **:two: _`Production build`_**  
-> _Yeah!, nó thật ra đơn giản lắm. File `bundle.js` của bạn ban đầu lớn một phần là do code bạn có nhiều comment qúa chẳng hạn, hoặc tên biến dài, hoặc ký tự Enter thì vô vàn, blabla. [webpack](https://webpack.js.org/) thần thánh sẽ giúp bạn minimize code lại._  
+_Yeah!, nó thật ra đơn giản lắm. File `bundle.js` của bạn ban đầu lớn một phần là do code bạn có nhiều comment qúa chẳng hạn, hoặc tên biến dài, hoặc ký tự Enter thì vô vàn, blabla. [webpack](https://webpack.js.org/) thần thánh sẽ giúp bạn minimize code lại._  
   
 **:three: _gzip_**
 _Cái này thì như kiểu như này._
