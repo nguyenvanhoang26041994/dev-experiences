@@ -130,4 +130,4 @@ class WrapperComponent extends React.Component {
 
 <br/>
 
-**Tác giả: *[Nguyễn Văn Hoàng](https://www.facebook.com/nvh26041994)* **
+- Tác giả: *[Nguyễn Văn Hoàng](https://www.facebook.com/nvh26041994)*
