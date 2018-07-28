@@ -36,9 +36,7 @@ class DemoComponent extends React.Component {
 ``` 
 2. `static getDerivedStateFromProps(props, state): object`
 - Trước đây, với lifecycle cũ, người ta thường tính toán state thông qua props trong hàm `constructor`. Và khi components update `props` thì dùng kèm với `componentWillReceiveProps` để set lại `state`. Hook này sinh ra để thay thế việc này.
-- Return về một object chính là `state`.<br/>
-Và khi components update props thì dùng kèm với `componentWillReceiveProps` để set lại `state`.<br/>
-Ví dụ với lifecycle cũ:
+- Return về một object chính là `state`. Và khi components update props thì dùng kèm với `componentWillReceiveProps` để set lại `state`. Ví dụ với lifecycle cũ:
 ```
 class DemoComponent extends React.Component {
   constructor(props) {
@@ -54,7 +52,7 @@ class DemoComponent extends React.Component {
   ...
 }
 
-hoặc 
+// hoặc 
 
 class DemoComponent extends React.Component {
   componentWillMount() {}
@@ -67,8 +65,7 @@ class DemoComponent extends React.Component {
   ...
 }
 ```   
-> `=> Cực`
-> Hãy chuyển sang lifecycle mới, nó sẽ trông như thế nào?. Như này:
+> `=> Cực. Hãy chuyển sang lifecycle mới, nó sẽ trông như thế nào?. Như này:`
 ```
 class DemoComponent extends React.Component {
   state = {};
