@@ -146,7 +146,7 @@ _Khi sử dụng `Server-side-rendering` bạn nên sử dụng `ReactDOM.hydrat
   
 **:five: _Sử dụng CDN(`Content Delivery Network`)_**  
 _Bài viết này mình đọc qua ở [techtalk.vn](https://techtalk.vn/cdn-chi-1-giay-lam-doi-thay-tam-tri-khach-hang.html)_  
-  
+![alt text](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/images/cdn_yes_and_no.jpg)
 _Nếu bạn nhác đọc thì mình có thể tóm tắt ở ngay đây:_  
 _Giả sử server của mình ở VN, những người dùng ở Mỹ sẽ phải request **nữa vòng trái đất** để lấy file `bundle.js`. CDN sẽ giúp những người ở Mỹ request lấy file `bundle.js` **ngay tại Mỹ**. Ví dụ `http://cdn-whatever.com/nvh26041994/bundle.js` chẳng hạn. Vì CDN có cơ sở hạ tầng rộng khắp thế giới nên bạn có thể yên tâm dùng. À mà cũng phaỉ chịu chi tí._  
 _Nếu bạn giàu, cho `bundle.js` lên CDN._
