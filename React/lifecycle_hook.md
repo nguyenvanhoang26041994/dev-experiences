@@ -79,19 +79,13 @@ class DemoComponent extends React.Component {
   ...
 }
 ```
-**♵`render(): ReactNode`**
-
+**♵`render(): ReactNode`**<br/>
 **♶`componentDidMount(prevProps, prevState): void`**
-
 - *Lúc này đã render lần đầu, lúc này thích hợp để tương tác với Tree Node.*
- 
 **☞ Updating(Lớn lên)**
-
 **♳`static getDerivedStateFromProps(nextProps, state): object`**
-
 - *Khi props hoặc state thay đổi thì hook này được gọi(Từ phiên bản 16.4 trở đi thì state hay props thay đổi thì hook này được gọi).*
 **♴`shouldComponentUpdate(nextProps, nextState): boolean`**
-
 - *Khi props hoặc state thay đổi thì hook này được gọi.*
 - *Với PureComponent thì dev không thể định nghĩa lại. Mặc định là shallow compare.*
 - *Với Component thì dev có thể định nghĩa lại để chống render không cần thiết. Mặc định là reference compare.*
@@ -100,18 +94,13 @@ class DemoComponent extends React.Component {
 [Có bao nhiêu kiểu Component React](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/how_many_component_types.md)<br/>
 [Component vs PureComponent](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/component_vs_purecomponent.md)*.
   
-**♵`render(): ReactNode`
-<br/>
+**♵`render(): ReactNode`<br/>
 **♶`getSnapshootBeforeUpdate(prevProps, prevState): object`**
-
 - *Thường thì get một số thông tin của `props`, `state`, hoặc ref trước khi re-render, và sử dụng nó sau khi render.*
-
 **♷`componentDidUpdate(prevProps, prevState, snapshoot): void`**
-
 - *Lúc này đã re-render, thích hợp để tương tác với Tree Node.*
 - *Với lifecycle mới thì có thêm param snapshoot, `snapshoot` là output của `getSnapshootBeforeUpdate` hook.*
-  
-**☞ Unmounting(Chết đi)**ư
+**☞ Unmounting(Chết đi)**<br/>
 **♳`componentWillUnmount: void`**
 - *Thường thì chạy một function nào đó, ví dụ như clear interval, delete rác. Ít khi sử dụng.*
 - *Không nên `setState` tại đây, Vì nó chết rồi không sống lại nữa.*
