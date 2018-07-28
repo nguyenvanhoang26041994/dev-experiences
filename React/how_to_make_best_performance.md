@@ -98,9 +98,9 @@ _Và bạn có để ý thì các file `about.chunk.js` `homepage.chunk.js` và 
 _**Mình sẽ nói tiếp một tí về phần kinh nghiệm của mình khi spliting ở phần CHIA SẺ THÊM về phần này.**_
   
 **:two: _`Production build`_**  
-_Yeah!, nó thật ra đơn giản lắm. File `bundle.js` của bạn ban đầu lớn một phần là do code bạn có nhiều comment qúa chẳng hạn, hoặc tên biến dài, hoặc ký tự Enter thì vô vàn, blabla. [webpack](https://webpack.js.org/) thần thánh sẽ giúp bạn minimize code lại._  
+_Yeah!, nó thật ra đơn giản lắm. File `bundle.js` của bạn ban đầu lớn một phần là do code bạn có nhiều comment qúa chẳng hạn, hoặc tên biến dài, hoặc ký tự Enter thì vô vàn, blabla. [webpack](https://webpack.js.org/) thần thánh sẽ giúp bạn minimize code lại. Link [https://webpack.js.org/guides/production/](https://webpack.js.org/guides/production/)_  
   
-**:three: _gzip_**
+**:three: _`gzip`_**
 _Cái này thì như kiểu như này._
 ```
 - Browser: Ê Server, bundle.js nặng đấy, gửi tao file nén đi!.
