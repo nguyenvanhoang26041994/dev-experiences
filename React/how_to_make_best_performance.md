@@ -144,7 +144,7 @@ app.get('/homepage', (res, req) => res.send(`
 ```
 > _Khi sử dụng `Server-side-rendering` bạn nên sử dụng `ReactDOM.hydrate` thay cho `ReactDOM.render` vì nó sẽ tối đa performace render hơn, vì dù sau cũng render một phần HTML ở server rồi mà. Việc còn lại chỉ là render ở Browser để có React Application. Tuy nhiên vì cái này khá khó nên 1, 2 câu không thể nói hết được. Sẽ viết ở bài [Server side rendering](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/server_side_rendering.md)._  
   
-**:five: _Sử dụng CDN(Content Delivery Network)_**  
+**:five: _Sử dụng CDN(`Content Delivery Network`)_**  
 > _Bài viết này mình đọc qua ở [techtalk.vn](https://techtalk.vn/cdn-chi-1-giay-lam-doi-thay-tam-tri-khach-hang.html)_  
   
 > _Nếu bạn nhác đọc thì mình có thể tóm tắt ở ngay đây:_  
@@ -152,13 +152,13 @@ app.get('/homepage', (res, req) => res.send(`
 > _Nếu bạn giàu, cho `bundle.js` lên CDN._
 > _Nếu bạn muốn **chơi game không nạp card?**. Vẫn chơi CDN được vì những thư viên phổ biến đều có link CDN hết._  
   
-**:six: _Web worker_**
-`Mình chưa có kinh nghiệm với thằng này. Nó giống như cach file bundle.js trên Browser với level gây ức chế cho dev. Cần bạn nào nó nói về thằng này và hướng dẫn config với webpack thân thánh. OffilePlugin gì đấy nếu bạn muốn search thêm`
+**:six: _`Web worker`_**
+> _Mình chưa có kinh nghiệm với thằng này. Nó giống như cach file bundle.js trên Browser với level gây ức chế cho dev. Cần bạn nào nó nói về thằng này và hướng dẫn config với webpack thân thánh. OffilePlugin gì đấy nếu bạn muốn search thêm_
 ### _♵ CHIA SẼ THÊM_
-- _Đối với production build và CDN, bạn nên chia ra các môi trường như `development`, `production` cho `webpack`:_
- - `webpack.config.prod.js`.
- - `webpack.config.dev.js`.
-- _`webpack 4` hỗ trợ tách các third-party ra file riêng `vendors-main.chunk.js` với mặc định(Cái này chắc cho vào phần code splitting chắc hợp lý)._
+> _Đối với production build và CDN, bạn nên chia ra các môi trường như `development`, `production` cho `webpack`:_
+> - `webpack.config.prod.js`.
+> - `webpack.config.dev.js`.
+> _`webpack 4` hỗ trợ tách các third-party ra file riêng `vendors-main.chunk.js` với mặc định(Cái này chắc cho vào phần code splitting chắc hợp lý)._
 ```javascript
 webpackConfig: {
   ...
@@ -167,30 +167,34 @@ webpackConfig: {
   }
 }
 ```
-- _Về Server-side-rendering mình sẽ có bài riêng về nó tại [Server side rendering](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/server_side_rendering.md)._
+> _Về Server-side-rendering mình sẽ có bài riêng về nó tại [Server side rendering](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/server_side_rendering.md)._
     
-- _Khi sử dụng `react-loadable`, bạn không nên code như mình ở `☞ Step 2` như vậy. Rất khó tái sử dụng. Với `☞ Step 2` thì mình sẽ refactor như này._
-- components
-- HomePage
--- index.js
-- Loadable.js
-- About
-- index.js
-- Loadable.js
-- KhuyenMai
-- index.js
-- Loadable.js
+> _Khi sử dụng `react-loadable`, bạn không nên code như mình ở `☞ Step 2` như vậy. Rất khó tái sử dụng. Với `☞ Step 2` thì mình sẽ refactor như này._  
+```
+components
+  HomePage
+    index.js
+    Loadable.js
+  About
+    index.js
+    Loadable.js
+  KhuyenMai
+    index.js
+    Loadable.js
+```
 > _Khi sử dụng mình chỉ cần `import HomePage from '../path/to/components/HomePage/Loadable';`_  
   
 > _Hoặc bạn cũng có thể refactor theo kiểu_
- - components
- - HomePage.js
- - About.js
- - KhuyenMai.js
- - Loadable
- - HomePage.js
- - About.js
- - KhuyenMai.js
+```
+components
+  HomePage.js
+  About.js
+  KhuyenMai.js
+  Loadable
+    HomePage.js
+    About.js
+    KhuyenMai.js
+```
 > _Khi sử dụng chỉ cần import HomePage from '../path/to/components/Loadable/HomePage';_  
   
 > _Tác giả: [Nguyễn Văn Hoàng](https://www.facebook.com/nvh26041994)_
