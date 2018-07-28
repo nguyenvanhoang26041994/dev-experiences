@@ -1,5 +1,5 @@
 ### ♳ TỔNG QUAN
-> **Hiện tại, React hỗ trợ 3 cách viết component đó là:**
+> **Hiện tại, React hỗ trợ 3 cách viết component đó là:**<br/>
 > *`Functional Component`*<br/>
 > *`React.Component`*<br/>
 > *`React.PureComponent`*<br/>
