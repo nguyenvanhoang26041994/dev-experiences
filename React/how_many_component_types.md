@@ -40,6 +40,7 @@ const Demo = props => <span>Hello world!</span>;
 - *Để sử dụng bạn cần extends `React.Component`.*
 - *Nó khác ở `React.PureComponent` một chổ duy nhất là `shouldComponentUpdate`.*
 - `shouldComponentUpdate` mặc định là reference compare. Nghĩa là nếu `nextProps === prevProps && nextState === prevState ` thì return false. return false thì sẽ không re-render. Tuy nhiên bạn có thể overide lại được để chống render không cần thiết, từ đó tăng performance.
+
 **☞ React.PureComponent**
 - *Để sử dụng bạn cần extends `React.PureComponent`.*
 - *Nó là anh em sinh đôi nhưng thông minh hơn một chút nhờ sự khác biệt tại `shouldComponentUpdate`.*
