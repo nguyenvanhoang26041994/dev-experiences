@@ -6,7 +6,7 @@
 - _`React.Component` cho phép dev override lại `shouldComponentUpdate` hook, mặc định hook này reference compare để quyết định re-render lại hay không.
 - `React.PureComponent` không cho phép dev overide lại `shouldComponentUpdate` hook, nếu bạn cố tình override thì bạn sẽ ăn ngay warning. Hook này shallow compare để quyết định re-render lại hay không.
 - Đôi khi nếu thấy `React.Component` render chậm, hãy thử set `shouldComponentUpdate` hook return true hoặc return false._
-```
+```javascript
 class Demo extends React.Component {
   ...
   shouldComponentUpdate() {
