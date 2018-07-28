@@ -11,7 +11,7 @@
 ### _♴ NỘI DUNG_
 **_☞ Mounting(Sinh ra)_**
 
-**_:one:`contructor(props): void`_**
+**:one: _`contructor(props): void`_**
 > _Ở ES6 thì thường dùng để tạo init `state`, bind context(`this`) cho các function, event handling, createRef()._  
   
 _Ví dụ:_
@@ -34,7 +34,7 @@ class DemoComponent extends React.Component {
   }
 }
 ``` 
-**_:two:`static getDerivedStateFromProps(props, state): object`_**
+**:two: _`static getDerivedStateFromProps(props, state): object`_**
 - _Trước đây, với lifecycle cũ, người ta thường tính toán `state` thông qua `props` trong hàm `constructor`. Và khi components update `props` thì dùng kèm với `componentWillReceiveProps` để set lại `state`. Hook này sinh ra để thay thế việc này._
 - _Return về một object chính là `state`. Và khi components update `props` thì dùng kèm với `componentWillReceiveProps` để set lại `state`. Ví dụ với lifecycle cũ:_
 ```javascript
@@ -77,15 +77,15 @@ class DemoComponent extends React.Component {
   ...
 }
 ```
-**_:three:`render(): ReactNode`_**  
-**_:four:`componentDidMount(prevProps, prevState): void`_**
+**:three: _`render(): ReactNode`_**  
+**:four: _`componentDidMount(prevProps, prevState): void`_**
 - _Lúc này đã render lần đầu, lúc này thích hợp để tương tác với Tree Node._  
   
 **_☞ Updating(Lớn lên)_**  
-**_:one:`static getDerivedStateFromProps(nextProps, state): object`_**
+**:one: _`static getDerivedStateFromProps(nextProps, state): object`_**
 - *Khi props hoặc state thay đổi thì hook này được gọi(Ở phiên bản 16.3.x `state` thay đổi thì hook này không được gọi)._  
   
-**_:two:`shouldComponentUpdate(nextProps, nextState): boolean`_**
+**:two: _`shouldComponentUpdate(nextProps, nextState): boolean`_**
 - _Khi `props` hoặc `state` thay đổi thì hook này được gọi._
 - _Với `React.PureComponent` thì dev không thể override. Mặc định là shallow compare._
 - _Với `React.Component` thì dev có thể override để chống render không cần thiết. Mặc định là reference compare._
@@ -94,16 +94,16 @@ class DemoComponent extends React.Component {
 [Có bao nhiêu kiểu Component React](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/how_many_component_types.md)  
 [Component vs PureComponent](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/component_vs_purecomponent.md)._  
   
-**_:three:`render(): ReactNode`_**  
-**_:four:`getSnapshootBeforeUpdate(prevProps, prevState): object`_**
+**:three: _`render(): ReactNode`_**  
+**:four: _`getSnapshootBeforeUpdate(prevProps, prevState): object`_**
 - _Thường thì get một số thông tin của `props`, `state`, hoặc ref trước khi re-render, và sử dụng nó sau khi render._
 
-**_:five:`componentDidUpdate(prevProps, prevState, snapshoot): void`_**
+**:five: _`componentDidUpdate(prevProps, prevState, snapshoot): void`_**
 - _Lúc này đã re-render, thích hợp để tương tác với Tree Node._
 - _Với lifecycle mới thì có thêm param snapshoot, `snapshoot` là output của `getSnapshootBeforeUpdate` hook._  
   
 **_☞ Unmounting(Chết đi)_**  
-**_:one:`componentWillUnmount: void`_**
+**:one: _`componentWillUnmount: void`_**
 - _Thường thì chạy một function nào đó, ví dụ như clear interval, delete rác. Ít khi sử dụng._
 - _Không nên `setState` tại đây, Vì nó chết rồi không sống lại nữa._  
   
