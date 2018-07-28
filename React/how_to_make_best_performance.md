@@ -2,16 +2,16 @@
 _**Lúc còn mới tập tành code React file bundle của mình thường lên tới từ 1Mb đến 6Mb. Chạy lần đầu trên product chậm rì chậm rịt. Sau gần 1 năm dùng React thì bản thân cũng rút ra một cố cách dùng để cải thiện performance.**_  
   
 _**Bài viết này sẽ xoanh quanh vấn đề làm sao để app chạy nhanh nhất ngay cả lần đầu vào trang web. Các kỹ thuật mình nói trong bài viết sẽ bao gồm:**_  
-- _Code splitting, đây là kỹ thuật trọng điểm trong bài này._
-- _Production build(with `webpack`)._
+- _`Code splitting`, đây là kỹ thuật trọng điểm trong bài này._
+- _`Production build`(with `webpack`)._
 - _Nén file với `gzip`._
 - _`Server-side-rendering`._
 - _CDN(`Content Delivery Network`)._
-- _Web worker._  
+- _`Web worker`._  
   
 > _Và tất nhiên mình không giới thiệu một cách detail. Mình chỉ nói để các bạn hiểu những kĩ thuật đó là gì, tại sao phải sử dụng nó, sử dụng khi nào. Chứ trên google hướng dẫn rất cụ thể rồi mình không nói lại._  
 ### _♴ NỘI DUNG_
-**:one: _Code splitting_**  
+**:one: _`Code splitting`_**  
 _Đây là **nòng cốt của bất kỳ bạn front-end nào cần phải biết về tối đa performace**. Câu chuyện là hồi xưa mình thường dùng `webpack` để bundle ra một file duy nhất là `bundle.js` rồi `import` nó vào trang `index.html` qua thẻ `<script>`. Chuyện cũng không có gì cho đến một thời gian sau code mình càng ngày càng lớn khiến file `bundle.js` càng ngày càng nặng. Ban đầu cũng 200kb, rồi 1Mb, rồi lên tới 2Mb. Chắc nhiều bạn mới cũng gặp cái bí này. Và rồi thông qua [techtalk.vn](https://techtalk.vn/) (hay [viblo.asia](https://viblo.asia/) gì đó không nhớ) mình biết tới code spliting._  
   
 > _Ví dụ, bạn có trang chủ: `localhost:3000/` chứa link tới các trang `/login`, `/about`, `/khuyenmai`. Tương ứng với mỗi route đó là các `React.Component` sau:_
@@ -50,7 +50,7 @@ ReactDOM.render(<App />, document.getElementById('app'));
   
 > _Câu hỏi đặt ra là: Ủa tại sao tôi vào `Trang Chủ` mà bắt tôi tải soure của mấy trang `Khuyến Mãi`, rồi `Thông tin công ty` làm gì vậy hè?. Hoặc tôi vào `localhost:3000/khuyenmai` thì chỉ càn tải source của `Trang khuyến mãi` thôi chứ tải `Trang Chủ` làm gì?._  
   
-> _Okay!, tiếp nào. Thì đây chính là code sau khi sử dụng code splitting(Sử dụng một thư viên là `react-loadable`)_ [https://github.com/jamiebuilds/react-loadable](https://github.com/jamiebuilds/react-loadable)  
+> _Okay!, tiếp nào. Thì đây chính là code sau khi sử dụng `code splitting`(Sử dụng một thư viên là `react-loadable`)_ [https://github.com/jamiebuilds/react-loadable](https://github.com/jamiebuilds/react-loadable)  
   
 **_☞ Step 2:(`App.js`)_**
 ```javascript
@@ -97,7 +97,7 @@ ReactDOM.render(<App />, document.getElementById('app'));
   
 > _**Mình sẽ nói tiếp một tí về phần kinh nghiệm của mình khi spliting ở phần CHIA SẺ THÊM về phần này.**_
   
-**:two: _Production build_**  
+**:two: _`Production build`_**  
 > _Yeah!, nó thật ra đơn giản lắm. File `bundle.js` của bạn ban đầu lớn một phần là do code bạn có nhiều comment qúa chẳng hạn, hoặc tên biến dài, hoặc ký tự Enter thì vô vàn, blabla. [webpack](https://webpack.js.org/) thần thánh sẽ giúp bạn minimize code lại._  
   
 **:three: _gzip_**
@@ -111,10 +111,10 @@ ReactDOM.render(<App />, document.getElementById('app'));
   
 > _Mình không chắc các trình duyệt cũ có hỗ trợ cái này hay không nữa. Bên server mình dùng `express` thì mình dùng kèm `compression`. Tài liệu: https://expressjs.com/en/advanced/best-practice-performance.html#use-gzip-compression ._  
   
-> _Để check trang web của bạn đã sử dụng gzip chưa thì F12 kiểm tra phần network. Nó có ghi dung lượng đấy._
+> _Để check trang web của bạn đã sử dụng `gzip` chưa thì F12 kiểm tra phần network. Nó có ghi dung lượng đấy._
   
-**:four: _Server-side-rendering(SSR)_**  
-> _Cái này nó không có gì phức tạp hết, **làm thực tế mới khó đấy**.  
+**:four: _`Server-side-rendering`(SSR)_**  
+> _Cái này nó không có gì phức tạp hết, **làm thực tế mới khó đấy**._  
   
 > _Mình miêu tả nó đơn giản thế này thôi nhé: Mang tiếng là `Server-side-rendering` nhưng thật chất nó vẫn là `Client-side-rendering` đấy, rất là lừa tình. Nó render ra HTML tĩnh trên Server rồi gửi cho Browser nhằm tiết kiệm băng thông thôi, nó vẫn render lại ở client như bình thường thôi à. Vì HTML của một phần nào đó cho người dùng thấy nên cảm giác nó nhanh chứ thực tế nó lấy đi sức lao động của Server nhiều hơn. Nhưng được cái nó sẽ SEO tốt!. Tài liệu: [https://reactjs.org/docs/react-dom-server.html](https://reactjs.org/docs/react-dom-server.html)_  
   
@@ -145,20 +145,20 @@ app.get('/homepage', (res, req) => res.send(`
 > _Khi sử dụng `Server-side-rendering` bạn nên sử dụng `ReactDOM.hydrate` thay cho `ReactDOM.render` vì nó sẽ tối đa performace render hơn, vì dù sau cũng render một phần HTML ở server rồi mà. Việc còn lại chỉ là render ở Browser để có React Application. Tuy nhiên vì cái này khá khó nên 1, 2 câu không thể nói hết được. Sẽ viết ở bài [Server side rendering](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/server_side_rendering.md)._  
   
 **:five: _Sử dụng CDN(`Content Delivery Network`)_**  
-> _Bài viết này mình đọc qua ở_ [techtalk.vn](https://techtalk.vn/cdn-chi-1-giay-lam-doi-thay-tam-tri-khach-hang.html)  
+> _Bài viết này mình đọc qua ở [techtalk.vn](https://techtalk.vn/cdn-chi-1-giay-lam-doi-thay-tam-tri-khach-hang.html)_  
   
 > _Nếu bạn nhác đọc thì mình có thể tóm tắt ở ngay đây:_  
-> _Giả sử server của mình ở VN, những người dùng ở Mỹ sẽ phải request **nữa vòng trái đất** để lấy file `bundle.js`. CDN sẽ giúp những người ở Mỹ request lấy file `bundle.js` **ngay tại Mỹ**. Ví dụ http://cdn-whatever.com/nvh26041994/bundle.js chẳng hạn. Vì CDN có cơ sở hạ tầng rộng khắp thế giới nên bạn có thể yên tâm dùng. À mà cũng phaỉ chịu chi tí._  
+> _Giả sử server của mình ở VN, những người dùng ở Mỹ sẽ phải request **nữa vòng trái đất** để lấy file `bundle.js`. CDN sẽ giúp những người ở Mỹ request lấy file `bundle.js` **ngay tại Mỹ**. Ví dụ `http://cdn-whatever.com/nvh26041994/bundle.js` chẳng hạn. Vì CDN có cơ sở hạ tầng rộng khắp thế giới nên bạn có thể yên tâm dùng. À mà cũng phaỉ chịu chi tí._  
 > _Nếu bạn giàu, cho `bundle.js` lên CDN._
 > _Nếu bạn muốn **chơi game không nạp card?**. Vẫn chơi CDN được vì những thư viên phổ biến đều có link CDN hết._  
   
 **:six: _`Web worker`_**
 > _Mình chưa có kinh nghiệm với thằng này. Nó giống như cach file bundle.js trên Browser với level gây ức chế cho dev. Cần bạn nào nó nói về thằng này và hướng dẫn config với webpack thân thánh. OffilePlugin gì đấy nếu bạn muốn search thêm_
 ### _♵ CHIA SẼ THÊM_
-> _Đối với production build và CDN, bạn nên chia ra các môi trường như `development`, `production` cho `webpack`:_
+> _Đối với `production build` và CDN, bạn nên chia ra các môi trường như `development`, `production` cho `webpack`:_
 > - `webpack.config.prod.js`.
-> - `webpack.config.dev.js`.
-> _`webpack 4` hỗ trợ tách các third-party ra file riêng `vendors-main.chunk.js` với mặc định(Cái này chắc cho vào phần code splitting chắc hợp lý)._
+> - `webpack.config.dev.js`.  
+> _`webpack 4` hỗ trợ tách các third-party ra file riêng `vendors-main.chunk.js` với mặc định(Cái này chắc cho vào phần `code splitting` chắc hợp lý)._
 ```javascript
 webpackConfig: {
   ...
