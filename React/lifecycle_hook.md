@@ -12,7 +12,7 @@
 ### ♴ NỘI DUNG
 **☞ Mounting(Sinh ra)**
 
-- ☆ contructor(props): void
+1. ☆ contructor(props): void
     -- Ở ES6 thì thường dùng để tạo init state, bind context(this) cho các function, event handling, createRef().
       Ví dụ: 
   
@@ -34,7 +34,7 @@
         }
       }
    
-  ☆ static getDerivedStateFromProps(props, state): object
+2. ☆ static getDerivedStateFromProps(props, state): object
     - Trước đây, với lifecycle cũ, người ta thường tính toán state thông qua props trong hàm constructor
        Và khi components update props thì dùng kèm với componentWillReceiveProps để set lại state.
        Hook này sinh ra để thay thế việc này.
@@ -80,15 +80,16 @@
         ...
       }
   
-  ☆ render(): ReactNode
-  ☆ componentDidMount(prevProps, prevState): void
+3. ☆ render(): ReactNode
+4. ☆ componentDidMount(prevProps, prevState): void
     - Lúc này đã render lần đầu, lúc này thích hợp để tương tác với Tree Node
  
- ☞ Updating(Lớn lên)-------------------------------------
-  ☆ static getDerivedStateFromProps(nextProps, state): object
+**☞ Updating(Lớn lên)**
+
+1. ☆ static getDerivedStateFromProps(nextProps, state): object
     - Khi props hoặc state thay đổi thì hook này được gọi(Từ phiên bản 16.4 
       trở đi thì state hay props thay đổi thì hook này được gọi)
-  ☆ shouldComponentUpdate(nextProps, nextState): boolean
+2. ☆ shouldComponentUpdate(nextProps, nextState): boolean
     - Khi props hoặc state thay đổi thì hook này được gọi
     - Với PureComponent thì dev không thể định nghĩa lại. Mặc định là shallow compare.
     - Với Component thì dev có thể định nghĩa lại để chống render không cần thiết. Mặc định là reference compare.
@@ -99,15 +100,16 @@
       https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/how_many_component_types
       https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/component_vs_purecomponent
   
-  ☆ render(): ReactNode
-  ☆ getSnapshootBeforeUpdate(prevProps, prevState): object
+3. ☆ render(): ReactNode
+4. ☆ getSnapshootBeforeUpdate(prevProps, prevState): object
     - Thường thì get một số thông tin của props, state, hoặc ref trước khi re-render, và sử dụng nó sau khi render.
-  ☆ componentDidUpdate(prevProps, prevState, snapshoot): void
+5. ☆ componentDidUpdate(prevProps, prevState, snapshoot): void
     - Lúc này đã re-render, thích hợp để tương tác với Tree Node.
     - Với lifecycle mới thì có thêm param snapshoot, snapshoot là output của getSnapshootBeforeUpdate hook
   
- ☞ Unmounting(Chết đi)------------------------------------
-  ☆ componentWillUnmount: void
+**☞ Unmounting(Chết đi)**
+
+1. ☆ componentWillUnmount: void
     - Thường thì chạy một function nào đó, ví dụ như clear interval, delete rác. Ít khi sử dụng.
     - Không nên setState tại đây, Vì nó chết rồi không sống lại nữa.
 ----------------------------------------------------------------------------------------------------------------
