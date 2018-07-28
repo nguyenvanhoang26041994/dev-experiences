@@ -46,7 +46,7 @@ const App = () => (
 
 ReactDOM.render(<App />, document.getElementById('app'));
 ```
-> _Xong, chạy app lên bạn sễ thấy file `bundle.js` của bạn nặng 2Mb(giả sử). Trong có soure code của HomePage tầm 300kB, `CompanyInfo` tầm 200Kb, KhuyenMai tầm 500Kb, mấy cái viện như `react`, `lodash` tổng cộng... tầm 1Mb đi chẳng hạn._  
+_**Xong, chạy app lên bạn sễ thấy file `bundle.js` của bạn nặng 2Mb(giả sử). Trong có soure code của HomePage tầm 300kB, `CompanyInfo` tầm 200Kb, KhuyenMai tầm 500Kb, mấy cái viện như `react`, `lodash` tổng cộng... tầm 1Mb đi chẳng hạn.**_  
   
 > _Câu hỏi đặt ra là: Ủa tại sao tôi vào `Trang Chủ` mà bắt tôi tải soure của mấy trang `Khuyến Mãi`, rồi `Thông tin công ty` làm gì vậy hè?. Hoặc tôi vào `localhost:3000/khuyenmai` thì chỉ càn tải source của `Trang khuyến mãi` thôi chứ tải `Trang Chủ` làm gì?._  
   
@@ -95,7 +95,7 @@ ReactDOM.render(<App />, document.getElementById('app'));
   
 > _Và bạn có để ý thì các file `about.chunk.js` `homepage.chunk.js` và `khuyenmai.chunk.js` được file `bundle.js` gọi, từ đây bạn cũng biết thêm một điều rằng file js cũng có thể gọi file js khác chứ không nhất thiết phải sử dụng thẻ `<script>`._
   
-> _**Mình sẽ nói tiếp một tí về phần kinh nghiệm của mình khi spliting ở phần CHIA SẺ THÊM về phần này.**_
+_**Mình sẽ nói tiếp một tí về phần kinh nghiệm của mình khi spliting ở phần CHIA SẺ THÊM về phần này.**_
   
 **:two: _`Production build`_**  
 > _Yeah!, nó thật ra đơn giản lắm. File `bundle.js` của bạn ban đầu lớn một phần là do code bạn có nhiều comment qúa chẳng hạn, hoặc tên biến dài, hoặc ký tự Enter thì vô vàn, blabla. [webpack](https://webpack.js.org/) thần thánh sẽ giúp bạn minimize code lại._  
