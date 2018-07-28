@@ -83,7 +83,8 @@ class DemoComponent extends React.Component {
   
 **_☞ Updating(Lớn lên)_**  
 **:one: _`static getDerivedStateFromProps(nextProps, state): object`_**
-- *Khi props hoặc state thay đổi thì hook này được gọi(Ở phiên bản 16.3.x `state` thay đổi thì hook này không được gọi)._  
+- _Khi props hoặc state thay đổi thì hook này được gọi._  
+> _Ở phiên bản 16.3.x `state` thay đổi thì hook này không được gọi)_
   
 **:two: _`shouldComponentUpdate(nextProps, nextState): boolean`_**
 - _Khi `props` hoặc `state` thay đổi thì hook này được gọi._
