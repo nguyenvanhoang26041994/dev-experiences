@@ -72,6 +72,49 @@ class Demo extends React.Component {
   
 > *Okay!, lần này nó đã không re-render lại nữa rồi. Nhưng, nhưng mà chả nhẽ có bao nhiêu state, bao nhiêu props thì mình phải so sánh cho hết ư?. Thế thì code lắm. hãy để React.PureComponent giải quyết một cách ngắn gọn.*
 
+**☞ Step 3:**
+```
+class Demo extends React.PureComponent {
+  state = { myName: 'Hoang' };
+
+  componentDidMount() {
+    this.setState({ myName: 'Hoang' });
+  }
+
+  componentDidUpdate() {
+    console.log(`Component này đã render lại với state.myName: ${this.state.myName}`);
+  }
+
+  render() {
+    return (
+      <span>My name is {this.state.myName}</span>
+    );
+  }
+}
+```
+> *Thế là xong!, đơn giản!. Vậy là đã chống re-render không cần thiết ở mức độ shallow level.
+> Tuy nhiên, tuy nhiên, Vì javascript là dynamic type nên bạn không biết props ở runtime là kiểu gì.
+> Nên PureComponent vẫn compare cả những props mình không cần quan tâm đến, khiến render vô tội vạ.
+> Ví dụ ở nơi nào đó sử dụng Component Demo như sau:*
+**☞ Step 4:**
+```
+class WrapperComponent extends React.Component {
+  state = { something: 'something' };
+
+  componentDidMount() {
+    this.setState({ something: 'something change' });
+  }
+
+  render() {
+    return (
+      <Demo something={this.state.something} /> // Demo là PureComponent như trên nhé
+    );
+  }
+}
+```
+  
+> *Lúc nãy thì dòng **"Component này đã render lại với state.myName: Hoang"** sẽ xuất hiện ở màn hình console. Đây là một trong những nhược điểm của PureComponent. Lúc này Component sẽ là thích hợp hơn vì nó flexible, tuỳ dev.*
 
 ----
 ### ♵ CHIA SẼ THÊM
+> *Hồi xưa cũng toàn dùng **React.Component** thôi chứ chả dùng Functional hay PureComponent đâu. Từ khi bật source code một số thư viện thì thấy **PureComponent** và **Functional Component** nên cũng đặt câu hỏi tại sao họ code vậy?. Trên đây hoàn toàn là từ kinh nghiệm cá nhân, có thể sai hoặc thiếu sót. Mong các bạn góp ý qua cho mình. Thanks!*
