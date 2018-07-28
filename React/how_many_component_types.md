@@ -5,10 +5,10 @@
 > *`React.PureComponent`*<br/>
   
 > **Bài viết này giúp các bạn hiểu rõ hơn về đặc điểm, cách sử dụng chúng trong dự án của mình cũng như một số thủ thuật ngắn gọn được tóm gọn như nhau:**<br/>
-> - *Sử dụng `Functional Component` và `React.PureComponent` hết mức có thể, tránh lạm dụng `React.Component`.*<br/>
-> - *Các Component unit(những component base) thì nên sử dụng `React.PureComonent` để viết và props chỉ nên có một cấp(shallow) và nó không có state thì có thể sử dụng Functional Component cũng không sao. Vì chỉ cần thằng cha chống render tốt thì cũng không đến lượt mấy thằng con re-render.*<br/>
+> - *Sử dụng `Functional Component` và `React.PureComponent` hết mức có thể, tránh lạm dụng `React.Component`.*<br/><br/>
+> - *Các Component unit(những component base) thì nên sử dụng `React.PureComonent` để viết và props chỉ nên có một cấp(shallow) và nó không có state thì có thể sử dụng Functional Component cũng không sao. Vì chỉ cần thằng cha chống render tốt thì cũng không đến lượt mấy thằng con re-render.*<br/><br/>
 > - *Các Component chỉ có props(hoặc chỉ render html tĩnh), không có `state`, những prop thường là truyền cứng, ít thay đổi
-    thì dùng `Functional Component`.*<br/>
+    thì dùng `Functional Component`.*<br/><br/>
 > - *Các Component mà cần định nghĩa `shouldComponentUpdate` để chống render không cần thiết(tăng performance) thì sử dụng
     `React.Component`, nếu bạn không đụng đến `shouldComponentUpdate` thì không cần dùng. Đôi khi người ta return true hoặc
     false cho `shouldComponentUpdate` luôn để render cho nhanh. Cái này nói kỹ ở bài [Component vs PureComponent](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/component_vs_purecomponent.md)*
