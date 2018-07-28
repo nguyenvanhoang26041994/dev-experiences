@@ -151,6 +151,8 @@ _Nếu bạn nhác đọc thì mình có thể tóm tắt ở ngay đây:_
 _Giả sử server của mình ở VN, những người dùng ở Mỹ sẽ phải request **nữa vòng trái đất** để lấy file `bundle.js`. CDN sẽ giúp những người ở Mỹ request lấy file `bundle.js` **ngay tại Mỹ**. Ví dụ `http://cdn-whatever.com/nvh26041994/bundle.js` chẳng hạn. Vì CDN có cơ sở hạ tầng rộng khắp thế giới nên bạn có thể yên tâm dùng. À mà cũng phaỉ chịu chi tí._  
 _Nếu bạn giàu, cho `bundle.js` lên CDN._
 _Nếu bạn muốn **chơi game không nạp card?**. Vẫn chơi CDN được vì những thư viên phổ biến đều có link CDN hết._  
+
+> 
   
 **:six: _`Web worker`_**
 > _Mình chưa có kinh nghiệm với thằng này. Nó giống như cach file bundle.js trên Browser với level gây ức chế cho dev. Cần bạn nào nó nói về thằng này và hướng dẫn config với webpack thân thánh. OffilePlugin gì đấy nếu bạn muốn search thêm_
