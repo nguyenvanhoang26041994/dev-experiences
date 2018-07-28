@@ -5,9 +5,9 @@
 - *Hoặc bạn muốn get thông tin nào đó của các ref trước khi render chẳng hạn, và sử dụng nó sau khi nó sau khi render lại. Đó là lý do mà `getSnapshotBeforeUpdate` ra đời để thay thế `componentWillUpdate`, và `componentDidUpdate` có thêm một param mới là snapshoot.*
 
 **☞ Tóm lại lifecycle mới sẽ có dạng tóm tắt như sau:**
-- *Mounting: `constructor` → `getDerivedStateFromProps` → `render` → `componentDidMount`.*
-- *Updating: `getDerivedStateFromProps` → `shouldComponentUpdate` → `render` → `getSnapshootBeforeUpdate` → `componentDidUpdate`.*
-- *Unmouting: `componentWillUnmount`.*
+-* ***Mounting***: `constructor` → `getDerivedStateFromProps` → `render` → `componentDidMount`.*
+-* ***Updating***: `getDerivedStateFromProps` → `shouldComponentUpdate` → `render` → `getSnapshootBeforeUpdate` → `componentDidUpdate`.*
+-* ***Unmouting***: `componentWillUnmount`.*
 ----
 ### ♴ NỘI DUNG
 **☞ Mounting(Sinh ra)**
