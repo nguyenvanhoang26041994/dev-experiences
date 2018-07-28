@@ -1,8 +1,8 @@
 ### ♳ TỔNG QUAN
-> *Từ phiên bản 16.3 trở đi, React đã có lifecycle mới tuy nhiên vẫn hỗ trợ life cycle cũ. Từ phiên bản 17 thì lifecycle cũ không được hỗ trợ nữa nên ở bài này chỉ để cập đến lifecyle hook mới của React.*<br/>
-> *Ở lifecycle cũ phát sinh nhiều vấn đề nhất là naming của lifecycle hook, gây hiểu nhầm!*<br/>
-> *Người ta thường dùng `constructor` `componentWillMount` `comonentWillReceiveProps` để init `state` dựa trên `props`, Vì vậy nhiều khi gây duplicate code. Đó là lý do mà `getDerivedStateFromProps` sinh ra để xoá sự khó hiểu và lằng nhằng đó đi.<br/>
-> *Hoặc bạn muốn get thông tin nào đó của các ref trước khi render chẳng hạn, và sử dụng nó sau khi nó sau khi render lại. Đó là lý do mà `getSnapshotBeforeUpdate` ra đời để thay thế `componentWillUpdate`, và `componentDidUpdate` có thêm một param mới là snapshoot.*<br/>
+> - *Từ phiên bản 16.3 trở đi, React đã có lifecycle mới tuy nhiên vẫn hỗ trợ life cycle cũ. Từ phiên bản 17 thì lifecycle cũ không được hỗ trợ nữa nên ở bài này chỉ để cập đến lifecyle hook mới của React.*<br/>
+> - *Ở lifecycle cũ phát sinh nhiều vấn đề nhất là naming của lifecycle hook, gây hiểu nhầm!*<br/>
+> - *Người ta thường dùng `constructor` `componentWillMount` `comonentWillReceiveProps` để init `state` dựa trên `props`, Vì vậy nhiều khi gây duplicate code. Đó là lý do mà `getDerivedStateFromProps` sinh ra để xoá sự khó hiểu và lằng nhằng đó đi.<br/>
+> - *Hoặc bạn muốn get thông tin nào đó của các ref trước khi render chẳng hạn, và sử dụng nó sau khi nó sau khi render lại. Đó là lý do mà `getSnapshotBeforeUpdate` ra đời để thay thế `componentWillUpdate`, và `componentDidUpdate` có thêm một param mới là snapshoot.*<br/>
 
 **☞ Tóm lại lifecycle mới sẽ có dạng tóm tắt như sau:**
 > - *Mounting: `constructor` → `getDerivedStateFromProps` → `render` → `componentDidMount`*.<br/>
