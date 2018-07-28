@@ -94,6 +94,7 @@ class DemoComponent extends React.Component {
 [Có bao nhiêu kiểu Component React](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/how_many_component_types.md)<br/>
 [Component vs PureComponent](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/component_vs_purecomponent.md)*.
 <br/>
+
 **♵`render(): ReactNode`**<br/>
 **♶`getSnapshootBeforeUpdate(prevProps, prevState): object`**
 - *Thường thì get một số thông tin của `props`, `state`, hoặc ref trước khi re-render, và sử dụng nó sau khi render.*
