@@ -18,23 +18,17 @@
 - ☆ Nó đơn giản chỉ là một function return về React Element mà thôi.
 - ☆ Không implement lifecycle hook nên nói về tốc độ render nó là nhanh nhất.
 - ☆ Có 2 kiểu code functional. Ví dụ:
-    
-**Cách 1:**
 ```
+// Cách 1:
 function Demo(props) {
   return (
     <span>Hello world!</span>
   );
 }
-```
-
-<br/>
-
-**Cách 2:
-```
+// Cách 2:
 const Demo = props => <span>Hello world!</span>;
 ```
- 
+
 > *Rõ ràng thì arrow function khiến ta code lẹ hơn, gọn hơn. Tuy nhiên, bạn nên chọn một trong 2 cách để viết tránh trình trạng code không trong sạch, mỗi người mỗi kiểu. Trên personal thì mình khuyến khích normal hơn vì function đó sẽ có tên, còn arrow thì sẽ không có tên(anonymous). Tuỳ sở thích mỗi người. Tuy nhiên mình có nhớ airbnb recomment thằng normal function(chưa giải thích kỹ vì sao nên dùng), tuy nhiên mình chưa tìm lại được link, sẽ update sau.*
 
 <br/>
