@@ -14,75 +14,71 @@ _**Bài viết này sẽ xoanh quanh vấn đề làm sao để app chạy nhanh
 **:one: _Code splitting_**  
 > _Đây là nòng cốt của bất kỳ bạn front-end nào cần phải biết về tối đa performace. Câu chuyện là hồi xưa mình thường dùng `webpack` để bundle ra một file duy nhất là `bundle.js` rồi `import` nó vào trang `index.html` qua thẻ `<script>`. Chuyện cũng không có gì cho đến một thời gian sau code mình càng ngày càng lớn khiến file `bundle.js` càng ngày càng nặng. Ban đầu cũng 200kb, rồi 1Mb, rồi lên tới 2Mb. Chắc nhiều bạn mới cũng gặp cái bí này. Và rồi thông qua [techtalk.vn](https://techtalk.vn/) (hay [viblo.asia](https://viblo.asia/) gì đó không nhớ) mình biết tới code spliting._  
   
-_Ví dụ, bạn có trang chủ: (localhost:3000/)[] chứa link tới các trang `/login`, `/about`, `/khuyenmai_`
+> _Ví dụ, bạn có trang chủ: (localhost:3000/)[] chứa link tới các trang `/login`, `/about`, `/khuyenmai`. Tương ứng với mỗi route đó là các `React.Component` sau:_
+- `HomePage` cho trang chủ `/`.
+- `CompanyInfo` cho `/about`.
+- `KhuyenMai` cho `/khuyenmai`.
   
-_Tương ứng với mỗi route đó là các `React.Component` sau:_
-- `HomePage` cho trang chủ `/`
-- `CompanyInfo` cho `/about`
-- `KhuyenMai` cho `/khuyenmai`
+> _Okay!, giờ code cho mấy cái route này nào._  
   
-  Okay!, giờ code cho mấy cái route này nào.
-☞ Step 1:(App.js)
-  import React from 'react';
-  import ReactDOM from 'react-dom';
-  import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+**_☞ Step 1:(`App.js`)_**
+```javascript
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
+import HomePage from '../path/to/components/HomePage';
+import About from '../path/to/components/About';
+import KhuyenMai from '../path/to/components/KhuyenMai';
+
+const App = () => (
+  <Router>
+    <div>
+      <Link to="/">Trang chủ</Link>
+      <Link to="/about">Về chúng tôi</Link>
+      <Link to="/khuyenmai">Nhận khuyến mãi ngay</Link>
+      <Route exact component={HomePage} />
+      <Route component={CompanyInfo} />
+      <Route component={KhuyenMai} />
+    </div>
+  </Router>
+);
+
+ReactDOM.render(<App />, document.getElementById('app'));
+```
+> _Xong, chạy app lên bạn sễ thấy file `bundle.js` của bạn nặng 2Mb(giả sử). Trong có soure code của HomePage tầm 300kB, `CompanyInfo` tầm 200Kb, KhuyenMai tầm 500Kb, mấy cái viện như `react`, `lodash` tổng cộng... tầm 1Mb đi chẳng hạn.  
   
-  import HomePage from '../path/to/components/HomePage';
-  import About from '../path/to/components/About';
-  import KhuyenMai from '../path/to/components/KhuyenMai';
+> _Câu hỏi đặt ra là: Ủa tại sao tôi vào `Trang Chủ` mà bắt tôi tải soure của mấy trang `Khuyến Mãi`, rồi `Thông tin công ty` làm gì vậy hè?. Hoặc tôi vào `localhost:3000/khuyenmai` thì chỉ càn tải source của `Trang khuyến mãi` thôi chứ tải `Trang Chủ` làm gì?._  
   
-  const App = () => (
-    <Router>
-      <div>
-        <Link to="/">Trang chủ</Link>
-        <Link to="/about">Về chúng tôi</Link>
-        <Link to="/khuyenmai">Nhận khuyến mãi ngay</Link>
-        <Route exact component={HomePage} />
-        <Route component={CompanyInfo} />
-        <Route component={KhuyenMai} />
-      </div>
-    </Router>
-  );
-  
-  ReactDOM.render(<App />, document.getElementById('app'));
-  
-  Xong, chạy app lên bạn sễ thấy file bundle của bạn nặng 2Mb(giả sử). Trong có soure code của HomePage tầm 300kB,
-  CompanyInfo tầm 200Kb, KhuyenMai tầm 500Kb, mấy cái viện như React, Lodash tổng cộng... tầm 1Mb đi chẳng hạn.
-  
-  Câu hỏi đặt ra là: Ủa tại sao tôi vào Trang Chủ mà bắt tôi tải soure của mấy trang Khuyến Mãi, rồi Thông tin công ty
-  làm gì vậy hè?. Hoặc tôi vào localhost:3000/khuyenmai thì chỉ càn tải source của Trang khuyến mãi thôi chứ tải Trang Chủ
-  làm gì?.
-  
-  Okay!, tiếp nào. Thì đây chính là code sau khi sử dụng code splitting(Sử dụng một thư viên là react-loadable)
-    https://github.com/jamiebuilds/react-loadable
-☞ Step 2:(App.js)
-  import React from 'react';
-  import Loadable from 'react-loadable';
-  import ReactDOM from 'react-dom';
-  import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-  
-  const Spinner = () => <span className="spinner" />; // Một cái icon xoay xoay loading thôi
-  
-  const HomePage = Loadable({ loader: () => import('../path/to/components/HomePage'), loading: Spinner });
-  const About = Loadable({ loader: () => import('../path/to/components/About'), loading: Spinner });
-  const KhuyenMai = Loadable({ loader: () => import('../path/to/components/KhuyenMai'), loading: Spinner });
-  // loader có nghĩa là đã load xong sẽ trả về Component trong cái import
-  // loading có nghĩa đang load soure chưa xong tạm thời load component nào đó tạm. Ở đây là Spinner
-  
-  const App = () => (
-    <Router>
-      <div>
-        <Link to="/">Trang chủ</Link>
-        <Link to="/about">Về chúng tôi</Link>
-        <Link to="/khuyenmai">Nhận khuyến mãi ngay</Link>
-        <Route exact component={HomePage} />
-        <Route component={CompanyInfo} />
-        <Route component={KhuyenMai} />
-      </div>
-    </Router>
-  );
-  
-  ReactDOM.render(<App />, document.getElementById('app'));
+> _Okay!, tiếp nào. Thì đây chính là code sau khi sử dụng code splitting(Sử dụng một thư viên là `react-loadable`) https://github.com/jamiebuilds/react-loadable
+**_☞ Step 2:(`App.js`)_**
+```javascript
+import React from 'react';
+import Loadable from 'react-loadable';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
+const HomePage = Loadable({ loader: () => import('../path/to/components/HomePage'), loading: () => null });
+const About = Loadable({ loader: () => import('../path/to/components/About'), loading: () => null });
+const KhuyenMai = Loadable({ loader: () => import('../path/to/components/KhuyenMai'), loading: () => null });
+// loader có nghĩa là đã load xong sẽ trả về Component trong cái import
+// loading có nghĩa đang load soure chưa xong tạm thời load component nào đó tạm
+
+const App = () => (
+  <Router>
+    <div>
+      <Link to="/">Trang chủ</Link>
+      <Link to="/about">Về chúng tôi</Link>
+      <Link to="/khuyenmai">Nhận khuyến mãi ngay</Link>
+      <Route exact component={HomePage} />
+      <Route component={CompanyInfo} />
+      <Route component={KhuyenMai} />
+    </div>
+  </Router>
+);
+
+ReactDOM.render(<App />, document.getElementById('app'));
+```
   
   Xong, bây giờ thì từ 1 file bundle.js nặng 2Mb ta có các file sau chẳng hạn.
   - main.js(File chứa soure thư viện như React, Lodash... và file đầu tiên App.) năng 1Mb
