@@ -42,8 +42,36 @@ class Demo extends React.Component {
 }
 ```
 > *Kết quả là ở màn hình console sẽ thấy dòng chữ **"Component này đã render lại với state.myName: Hoang"**.
-> Rõ ràng thì trước và sau render lại thì myName vẫn là **'Hoang'** mà đúng không?. Tại sao phải re-render nữa làm gì cho tốn công?. Lý do nó render lại là do mặc đinh **shouldComponentUpdate reference compare**.
+> Rõ ràng thì trước và sau render lại thì myName vẫn là **"Hoang"** mà đúng không?. Tại sao phải re-render nữa làm gì cho tốn công?. Lý do nó render lại là do mặc đinh **shouldComponentUpdate reference compare**.
 > Okay, để chống sự render không cần thiết này, mình sẽ override lại **shouldComponentUpdate** hook.*
+
+**☞ Step 2:**
+```
+class Demo extends React.Component {
+  state = { myName: 'Hoang' };
+
+  componentDidMount() {
+    this.setState({ myName: 'Hoang' });
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextState.myName !== this.state.myName
+  }
+
+  componentDidUpdate() {
+    console.log(`Component này đã render lại với state.myName: ${this.state.myName}`);
+  }
+
+  render() {
+    return (
+      <span>My name is {this.state.myName}</span>
+    );
+  }
+}
+```
+  
+> *Okay!, lần này nó đã không re-render lại nữa rồi. Nhưng, nhưng mà chả nhẽ có bao nhiêu state, bao nhiêu props thì mình phải so sánh cho hết ư?. Thế thì code lắm. hãy để React.PureComponent giải quyết một cách ngắn gọn.*
+
 
 ----
 ### ♵ CHIA SẼ THÊM
