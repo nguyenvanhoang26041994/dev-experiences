@@ -98,6 +98,7 @@ class DemoComponent extends React.Component {
 **♵`render(): ReactNode`**<br/>
 **♶`getSnapshootBeforeUpdate(prevProps, prevState): object`**
 - *Thường thì get một số thông tin của `props`, `state`, hoặc ref trước khi re-render, và sử dụng nó sau khi render.*
+
 **♷`componentDidUpdate(prevProps, prevState, snapshoot): void`**
 - *Lúc này đã re-render, thích hợp để tương tác với Tree Node.*
 - *Với lifecycle mới thì có thêm param snapshoot, `snapshoot` là output của `getSnapshootBeforeUpdate` hook.*
