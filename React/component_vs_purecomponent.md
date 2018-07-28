@@ -19,6 +19,7 @@ class Demo extends React.Component {
 ----
 ### ♴ NỘI DUNG
 > _Để mình lấy một ví dụ đơn giản nhất, trước khi đọc bài này có lẽ bạn nên đọc một chút về [React 16.4.1 Lifecycle hook update](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/lifecycle_hook)_  
+
 **☞ Step 1:**
 ```javascript
 class Demo extends React.Component {
@@ -42,6 +43,7 @@ class Demo extends React.Component {
 > _Kết quả là ở màn hình console sẽ thấy dòng chữ `Component này đã render lại với state.myName: Hoang`.
 > Rõ ràng thì trước và sau render lại thì myName vẫn là `Hoang` mà đúng không?. Tại sao phải re-render nữa làm gì cho tốn công?. Lý do nó render lại là do mặc đinh `shouldComponentUpdate` reference compare.
 > Okay, để chống sự render không cần thiết này, mình sẽ override lại `shouldComponentUpdate` hook._  
+
 **☞ Step 2:**
 ```javascript
 class Demo extends React.Component {
@@ -67,6 +69,7 @@ class Demo extends React.Component {
 }
 ```
 > _Okay!, lần này nó đã không re-render lại nữa rồi. Nhưng, nhưng mà chả nhẽ có bao nhiêu state, bao nhiêu props thì mình phải so sánh cho hết ư?. Thế thì code lắm. hãy để `React.PureComponent` giải quyết một cách ngắn gọn._  
+
 **☞ Step 3:**
 ```javascript
 class Demo extends React.PureComponent {
@@ -91,6 +94,7 @@ class Demo extends React.PureComponent {
 > Tuy nhiên, tuy nhiên, Vì javascript là dynamic type nên bạn không biết props ở runtime là kiểu gì.
 > Nên `React.PureComponent` vẫn compare cả những props mình không cần quan tâm đến, khiến render vô tội vạ.
 > Ví dụ ở nơi nào đó sử dụng Component Demo như sau:_  
+
 **☞ Step 4:**
 ```javascript
 class WrapperComponent extends React.Component {
@@ -111,4 +115,5 @@ class WrapperComponent extends React.Component {
 ----
 ### ♵ CHIA SẼ THÊM  
 > _Hồi xưa cũng toàn dùng `React.Component` thôi chứ chả dùng `Functional Component` hay `React.PureComponent` đâu. Từ khi bật source code một số thư viện thì thấy `PureComponent` và `Functional Component` dùng nhiều nên cũng đặt câu hỏi tại sao họ code vậy?. Trên đây hoàn toàn là từ kinh nghiệm cá nhân, có thể sai hoặc thiếu sót. Mong các bạn góp ý qua cho mình. Thanks!_  
+
 > Tác giả: _[Nguyễn Văn Hoàng](https://www.facebook.com/nvh26041994)_
