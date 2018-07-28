@@ -14,12 +14,12 @@ _**Bài viết này sẽ xoanh quanh vấn đề làm sao để app chạy nhanh
 **:one: _Code splitting_**  
 > _Đây là nòng cốt của bất kỳ bạn front-end nào cần phải biết về tối đa performace. Câu chuyện là hồi xưa mình thường dùng `webpack` để bundle ra một file duy nhất là `bundle.js` rồi `import` nó vào trang `index.html` qua thẻ `<script>`. Chuyện cũng không có gì cho đến một thời gian sau code mình càng ngày càng lớn khiến file `bundle.js` càng ngày càng nặng. Ban đầu cũng 200kb, rồi 1Mb, rồi lên tới 2Mb. Chắc nhiều bạn mới cũng gặp cái bí này. Và rồi thông qua [techtalk.vn](https://techtalk.vn/) (hay [viblo.asia](https://viblo.asia/) gì đó không nhớ) mình biết tới code spliting._  
   
-  Ví dụ, bạn có trang chủ: localhost:3000/ chứa link tới các trang /login, /about, /khuyenmai
+_Ví dụ, bạn có trang chủ: (localhost:3000/)[] chứa link tới các trang `/login`, `/about`, `/khuyenmai_`
   
-  Tương ứng với mỗi route đó là các React.Component sau:
-  - HomePage cho trang chủ /
-  - CompanyInfo cho /about
-  - KhuyenMai cho /khuyenmai
+_Tương ứng với mỗi route đó là các `React.Component` sau:_
+- `HomePage` cho trang chủ `/`
+- `CompanyInfo` cho `/about`
+- `KhuyenMai` cho `/khuyenmai`
   
   Okay!, giờ code cho mấy cái route này nào.
 ☞ Step 1:(App.js)
@@ -177,13 +177,13 @@ _**Bài viết này sẽ xoanh quanh vấn đề làm sao để app chạy nhanh
  - `webpack.dev.babel.js`.
 - _`webpack` 4 hỗ trợ tách các third-party ra file riêng `vendor-main.chunk.js`(Cái này chắc cho vào phần code splitting)._
 ```javascript
-    webpackConfig: {
-      ...
-      optimization: {
-        splitChunks: { chunks: 'all' }
-      }
-    }
- ```
+webpackConfig: {
+  ...
+  optimization: {
+    splitChunks: { chunks: 'all' }
+  }
+}
+```
 - _Về Server-side-rendering mình sẽ có bài riêng về nó tại [Server side rendering](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/server_side_rendering)._
     
 - _Khi sử dụng `react-loadable`, bạn không nên code như mình ở `☞ Step 2` như vậy. Rất khó tái sử dụng. Với `☞ Step 2` thì mình sẽ refactor như này._
