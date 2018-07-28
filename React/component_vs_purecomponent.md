@@ -22,5 +22,30 @@ class Demo extends React.Component {
   > *Để mình lấy một ví dụ đơn giản nhất, trước khi đọc bài này có lẽ bạn nên đọc một chút về lifecycle hook.*
   > https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/lifecycle_hook
 
-`☞ Step 1:`
+☞ Step 1:
+```
+class Demo extends React.Component {
+  state = { myName: 'Hoang' };
+
+  componentDidMount() {
+    this.setState({ myName: 'Hoang' });
+  }
+
+  componentDidUpdate() {
+    console.log(`Component này đã render lại với state.myName: ${this.state.myName}`);
+  }
+
+  render() {
+    return (
+      <span>My name is {this.state.myName}</span>
+    );
+  }
+}
+```
+Kết quả là ở màn hình console sẽ thấy dòng chữ "Component này đã render lại với state.myName: Hoang".
+Rõ ràng thì trước và sau render lại thì myName vẫn là 'Hoang' mà đúng không?. Tại sao phải re-render nữa làm
+gì cho tốn công?. Lý do nó render lại là do mặc đinh shouldComponentUpdate reference compare.
+Okay, để chống sự render không cần thiết này, mình sẽ overide lại shouldComponentUpdate hook.
+
+----
 ### ♵ CHIA SẼ THÊM
