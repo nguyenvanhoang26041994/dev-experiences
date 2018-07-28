@@ -34,7 +34,9 @@ class DemoComponent extends React.Component {
   }
 }
 ``` 
+
 **♴`static getDerivedStateFromProps(props, state): object`**
+
 - *Trước đây, với lifecycle cũ, người ta thường tính toán state thông qua props trong hàm `constructor`. Và khi components update `props` thì dùng kèm với `componentWillReceiveProps` để set lại `state`. Hook này sinh ra để thay thế việc này.*
 - *Return về một object chính là `state`. Và khi components update props thì dùng kèm với `componentWillReceiveProps` để set lại `state`. Ví dụ với lifecycle cũ:*
 ```
@@ -99,7 +101,7 @@ class DemoComponent extends React.Component {
 [Component vs PureComponent](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/component_vs_purecomponent.md)*.
   
 **♵`render(): ReactNode`
-
+<br/>
 **♶`getSnapshootBeforeUpdate(prevProps, prevState): object`**
 
 - *Thường thì get một số thông tin của `props`, `state`, hoặc ref trước khi re-render, và sử dụng nó sau khi render.*
