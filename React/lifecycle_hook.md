@@ -11,6 +11,7 @@
 ----
 ### ♴ NỘI DUNG
 **☞ Mounting(Sinh ra)**
+
 - ☆ contructor(props): void
     -- Ở ES6 thì thường dùng để tạo init state, bind context(this) cho các function, event handling, createRef().
       Ví dụ: 
