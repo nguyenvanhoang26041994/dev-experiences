@@ -8,6 +8,7 @@
 - _**Mounting**: `constructor` → `getDerivedStateFromProps` → `render` → `componentDidMount`._
 - _**Updating**: `getDerivedStateFromProps` → `shouldComponentUpdate` → `render` → `getSnapshootBeforeUpdate` → `componentDidUpdate`._
 - _**Unmouting**: `componentWillUnmount`._
+![alt text](https://github.com/nguyenvanhoang26041994/dev-experiences/edit/master/React/images/_new_lifecycle.jpg)
 ### _♴ NỘI DUNG_
 **_☞ Mounting(Sinh ra)_**
 
