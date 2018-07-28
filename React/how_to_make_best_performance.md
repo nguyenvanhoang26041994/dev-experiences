@@ -95,7 +95,7 @@ ReactDOM.render(<App />, document.getElementById('app'));
   
 > _Và bạn có để ý thì các file `about.chunk.js` `homepage.chunk.js` và `khuyenmai.chunk.js` được file `bundle.js` gọi, từ đây bạn cũng biết thêm một điều rằng file js cũng có thể gọi file js khác chứ không nhất thiết phải sử dụng thẻ `<script>`._
   
-> _**Mình sẽ nói tiếp một tí về phần kinh nghiệm của mình khi spliting ở phần [CHIA SẺ THÊM](^chiasethem) về phần này.**_
+> _**Mình sẽ nói tiếp một tí về phần kinh nghiệm của mình khi spliting ở phần CHIA SẺ THÊM về phần này.**_
   
 **:two: _Production build_**  
 > _Yeah!, nó thật ra đơn giản lắm. File `bundle.js` của bạn ban đầu lớn một phần là do code bạn có nhiều comment qúa chẳng hạn, hoặc tên biến dài, hoặc ký tự Enter thì vô vàn, blabla. [webpack](https://webpack.js.org/) thần thánh sẽ giúp bạn minimize code lại._  
@@ -170,27 +170,27 @@ webpackConfig: {
 - _Về Server-side-rendering mình sẽ có bài riêng về nó tại [Server side rendering](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/server_side_rendering.md)._
     
 - _Khi sử dụng `react-loadable`, bạn không nên code như mình ở `☞ Step 2` như vậy. Rất khó tái sử dụng. Với `☞ Step 2` thì mình sẽ refactor như này._
-    - components
-      - HomePage
-        - index.js
-        - Loadable.js
-      - About
-        - index.js
-        - Loadable.js
-      - KhuyenMai
-        - index.js
-        - Loadable.js
-    Khi sử dụng mình chỉ cần import HomePage from '../path/to/components/HomePage/Loadable'; // recomment cách này
-    
-    Hoặc bạn cũng có thể refactor theo kiểu
-      - components
-        - HomePage.js
-        - About.js
-        - KhuyenMai.js
-        - Loadable
-          - HomePage.js
-          - About.js
-          - KhuyenMai.js
-    Khi sử dụng chỉ cần import HomePage from '../path/to/components/Loadable/HomePage';
-
+- components
+- HomePage
+-- index.js
+- Loadable.js
+- About
+- index.js
+- Loadable.js
+- KhuyenMai
+- index.js
+- Loadable.js
+> _Khi sử dụng mình chỉ cần `import HomePage from '../path/to/components/HomePage/Loadable';`_  
+  
+> _Hoặc bạn cũng có thể refactor theo kiểu_
+ - components
+ - HomePage.js
+ - About.js
+ - KhuyenMai.js
+ - Loadable
+ - HomePage.js
+ - About.js
+ - KhuyenMai.js
+> _Khi sử dụng chỉ cần import HomePage from '../path/to/components/Loadable/HomePage';_  
+  
 > _Tác giả: [Nguyễn Văn Hoàng](https://www.facebook.com/nvh26041994)_
