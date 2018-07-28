@@ -81,27 +81,21 @@ const App = () => (
 
 ReactDOM.render(<App />, document.getElementById('app'));
 ```
+> _Xong, bây giờ thì từ 1 file `bundle.js` nặng 2Mb ta có các file sau chẳng hạn._
+> - _`bundle.js`(File chứa soure thư viện như `react`, `lodash`... và file đầu tiên App) nặng 1Mb._
+> - _`homepage.chunk.js` nặng 300Kb._
+> - _`about.chunk.js` nặng 200Kb._
+> - _`khuyenmai.chunk.js` nặng 500Kb._
   
-  Xong, bây giờ thì từ 1 file bundle.js nặng 2Mb ta có các file sau chẳng hạn.
-  - main.js(File chứa soure thư viện như React, Lodash... và file đầu tiên App.) năng 1Mb
-  - homepage.chunk.js nặng 300Kb
-  - about.chunk.js nặng 200Kb
-  - khuyenmai.chunk.js nặng 500Kb
+> _Khi bạn vào `localhost:3000/` thì bạn bật F12 lên(google chorme chế độ cho dev debug). Bên phần network thì bạn sẽ thấy nó tải `bundle.js` 1Mb trước sau đó nó tải tiếp `homepage.chunk.js` 300Kb sau. Vậy là ta chỉ cần tải tổng cộng 1.3Mb để vào được trang chủ thay vì 2Mb với cách không sử dụng code splitting`(☞ Step 1)`._  
   
-  Khi bạn vào localhost:3000/ thì bạn bật F12 lên(google chorme chế độ cho dev debug)
-  Bên phần network thì bạn sẽ thấy nó tải main.js 1Mb trước sau đó nó tải tiếp homepage.chunk.js 300Kb sau.
-  Vậy là ta chỉ cần tải tổng cộng 1.3Mb để vào được trang chủ thay vì 2Mb với cách không sử dụng code splitting(☞ Step 1).
+> _Tiếp, bạn click vào link  `Về chúng tôi` thì bạn sẽ thấy network tải thêm phần `about.chunk.js` 200Kb. Tải xong thì bạn sẽ thấy nội dung `About` vơi link `localhost:3000/about`._
   
-  Tiếp, bạn click vào link "Về chúng tôi" thì bạn sẽ thấy network tải thêm phần about.chunk.js 200Kb, Tải xong thì bạn sẽ
-  thấy nội dung About vơi link localhost:3000/about
+> _Tiếp, bạn quay vê `Trang chủ` và click vào `Nhận khuyến mãi ngay` thì bạn để ý network tải tiếp file `khuyenmai.chunkjs` 500Kb. Tải xong bạn sẽ thấy nội dung của `KhuyenMai` với link `localhost:3000/khuyenmai`._
   
-  Tiếp, bạn quay vê trang chủ và click vào "Nhận khuyến mãi ngay" thì bạn để ý network tải tiếp file khuyenmai.chunkjs 500Kb
-  Tải xong bạn sẽ thấy nội dung của KhuyenMai với link localhost:3000/khuyenmai
+> _Và bạn có để ý thì các file `about.chunk.js` `homepage.chunk.js` và `khuyenmai.chunk.js` được file `bundle.js` gọi, từ đây bạn cũng biết thêm một điều rằng file js cũng có thể gọi file js khác chứ không nhất thiết phải sử dụng thẻ `<script>`._
   
-  Và bạn có để ý thì các file about.chunk.js, homepage.chunk.js và khuyenmai.chunk.js được file main.js gọi, từ đây bạn cũng
-  biết thêm một điều rằng file js cũng có thể gọi file js khác chứ không nhất thiết phải sử dụng thẻ <script>
-  
-  Mình sẽ nói tiếp một tí về phần kinh nghiệm của mình khi spliting ở phần CHIA SẺ THÊM về phần này.
+> _**Mình sẽ nói tiếp một tí về phần kinh nghiệm của mình khi spliting ở phần [CHIA SẺ THÊM](^chiasethem) về phần này.**_
   
 **:two: _Production build_**  
 > _Yeah!, nó thật ra đơn giản lắm. File `bundle.js` của bạn ban đầu lớn một phần là do code bạn có nhiều comment qúa chẳng hạn, hoặc tên biến dài, hoặc ký tự Enter thì vô vàn, blabla. [webpack](https://webpack.js.org/) thần thánh sẽ giúp bạn minimize code lại._  
@@ -169,7 +163,7 @@ ReactDOM.render(<App />, document.getElementById('app'));
     Mình chưa có kinh nghiệm với thằng này.
     
 
-### _♵ CHIA SẼ THÊM_
+### _♵ CHIA SẼ THÊM_[^chiasethem]
 - _Đối với production build và CDN, bạn nên chia ra các môi trường như `development`, `production` cho `webpack`:_
  - `webpack.prob.babel.js`.
  - `webpack.dev.babel.js`.
