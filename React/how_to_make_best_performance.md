@@ -50,7 +50,8 @@ ReactDOM.render(<App />, document.getElementById('app'));
   
 > _Câu hỏi đặt ra là: Ủa tại sao tôi vào `Trang Chủ` mà bắt tôi tải soure của mấy trang `Khuyến Mãi`, rồi `Thông tin công ty` làm gì vậy hè?. Hoặc tôi vào `localhost:3000/khuyenmai` thì chỉ càn tải source của `Trang khuyến mãi` thôi chứ tải `Trang Chủ` làm gì?._  
   
-> _Okay!, tiếp nào. Thì đây chính là code sau khi sử dụng code splitting(Sử dụng một thư viên là `react-loadable`) https://github.com/jamiebuilds/react-loadable
+> _Okay!, tiếp nào. Thì đây chính là code sau khi sử dụng code splitting(Sử dụng một thư viên là `react-loadable`) https://github.com/jamiebuilds/react-loadable  
+  
 **_☞ Step 2:(`App.js`)_**
 ```javascript
 import React from 'react';
@@ -58,9 +59,10 @@ import Loadable from 'react-loadable';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
-const HomePage = Loadable({ loader: () => import('../path/to/components/HomePage'), loading: () => null });
-const About = Loadable({ loader: () => import('../path/to/components/About'), loading: () => null });
-const KhuyenMai = Loadable({ loader: () => import('../path/to/components/KhuyenMai'), loading: () => null });
+const DynamicImport = (LoaderComponent) => Loadble({
+  loader: LoaderComponent,
+  loading: () => null
+});
 // loader có nghĩa là đã load xong sẽ trả về Component trong cái import
 // loading có nghĩa đang load soure chưa xong tạm thời load component nào đó tạm
 
@@ -70,9 +72,9 @@ const App = () => (
       <Link to="/">Trang chủ</Link>
       <Link to="/about">Về chúng tôi</Link>
       <Link to="/khuyenmai">Nhận khuyến mãi ngay</Link>
-      <Route exact component={HomePage} />
-      <Route component={CompanyInfo} />
-      <Route component={KhuyenMai} />
+      <Route exact component={DynamicImport(() => import('../path/to/components/HomePage'))} />
+      <Route component={DynamicImport(() => import('../path/to/components/About'))} />
+      <Route component={DynamicImport(() => import('../path/to/components/KhuyenMai'))} />
     </div>
   </Router>
 );
