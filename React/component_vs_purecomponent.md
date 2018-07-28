@@ -96,6 +96,7 @@ class Demo extends React.PureComponent {
 > Tuy nhiên, tuy nhiên, Vì javascript là dynamic type nên bạn không biết props ở runtime là kiểu gì.
 > Nên `React.PureComponent` vẫn compare cả những props mình không cần quan tâm đến, khiến render vô tội vạ.
 > Ví dụ ở nơi nào đó sử dụng Component Demo như sau:*
+
 **☞ Step 4:**
 ```
 class WrapperComponent extends React.Component {
