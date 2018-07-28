@@ -12,28 +12,28 @@
 ### ♴ NỘI DUNG
 **☞ Mounting(Sinh ra)**
 
-1. ☆ contructor(props): void
-    -- Ở ES6 thì thường dùng để tạo init state, bind context(this) cho các function, event handling, createRef().
-      Ví dụ: 
-  
-      class DemoComponent extends React.Component {
-        constructor(props) {
-          super(props);
-          this.state = {};
-          this.handleClick = this.handleClick.bind(this);
-        }
-        
-        handleClick() {
-          this.setState({});
-        }
-        
-        render() {
-          return (
-            <button onClick={this.handleClick}>Click</button>
-          );
-        }
-      }
-   
+1. `contructor(props): void`
+> *Ở ES6 thì thường dùng để tạo init `state`, bind context(`this`) cho các function, event handling, createRef().*<br/>
+Ví dụ:
+```
+class DemoComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState({});
+  }
+
+  render() {
+    return (
+      <button onClick={this.handleClick}>Click</button>
+    );
+  }
+}
+``` 
 2. ☆ static getDerivedStateFromProps(props, state): object
     - Trước đây, với lifecycle cũ, người ta thường tính toán state thông qua props trong hàm constructor
        Và khi components update props thì dùng kèm với componentWillReceiveProps để set lại state.
