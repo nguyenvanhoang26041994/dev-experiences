@@ -105,8 +105,8 @@ class DemoComponent extends React.Component {
 **_☞ Unmounting(Chết đi)_**  
 **_:one:`componentWillUnmount: void`_**
 - _Thường thì chạy một function nào đó, ví dụ như clear interval, delete rác. Ít khi sử dụng._
-- _Không nên `setState` tại đây, Vì nó chết rồi không sống lại nữa._
-----
+- _Không nên `setState` tại đây, Vì nó chết rồi không sống lại nữa._  
+  
 ### _♵ CHIA SẼ THÊM_
 - _Hiện tại là phiên bản 16.4.1 Lifecycle hook khá nhiều vì phải hỗ trợ cả hai. Khuyến khích nên sử dụng lifecycle mới.  
 [https://reactjs.org/docs/react-component.html](https://reactjs.org/docs/react-component.html)_
