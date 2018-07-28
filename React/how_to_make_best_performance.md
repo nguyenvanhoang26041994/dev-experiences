@@ -1,5 +1,5 @@
 ### _♳ TỔNG QUAN_
-> _**Lúc còn mới tập tành code React file bundle của mình thường lên tới từ 1Mb đến 6Mb. Chạy lần đầu trên product chậm rì chậm rịt. Sau gần 1 năm dùng React thì bản thân cũng rút ra một cố cách dùng để cải thiện performance.**_  
+_**Lúc còn mới tập tành code React file bundle của mình thường lên tới từ 1Mb đến 6Mb. Chạy lần đầu trên product chậm rì chậm rịt. Sau gần 1 năm dùng React thì bản thân cũng rút ra một cố cách dùng để cải thiện performance.**_  
   
 _**Bài viết này sẽ xoanh quanh vấn đề làm sao để app chạy nhanh nhất ngay cả lần đầu vào trang web. Các kỹ thuật mình nói trong bài viết sẽ bao gồm:**_  
 - _Code splitting, đây là kỹ thuật trọng điểm trong bài này._
@@ -11,7 +11,7 @@ _**Bài viết này sẽ xoanh quanh vấn đề làm sao để app chạy nhanh
   
 > _Và tất nhiên mình không giới thiệu một cách detail. Mình chỉ nói để các bạn hiểu những kĩ thuật đó là gì, tại sao phải sử dụng nó, sử dụng khi nào. Chứ trên google hướng dẫn rất cụ thể rồi mình không nói lại._  
 ### _♴ NỘI DUNG_
-**_☞ Code splitting_**  
+**:one:_ Code splitting_**  
 > _Đây là nòng cốt của bất kỳ bạn front-end nào cần phải biết về tối đa performace. Câu chuyện là hồi xưa mình thường dùng `webpack` để bundle ra một file duy nhất là `bundle.js` rồi `import` nó vào trang `index.html` qua thẻ `<script>`. Chuyện cũng không có gì cho đến một thời gian sau code mình càng ngày càng lớn khiến file `bundle.js` càng ngày càng nặng. Ban đầu cũng 200kb, rồi 1Mb, rồi lên tới 2Mb. Chắc nhiều bạn mới cũng gặp cái bí này. Và rồi thông qua [techtalk.vn](https://techtalk.vn/) (hay [viblo.asia](https://viblo.asia/) gì đó không nhớ) mình biết tới code spliting._  
   
   Ví dụ, bạn có trang chủ: localhost:3000/ chứa link tới các trang /login, /about, /khuyenmai
@@ -105,11 +105,10 @@ _**Bài viết này sẽ xoanh quanh vấn đề làm sao để app chạy nhanh
   
   Mình sẽ nói tiếp một tí về phần kinh nghiệm của mình khi spliting ở phần CHIA SẺ THÊM về phần này.
   
-☆ Production build------------------------------------------------------
-  Yeah!, nó thật ra đơn giản lắm. File bundle của bạn ban đầu lớn một phần là do code bạn có nhiều comment qúa chẳng hạn,
-  hoặc tên biến dài, hoặc ký tự Enter thì vô vàn, blabla. WEBPACK thần thánh sẽ giúp bạn minimize code lại.
-    https://webpack.js.org/guides/production/
-☆ gzip-----------------------------------------------------------------
+**:two:_Production build_**  
+> _Yeah!, nó thật ra đơn giản lắm. File `bundle.js` của bạn ban đầu lớn một phần là do code bạn có nhiều comment qúa chẳng hạn, hoặc tên biến dài, hoặc ký tự Enter thì vô vàn, blabla. [webpack](https://webpack.js.org/) thần thánh sẽ giúp bạn minimize code lại._  
+  
+**:three:_gzip**
   Cái này thì như kiểu như này.
   - Browser: Ê Server, bundle.js nặng đấy, gửi tao file nén đi.
   - Server: Okay chú, để anh nén đã.... Okay của chú đây.
