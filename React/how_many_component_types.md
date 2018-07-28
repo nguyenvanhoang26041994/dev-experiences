@@ -3,7 +3,9 @@
 > - *`Functional Component`*<br/>
 > - *`React.Component`*<br/>
 > - *`React.PureComponent`*<br/>
-  
+
+<br/>
+
 **Bài viết này giúp các bạn hiểu rõ hơn về đặc điểm, cách sử dụng chúng trong dự án của mình cũng như một số thủ thuật ngắn gọn được tóm gọn như nhau:**
 > - *Sử dụng `Functional Component` và `React.PureComponent` hết mức có thể, tránh lạm dụng `React.Component`.*<br/><br/>
 > - *Các Component unit(những component base) thì nên sử dụng `React.PureComonent` để viết và props chỉ nên có một cấp(shallow) và nó không có `state` thì có thể sử dụng `Functional Component` cũng không sao. Vì chỉ cần thằng cha chống render tốt thì cũng không đến lượt mấy thằng con re-render.*<br/><br/>
