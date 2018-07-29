@@ -6,5 +6,6 @@ _Cùng với kỹ thuật SPA(`Single Page Application`) ngày càng phát tri�
 - _Khi load `Trang chủ` chỉ có cần load hết tất cả css của cả website hay không hay chỉ cần css liên quan đến `Trang chủ` thôi?._
 - _Với một website lớn, naming class css là một vấn đề đau đầu vì rất dễ đụng độ. Có khi nào bạn phải bỏ selector `.heading` vì ở đâu đó một anh developer nào đó đã định nghĩa sẵn nên bạn đành phải thay đổi thành `.my-heading` chưa?._
 ### _♴ NỘI DUNG_
+
 ### _♵ CHIA SẼ THÊM_
 > _Tác giả: [Nguyễn Văn Hoàng](https://www.facebook.com/nvh26041994)_

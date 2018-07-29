@@ -4,7 +4,8 @@
   "description": "Web experiences development",
   "main": "app",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "master": "git add . && git commit -m \"OK\" && git push origin master"
   },
   "repository": {
     "type": "git",
