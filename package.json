@@ -1,0 +1,29 @@
+{
+  "name": "dev-experiences",
+  "version": "1.0.0",
+  "description": "Web experiences development",
+  "main": "app",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nguyenvanhoang26041994/dev-experiences.git"
+  },
+  "keywords": [
+    "React",
+    "Angular",
+    "Vue",
+    "Webpack",
+    "Experiences",
+    "Viet",
+    "Nam",
+    "Developer"
+  ],
+  "author": "Nguyễn Văn Hoàng",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nguyenvanhoang26041994/dev-experiences/issues"
+  },
+  "homepage": "https://github.com/nguyenvanhoang26041994/dev-experiences#readme"
+}
