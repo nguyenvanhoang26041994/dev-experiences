@@ -1,4 +1,4 @@
-### _♳ TỔNG QUAN_
+# TỔNG QUAN
 **_Hiện tại, React hỗ trợ 3 cách viết component đó là:_**
 - *`Functional Component`*
 - *`React.Component`*
@@ -12,7 +12,7 @@
 - _Các Component mà cần định nghĩa `shouldComponentUpdate` để chống render không cần thiết(tăng performance) thì sử dụng
     `React.Component`, nếu bạn không đụng đến `shouldComponentUpdate` thì không cần dùng. Đôi khi người ta return true hoặc
     false cho `shouldComponentUpdate` luôn để render cho nhanh. Cái này nói kỹ ở bài [Component vs PureComponent](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/component_vs_purecomponent.md)_
-### _♴ NỘI DUNG_
+# NỘI DUNG
 **_☞ Functional Component:_**
 - _Nó đơn giản chỉ là một function return về React Element mà thôi._
 - _Không implement [Lifecycle hook](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/lifecycle_hook.md) nên nói về tốc độ render nó là nhanh nhất._
@@ -40,7 +40,7 @@ const Demo = props => <span>Hello world!</span>;
 - _Nó là anh em sinh đôi nhưng thông minh hơn một chút nhờ sự khác biệt tại `shouldComponentUpdate`._
 - _Bạn không thể override lại `shouldComponentUpdate` và nó là shallow compare. Nghĩa là các prop con của `nextProps` === các prop con của `prevProps` và các `state` con của `nextState` === các `state` con của `prevState` thì return false, return false thì sẽ không re-render nữa._
   
-### _♵ CHIA SẼ THÊM_
+# CHIA SẼ THÊM
 _Bài này chỉ giới thiệu các loại component có trong React và đặc điểm cũng như cách sử dụng. Nên để hiểu rõ hơn về anh em `React.Component` và `React.PureComponent` thì bạn đọc bài sau để hiểu hơn khi nào nên dùng `React.Component`, khi nào nên dùng `React.PureComponent`. Thế nào là reference compare, thế nào là shallow compare, thế nào là deep compare. [Link Component và PureComponent](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/component_vs_purecomponent.md)._  
   
-> _Tác giả: [Nguyễn Văn Hoàng](https://www.facebook.com/nvh26041994)_
+_Tác giả: [Nguyễn Văn Hoàng](https://www.facebook.com/nvh26041994)_

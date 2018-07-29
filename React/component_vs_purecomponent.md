@@ -1,4 +1,4 @@
-### _♳ TỔNG QUAN_
+# TỔNG QUAN
 _Bài này sẽ nói cụ thể và demo cụ thể sự khác nhau giữa hai thằng `React.Component` và `React.PureComponent`.
 Chắc không ít bạn cũng đã từng bị phỏng vấn câu này rồi, nhưng không ít bạn trả lời theo kiểu lý thuyết.
 OK mình sẽ giúp các bạn hiểu sâu hơn một chút._  
@@ -16,7 +16,7 @@ class Demo extends React.Component {
   ...
 }
 ```
-### _♴ NỘI DUNG_
+# NỘI DUNG
 _Để mình lấy một ví dụ đơn giản nhất, trước khi đọc bài này có lẽ bạn nên đọc một chút về [React 16.4.1 Lifecycle hook update](https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/lifecycle_hook)_  
 
 **_☞ Step 1:_**
@@ -107,7 +107,7 @@ class WrapperComponent extends React.Component {
 ```
 _Lúc nãy thì dòng `Component này đã render lại với state.myName: Hoang` sẽ xuất hiện ở màn hình console. Đây là một trong những nhược điểm của `React.PureComponent`. Lúc này `React.Component` sẽ là thích hợp hơn vì nó flexible, tuỳ dev._
   
-### _♵ CHIA SẼ THÊM_
+# CHIA SẼ THÊM
 _Hồi xưa cũng toàn dùng `React.Component` thôi chứ chả dùng `Functional Component` hay `React.PureComponent` đâu. Từ khi bật source code một số thư viện thì thấy `PureComponent` và `Functional Component` dùng nhiều nên cũng đặt câu hỏi tại sao họ code vậy?. Trên đây hoàn toàn là từ kinh nghiệm cá nhân, có thể sai hoặc thiếu sót. Mong các bạn góp ý qua cho mình. Thanks!_  
   
-> _Tác giả: [Nguyễn Văn Hoàng](https://www.facebook.com/nvh26041994)_
+_Tác giả: [Nguyễn Văn Hoàng](https://www.facebook.com/nvh26041994)_
