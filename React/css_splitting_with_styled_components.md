@@ -12,6 +12,6 @@ NO!.
 
 # NỘI DUNG
 
-# CHIA SẼ THÊM
+# CHIA SẺ THÊM
 
 _Tác giả: [Nguyễn Văn Hoàng](https://www.facebook.com/nvh26041994)_
