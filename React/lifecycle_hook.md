@@ -113,7 +113,7 @@ class DemoComponent extends React.Component {
 - _Hiện tại là phiên bản 16.4.1 Lifecycle hook khá nhiều vì phải hỗ trợ cả hai. Khuyến khích nên sử dụng lifecycle mới.  
 [https://reactjs.org/docs/react-component.html](https://reactjs.org/docs/react-component.html)_
  
-- _Khuyến khích sử dụng coding standar của airbnb cho React_  
+- _Khuyến khích sử dụng coding standard của Airbnb cho React_  
 [https://github.com/airbnb/javascript/tree/master/react](https://github.com/airbnb/javascript/tree/master/react)
  
 - _Khuyến khích sử dụng class ES7 thay thế cho ES6 để tránh việc bind this, init `state`, `propTypes`, `defaultPropTypes`,
