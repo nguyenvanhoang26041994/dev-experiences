@@ -11,6 +11,12 @@ NO!.
 Đó là câu trả lời. Vậy bài này sẽ hướng dẫn các bạn làm thế nào để split css theo từng React Component cũng như những kinh nghiệm của bản thân mình khi làm việc với [![style: styled-components](https://img.shields.io/badge/style-%F0%9F%92%85%20styled--components-orange.svg?colorB=daa357&colorA=db748e)](https://github.com/styled-components/styled-components)
 
 # NỘI DUNG
+## Tài liệu
+- https://github.com/styled-components/styled-components
+- https://www.styled-components.com/
+
+## Demo: Mọi resoure cho demo này mình sẽ lưu trong thư mục [này]()
+- Trước tiên hãy bạn cần config cho bundle tool, chính xác ở đây là webpack 4.
 
 # CHIA SẺ THÊM
 
