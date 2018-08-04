@@ -1,3 +1,5 @@
+THANK TO [REACT-BOILERPLATE](https://github.com/react-boilerplate/react-boilerplate)
+
 - Với mục đích ghi chép kinh nghiệm trong quá trình làm việc để lưu trữ
 cho các bạn tìm hiểu sau này.
 - Bài viết hoàn toàn từ kinh nghiệm nên sẽ không phải là bài viết lý thuyết xuông
