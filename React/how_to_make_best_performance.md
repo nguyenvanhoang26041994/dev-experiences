@@ -8,6 +8,7 @@ _Bài viết này sẽ xoanh quanh vấn đề làm sao để app chạy nhanh n
 - _`Server-side-rendering`._
 - _CDN(`Content Delivery Network`)._
 - _`Web worker`._  
+- _async vs defer_
   
 _**Và tất nhiên mình không giới thiệu một cách detail. Mình chỉ nói để các bạn hiểu những kĩ thuật đó là gì, tại sao phải sử dụng nó, sử dụng khi nào. Chứ trên google hướng dẫn rất cụ thể rồi mình không nói lại.**_  
 # NỘI DUNG
