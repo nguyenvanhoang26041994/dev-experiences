@@ -39,7 +39,7 @@ class Demo extends React.Component {
   }
 }
 ```
-_Kết quả là ở màn hình console sẽ thấy dòng chữ `Component này đã render lại với state.myName: Hoang`. Rõ ràng thì trước và sau render lại thì myName vẫn là `Hoang` mà đúng không?. Tại sao phải re-render nữa làm gì cho tốn công?. Lý do nó render lại là do mặc đinh `shouldComponentUpdate` reference compare. Okay, để chống sự render không cần thiết này, mình sẽ override lại `shouldComponentUpdate` hook._  
+_Kết quả là ở màn hình console sẽ thấy dòng chữ `Component này đã render lại với state.myName: Hoang`. Rõ ràng thì trước và sau render lại thì myName vẫn là `Hoang` mà đúng không?. Tại sao phải re-render nữa làm gì cho tốn công?. Lý do nó render lại là do mặc đinh `shouldComponentUpdate` reference compare. Okay, để tránh việc render không cần thiết này, mình sẽ override lại `shouldComponentUpdate` hook._  
   
 **_☞ Step 2:_**
 ```javascript
@@ -65,7 +65,7 @@ class Demo extends React.Component {
   }
 }
 ```
-_Okay!, lần này nó đã không re-render lại nữa rồi. Nhưng, nhưng mà chả nhẽ có bao nhiêu `state`, bao nhiêu `props` thì mình phải so sánh cho hết ư?. Thế thì code chán lắm. hãy để `React.PureComponent` giải quyết một cách ngắn gọn._  
+_Okay!, lần này nó đã không re-render lại nữa rồi. Nhưng, nhưng mà chả nhẽ có bao nhiêu `state`, bao nhiêu `props` thì mình phải so sánh cho hết ư? Thế thì code chán lắm. hãy để `React.PureComponent` giải quyết một cách ngắn gọn._  
   
 **_☞ Step 3:_**
 ```javascript
@@ -87,7 +87,7 @@ class Demo extends React.PureComponent {
   }
 }
 ```
-_Thế là xong!, đơn giản!. Vậy là đã chống re-render không cần thiết ở mức độ shallow level. Tuy nhiên, tuy nhiên, Vì javascript là dynamic type nên bạn không biết props ở runtime là kiểu gì. Nên `React.PureComponent` vẫn compare cả những `props` mình không cần quan tâm đến, khiến render vô tội vạ. Ví dụ ở nơi nào đó sử dụng Component Demo như sau:_  
+_Thế là xong!, đơn giản!. Vậy là đã tránh re-render không cần thiết ở mức độ shallow level. Tuy nhiên, tuy nhiên, Vì javascript là dynamic type nên bạn không biết props ở runtime là kiểu gì. Nên `React.PureComponent` vẫn compare cả những `props` mình không cần quan tâm đến, khiến render vô tội vạ. Ví dụ ở nơi nào đó sử dụng Component Demo như sau:_  
   
 **_☞ Step 4:_**
 ```javascript
@@ -108,6 +108,6 @@ class WrapperComponent extends React.Component {
 _Lúc nãy thì dòng `Component này đã render lại với state.myName: Hoang` sẽ xuất hiện ở màn hình console. Đây là một trong những nhược điểm của `React.PureComponent`. Lúc này `React.Component` sẽ là thích hợp hơn vì nó flexible, tuỳ dev._
   
 # CHIA SẺ THÊM
-_Hồi xưa cũng toàn dùng `React.Component` thôi chứ chả dùng `Functional Component` hay `React.PureComponent` đâu. Từ khi bật source code một số thư viện thì thấy `PureComponent` và `Functional Component` dùng nhiều nên cũng đặt câu hỏi tại sao họ code vậy?. Trên đây hoàn toàn là từ kinh nghiệm cá nhân, có thể sai hoặc thiếu sót. Mong các bạn góp ý qua cho mình. Thanks!_  
+_Hồi xưa cũng toàn dùng `React.Component` thôi chứ chả dùng `Functional Component` hay `React.PureComponent` đâu. Từ khi bật source code một số thư viện thì thấy `PureComponent` và `Functional Component` dùng nhiều nên cũng đặt câu hỏi tại sao họ code vậy? Trên đây hoàn toàn là từ kinh nghiệm cá nhân, có thể sai hoặc thiếu sót. Mong các bạn góp ý qua cho mình. Thanks!_  
   
 _Tác giả: [Nguyễn Văn Hoàng](https://www.facebook.com/nvh26041994)_
