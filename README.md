@@ -29,3 +29,6 @@ Draff:
   pre-commit
   husky
   lint-staged
+- Client HTML to PDF: https://github.com/MrRio/jsPDF
+  live demo: https://rawgit.com/MrRio/jsPDF/master/#
+- Client export excel: https://github.com/SheetJS/js-xlsx
