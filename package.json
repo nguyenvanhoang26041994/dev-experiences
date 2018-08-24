@@ -45,7 +45,8 @@
     "test": "cross-env NODE_ENV=test jest --coverage",
     "test:watch": "cross-env NODE_ENV=test jest --watchAll",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "prettify": "prettier --write"
+    "prettify": "prettier --write",
+    "quick": "git add . && git commit -m 'OK' && git push origin why-should-not-use-jquery-with-react --force"
   },
   "lint-staged": {
     "*.js": [
