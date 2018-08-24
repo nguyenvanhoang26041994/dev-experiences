@@ -19,3 +19,18 @@ Rất mong các bạn đóng góp bài viết cho mình về các lĩnh vực kh
 Các thành viên tham gia viết bài:
 1. Nguyễn Văn Hoàng
   mail: nguyenvanhoang26041994@gmail.com
+
+
+
+
+
+Draff:
+- Check eslint trước khi commit
+  pre-commit
+  husky
+  lint-staged
+- Client HTML to PDF: https://github.com/MrRio/jsPDF
+  live demo: https://rawgit.com/MrRio/jsPDF/master/#
+- Client export excel: https://github.com/SheetJS/js-xlsx
+
+- Tìm kiếm HTML symbold: http://graphemica.com/search?page=5&q=down
