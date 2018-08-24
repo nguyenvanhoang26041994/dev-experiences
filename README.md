@@ -6,4 +6,7 @@ Với tiêu chí là live demo, thực tế, các bạn hãy clone source bài v
 - `git checkout why-should-not-use-jquery-with-react`
 - `npm i`
 - `npm start`
-- Truy cập vào link http://localhost:3000/why-should-not-use-jquery-with-react
+- Truy cập vào link http://localhost:3000/why-should-not-use-jquery-with-react/react
+
+#### Sử dụng React bình thường
+- Truy cập vào link http://localhost:3000/why-should-not-use-jquery-with-react/react
