@@ -32,3 +32,5 @@ Draff:
 - Client HTML to PDF: https://github.com/MrRio/jsPDF
   live demo: https://rawgit.com/MrRio/jsPDF/master/#
 - Client export excel: https://github.com/SheetJS/js-xlsx
+
+- Tìm kiếm HTML symbold: http://graphemica.com/search?page=5&q=down
