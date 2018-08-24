@@ -1,16 +1,17 @@
 {
-  "name": "dev-experiences",
+  "name": "react-boilerplate",
   "version": "3.6.0",
-  "description": "dev-experiences and best practices",
+  "description": "A highly scalable, offline-first foundation with the best DX and a focus on performance and best practices",
   "repository": {
     "type": "git",
-    "url": "git://github.com/nguyenvanhoang26041994/dev-experiences.git"
+    "url": "git://github.com/react-boilerplate/react-boilerplate.git"
   },
   "engines": {
     "npm": ">=5",
     "node": ">=8"
   },
-  "author": "Nguyen Van Hoang",
+  "author": "Max Stoiber",
+  "license": "MIT",
   "scripts": {
     "analyze:clean": "rimraf stats.json",
     "preanalyze": "npm run analyze:clean",
@@ -118,10 +119,10 @@
     ],
     "coverageThreshold": {
       "global": {
-        "statements": 0,
-        "branches": 0,
-        "functions": 0,
-        "lines": 0
+        "statements": 98,
+        "branches": 91,
+        "functions": 98,
+        "lines": 98
       }
     },
     "moduleDirectories": [
@@ -143,26 +144,20 @@
     ]
   },
   "dependencies": {
-    "@blueprintjs/core": "^3.0.1",
-    "@blueprintjs/datetime": "^3.0.0",
-    "@blueprintjs/icons": "^3.0.0",
-    "@blueprintjs/select": "^3.0.0",
-    "@blueprintjs/table": "^3.0.0",
     "babel-polyfill": "6.26.0",
     "chalk": "^2.4.1",
-    "classnames": "^2.2.6",
     "compression": "1.7.2",
     "cross-env": "5.2.0",
     "express": "4.16.3",
     "fontfaceobserver": "2.0.13",
     "history": "4.7.2",
     "hoist-non-react-statics": "2.5.5",
+    "immutable": "3.8.2",
     "intl": "1.2.5",
     "invariant": "2.2.4",
     "ip": "1.1.5",
     "lodash": "4.17.10",
     "minimist": "1.2.0",
-    "normalize.css": "^8.0.0",
     "prop-types": "15.6.1",
     "react": "16.4.1",
     "react-dom": "16.4.1",
@@ -172,10 +167,11 @@
     "react-redux": "5.0.7",
     "react-router-dom": "4.3.1",
     "react-router-redux": "5.0.0-alpha.9",
-    "react-transition-group": "^2.4.0",
     "redux": "4.0.0",
+    "redux-immutable": "4.0.0",
     "redux-saga": "0.16.0",
     "reselect": "3.0.1",
+    "sanitize.css": "4.1.0",
     "styled-components": "3.3.2",
     "warning": "4.0.1",
     "whatwg-fetch": "2.0.4"

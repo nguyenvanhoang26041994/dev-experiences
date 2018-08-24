@@ -13,7 +13,6 @@ process.noDeprecation = true;
 
 module.exports = options => ({
   mode: options.mode,
-  externals: options.externals || {},
   entry: options.entry,
   output: Object.assign(
     {

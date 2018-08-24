@@ -3,6 +3,7 @@
  */
 
 import { memoryHistory } from 'react-router-dom';
+import { fromJS } from 'immutable';
 import identity from 'lodash/identity';
 
 import configureStore from '../../configureStore';
@@ -11,7 +12,7 @@ import getInjectors, { injectReducerFactory } from '../reducerInjectors';
 
 // Fixtures
 
-const initialState = { reduced: 'soon' };
+const initialState = fromJS({ reduced: 'soon' });
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -73,10 +74,10 @@ describe('reducer injectors', () => {
     it('given a store, it should provide a function to inject a reducer', () => {
       injectReducer('test', reducer);
 
-      const actual = store.getState().test;
+      const actual = store.getState().get('test');
       const expected = initialState;
 
-      expect(actual).toEqual(expected);
+      expect(actual.toJS()).toEqual(expected.toJS());
     });
 
     it('should not assign reducer if already existing', () => {

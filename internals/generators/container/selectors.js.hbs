@@ -6,7 +6,7 @@ import { initialState } from './reducer';
  */
 
 const select{{ properCase name }}Domain = state =>
-  state.{{ camelCase name }} || initialState;
+  state.get('{{ camelCase name }}', initialState);
 
 /**
  * Other specific selectors
@@ -17,7 +17,7 @@ const select{{ properCase name }}Domain = state =>
  */
 
 const makeSelect{{ properCase name }} = () =>
-  createSelector(select{{ properCase name }}Domain, substate => substate);
+  createSelector(select{{ properCase name }}Domain, substate => substate.toJS());
 
 export default makeSelect{{ properCase name }};
 export { select{{ properCase name }}Domain };
