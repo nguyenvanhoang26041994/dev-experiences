@@ -14,14 +14,42 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import HomePage from 'containers/HomePage/Loadable';
+import DemoBoxWithReact from 'components/DemoBoxWithReact';
+import DemoBoxWithJQuery from 'components/DemoBoxWithJQuery';
+import DemoBoxWithJQueryFix from 'components/DemoBoxWithJQueryFix';
+import DemoBoxWithJQueryFix2 from 'components/DemoBoxWithJQueryFix2';
+import DemoBoxWithJQueryFix3 from 'components/DemoBoxWithJQueryFix3';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 export default function App() {
   return (
     <div>
       <Switch>
-        <Route exact path="/" component={HomePage} />
+        <Route
+          exact
+          path="/why-should-not-use-jquery-with-react/react"
+          component={DemoBoxWithReact}
+        />
+        <Route
+          exact
+          path="/why-should-not-use-jquery-with-react/react-jquery"
+          component={DemoBoxWithJQuery}
+        />
+        <Route
+          exact
+          path="/why-should-not-use-jquery-with-react/react-jquery-fix"
+          component={DemoBoxWithJQueryFix}
+        />
+        <Route
+          exact
+          path="/why-should-not-use-jquery-with-react/react-jquery-fix-2"
+          component={DemoBoxWithJQueryFix2}
+        />
+        <Route
+          exact
+          path="/why-should-not-use-jquery-with-react/react-jquery-fix-3"
+          component={DemoBoxWithJQueryFix3}
+        />
         <Route component={NotFoundPage} />
       </Switch>
     </div>
