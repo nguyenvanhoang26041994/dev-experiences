@@ -21,21 +21,19 @@ export default class Demo extends React.PureComponent {
 
   componentDidMount() {
     this.jQueryLove = $('.love');
-    setInterval(() => {
-      this.jQueryLove
-        .fadeOut(500)
-        .fadeIn(500);
-    }, 2000);
+    this.jQueryLove
+      .fadeOut(500)
+      .fadeIn(500);
   }
 
-  // componentDidUpdate() {
-  //   this.jQueryLove
-  //     .fadeOut(500)
-  //     .fadeIn(500);
-  //   console.log('this.jQueryLove vs $(.love)', this.jQueryLove === $('.love'));
-  //   console.log('this.jQueryLove.length vs $(.love).length', this.jQueryLove.length, $('.love').length);
-  //   console.log('----------------------------------------------------------');
-  // }
+  componentDidUpdate() {
+    this.jQueryLove
+      .fadeOut(500)
+      .fadeIn(500);
+    console.log('this.jQueryLove vs $(.love)', this.jQueryLove === $('.love'));
+    console.log('this.jQueryLove.length vs $(.love).length', this.jQueryLove.length, $('.love').length);
+    console.log('----------------------------------------------------------');
+  }
 
   onAddLove = (love) => {
     this.setState(prevState => ({
