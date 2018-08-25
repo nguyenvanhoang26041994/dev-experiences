@@ -16,9 +16,13 @@ Rất mong các bạn đóng góp bài viết cho mình về các lĩnh vực kh
 - SocketIO
 - MongoDB
 
-Các thành viên tham gia viết bài:
-1. Nguyễn Văn Hoàng
-  mail: nguyenvanhoang26041994@gmail.com
+Các bài viết về React
+- Tại sao không nên sử dụng jQuery trong React: https://github.com/nguyenvanhoang26041994/dev-experiences/tree/why-should-not-use-jquery-with-react
+- Vòng đợi/life cycle của React Compoennt: https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/lifecycle_hook.md
+- Tất tật tật các cách tối đa performace cho ứng dụg React: https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/how_to_make_best_performance.md
+- Những loại component trong React và cách sử dụng đúng: https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/how_many_component_types.md
+- PureComponent vs Component: https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/component_vs_purecomponent.md
+
 
 
 
