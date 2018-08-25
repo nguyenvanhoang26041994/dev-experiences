@@ -38,3 +38,4 @@ Draff:
 - Client export excel: https://github.com/SheetJS/js-xlsx
 
 - Tìm kiếm HTML symbold: http://graphemica.com/search?page=5&q=down
+https://github.com/akiran/react-slick
