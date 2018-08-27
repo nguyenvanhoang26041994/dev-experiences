@@ -24,3 +24,12 @@ Draff:
 - Tìm kiếm HTML symbold: http://graphemica.com/search?page=5&q=down
 - https://github.com/akiran/react-slick
 - Coding standar: http://airbnb.io/javascript/
+- Ở webpack 4 không thể parse file json bình thường như webpack 3 vẫn làm được. Nên phải config lại một chút như này:
+```json
+{
+  test: /\.json/,
+  type: 'javascript/auto',
+  exclude: /node_modules|bower_components/,
+  use: [require.resolve('json-loader')],
+},
+```
