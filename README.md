@@ -33,3 +33,5 @@ Draff:
   use: [require.resolve('json-loader')],
 },
 ```
+
+- https://github.com/ckeditor/ckeditor5
