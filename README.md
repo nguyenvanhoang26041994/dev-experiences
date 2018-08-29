@@ -37,3 +37,11 @@ Draff:
 - https://github.com/ckeditor/ckeditor5
 - https://www.pdfonline.com/convert-pdf-to-html/
 - https://templates.mailchimp.com/resources/inline-css/
+- https://babeljs.io/blog/2018/08/27/7.0.0
+ 
+babel 7 có nhiều thứ hay ho như <></> render React.Fragment, suport TS. 
+- babel-plugin-proposal-optional-chaining cái này siêu hay, trước phải a && a.b && a.b.c thì bây giờ chỉ cần a?.b?.c thôi hoặc onHandle && onHandle() thì chỉ cần onHandle?.()
+- babel-plugin-proposal-logical-assignment-operators cũng khá ngầu nhưng chắc ít dùng
+ trước: a = a || b, thì bây giơ sẽ chỉ cần a ||= b, tương tự, a = a && b thì chỉ cần a &&= b;, khá cool.
+- @babel/preset-typescript cái này setting thương tự @babel/preset-flow, vậy là từ đây, React ngày càng flexible
+- <></> ????.
