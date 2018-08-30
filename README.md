@@ -45,3 +45,24 @@ babel 7 có nhiều thứ hay ho như <></> render React.Fragment, suport TS.
  trước: a = a || b, thì bây giơ sẽ chỉ cần a ||= b, tương tự, a = a && b thì chỉ cần a &&= b;, khá cool.
 - @babel/preset-typescript cái này setting thương tự @babel/preset-flow, vậy là từ đây, React ngày càng flexible
 - <></> ????.
+
+ 
+Với template, Ví dụ:
+chuỗi string `<div>Tôi là {{ name }}</div>` thì có thể sử dụng nhiều template hbs.
+- npm i handlebars
+```javascript
+import Handlebars from 'handlebars';
+
+export const fillVariables = (template, variables) => Handlebars.compile(template)(variables);
+
+```
+- config webpack.
+```javascript
+{
+...
+  node: {
+    fs: 'empty'
+  }
+...
+}
+```
