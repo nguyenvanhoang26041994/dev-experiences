@@ -66,3 +66,5 @@ export const fillVariables = (template, variables) => Handlebars.compile(templat
 ...
 }
 ```
+
+- http://www.boilrplate.com/
