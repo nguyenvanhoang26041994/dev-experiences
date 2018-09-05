@@ -68,3 +68,4 @@ export const fillVariables = (template, variables) => Handlebars.compile(templat
 ```
 
 - http://www.boilrplate.com/
+- https://github.com/MrRio/jsPDF/blob/master/examples/html2pdf/
