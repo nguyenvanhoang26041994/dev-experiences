@@ -11,7 +11,8 @@ Các bài viết về React
 - Tất tật tật các cách tối đa performace cho ứng dụg React: https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/how_to_make_best_performance.md
 - Những loại component trong React và cách sử dụng đúng: https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/how_many_component_types.md
 - PureComponent vs Component: https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/component_vs_purecomponent.md
---------------Dưới đây chỉ là nháp cá nhân thôi, các bạn không cần phải quan tâm---------------------------------------------------------
+ 
+#-------Dưới đây chỉ là nháp cá nhân thôi, các bạn không cần phải quan tâm---
 Draff:
 - Check eslint trước khi commit
   pre-commit
