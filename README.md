@@ -99,7 +99,7 @@ export const dataURItoBlob = dataURI => {
 export const createPDFFile = (dataURI, filename) =>
   new File([dataURItoBlob(dataURI)], filename, { type: 'application/pdf' }); 
 ```
-```
+```javascript
 import html2PDF from 'html2pdf.js';
 import Handlebars from 'handlebars';
 import { createPDFFile } from './create-pdf-file';
