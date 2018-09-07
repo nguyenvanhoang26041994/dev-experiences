@@ -123,6 +123,8 @@ export const renderPDFWithCallback = (template, filename, variables, callback) =
 
 ```
 ```javascript
+import InlineEditor from '@ckeditor/ckeditor5-build-inline';
+
 InlineEditor
     .create(document.querySelector('.ck-editor'), { toolbar: ['heading', '|', 'bold', 'italic', 'link']})
     .then(editor => window.editor = editor);
