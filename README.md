@@ -122,3 +122,8 @@ export const renderPDFWithCallback = (template, filename, variables, callback) =
 };
 
 ```
+```javascript
+InlineEditor
+    .create(document.querySelector('.ck-editor'), { toolbar: ['heading', '|', 'bold', 'italic', 'link']})
+    .then(editor => window.editor = editor);
+```
