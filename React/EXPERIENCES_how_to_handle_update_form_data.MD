@@ -65,7 +65,7 @@ Tuy nhiên mình biết còn nhiều cách khác nhưng đây là cách duy nh�
 ```javascript
 import React from 'react';
 
-class Child extends React.Component {
+class Child extends React.Component { // Giả sử đây là cái Form Update
   state = {
     detail: {
       name: '',
@@ -73,16 +73,16 @@ class Child extends React.Component {
   };
 
   componentDidMount() {
-    this.setState({ detail: this.props.detail });
+    this.setState({ detail: this.props.detail }); // Render lần đầu
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps) { // Mỗi khi redux store có chứa sate liên quan thay đổi thì state lại thay đổi theo.
     if (nextProps.detail !== this.props.detail) {
       this.setState({ detail: nextProps.detail });
     }
   }
   
-  changeChildValue = name => this.setState({ detail: { name } });
+  changeChildValue = name => this.setState({ detail: { name } }); // thằng này chứa dữ liệu edit.
 
   render() {
     const { name } = this.state.detail;
@@ -99,7 +99,7 @@ class Child extends React.Component {
             border: '1px solid black',
             borderRadius: '5px',
           }}
-          value={name || this.props.detail.name}
+          value={name || this.props.detail.name} // Khi xoá hết thì quay về dư liệu trước khi edit.
           onChange={e => this.changeChildValue(e.target.value)}
         />
         <button
@@ -109,7 +109,7 @@ class Child extends React.Component {
             border: '1px solid black',
             borderRadius: '5px',
           }}
-          onClick={() => this.props.onChangeStateParent('Nguyễn Văn Minh')}
+          onClick={() => this.props.onChangeStateParent('Nguyễn Văn Minh')} // Giả dử đây là API Update với name thay đổi là Nguyễn Văn Minh
         >
           Tôi là Nguyễn Văn Minh
         </button>
@@ -120,7 +120,7 @@ class Child extends React.Component {
             border: '1px solid black',
             borderRadius: '5px',
           }}
-          onClick={() => this.props.onChangeStateParent('Nguyễn Văn Thắng')}
+          onClick={() => this.props.onChangeStateParent('Nguyễn Văn Thắng')} // Giả dử đây là API Update với name thay đổi là Nguyễn Văn Thắng
         >
           Tôi là Nguyễn Văn Thắng
         </button>
@@ -130,8 +130,12 @@ class Child extends React.Component {
 }
 
 
-export default class Parent extends React.PureComponent {
-  state = { name: 'Nguyễn Văn Hoàng' };
+export default class Parent extends React.PureComponent { // Giả sử đây là thằng Redux store chứa state.
+  state = { name: '' };
+
+  componentDidMount() {
+    this.setState({ name: 'Nguyễn Văn Hoàng' }); // Giả dử lifecycle này là sau khi fetch API xong rôi đổ dữ liệu vào redux store
+  }
 
   changeValue = name => this.setState({ name });
 
@@ -148,4 +152,5 @@ export default class Parent extends React.PureComponent {
     );
   }
 }
+
 ```
