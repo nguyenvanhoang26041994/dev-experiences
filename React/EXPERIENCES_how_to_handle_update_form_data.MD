@@ -1,11 +1,17 @@
-Hi guys. Đây là bài chia sẽ kinh nghiệm của mình để handle một update form data.
+Đây là bài chia sẽ kinh nghiệm của mình để handle một update form data.
 
 #Bài toán:
   - Bạn có một form dùng để update thông tin cá nhân
   - Khi bạn vào form update khi nó phải tải dữ liệu củ (Dữ liệu cũ thì tên tôi là `Nguyễn Văn Hoàng`)
   - Update thành công thì form cũng phải thanh đổi đúng.
 
-=> Ý tưởng: Mình thay đổi những gì đã có trên input rồi POST là xong.
+=> Ý tưởng: 
+- Render form update. Phải render trước để thấy cái form chứ không để fetch xong mới đổ render form.
+- Fetch data rồi đổ vào redux store state.
+- Re-render form update(state thay đổi thì form tự re-render)
+- Thay đổi dữ liệu
+- Submit form.
+
 #Vấn đề xảy ra với uncontroller component
 Để dử dụng uncontroller thì chúng ta luôn luôn có code
   ```javascript
@@ -21,7 +27,11 @@ Hi guys. Đây là bài chia sẽ kinh nghiệm của mình để handle một u
     ref={node => this.inputRef = node}
   />
   ```
-Những ngặt nỗi, Mỗi khi componentDidUpdate(Thằng cha render lại prop `detail`) thì value của input không được update vì defaulValue chỉ init 1 lần cho thôi. => Chuyển sang sử dụng controller component.
+- Render lần đầu sẽ không có dữ liệu gì hết.
+- Sau khi fetch dữ liệu xong => thay đổi redux store state. => re-render Update Form
+- Bạn hãy yên tâm vì sau khi re-render lần thứ 2 hoặc n lần đi nưã cũng không thấy dữ liệu vì mình sử dụng defaultValue chỉ chạy 1 lần lúc render lần đầu thôi. 
+
+=> Chuyển sang controller component
 
 #Vấn đề xảy ra với controller component
   ```javascript
@@ -37,8 +47,21 @@ Những ngặt nỗi, Mỗi khi componentDidUpdate(Thằng cha render lại prop
     onChange={this.handleChange}
   />
   ```
-  
-Vấn đề đã được giải quyết nhưng prop `detail.name` là của thằng cha passing vào nên muốn input mình thay đổi thì this.handleChange phải thay đổi được `detail.name`. Nếu `detail.name` là state của thằng cha code cũng khó đọc rồi, chưa để nếu `detail.name` là từ thàng cha của thằng cha ông nội nữa thì chắc nhức não luôn, Và đăc biệt. Vì case ở đây là update form data nên có thể `detail.name` được lấy từ store state của redux. Chả nhẽ chỉ để handle controller component bạn luôn luôn change redux store state khi bạn gõ bất cứ thứ gì vào input sao?. Vậy thì quá nguy hiểm.
+- Render lần đầu không thấy dữ liệu
+- Sau khi fetch xong => thay đổi store state => re-render Update Form
+- Bạn hãy yên tâm thực sự đi vì sau khi render dữ liệu luôn luôn mapping với redux store state.
+- Những vấn đề bạn thực sự ở đây là bạn không thể edit cái input của mình được nếu bạn không thay đổi store state bằng cái `this.handleChange` kia. Nếu bạn muốn edit value của input được thì bặt buộc this.handleChange phải thay đổi được store state chứa `detail.name` kia đi. Nói đi cũng phải nói lại, để mà handle cái edit này mà lúc nào cũng update store state thì đúng cực hơn dev backend code css.
+
+=> Ý tưởng của mình đưa ra là:
+- Lưu trữ đồng thời dữ liệu detail trên cả redux store và component state.
+- redux store chỉ chứa dữ liệu chính xác so với API trả về.
+- component state sẽ chứa thông tin mà người dùng edit. Chỉ khi nào redux store update thì mới mapping component state = redux store lại từ đầu => Dùng để khi POST thành công redux store thay đổi thì state cũng thay đổi y hệt hay nói cách khác là UPDATE xong cho phép re-edit.
+
+LƯU Ý: Với lifecycle mới thì chưa tìm được cách nào. Cách này chỉ áp dụng với lifecycle cũ.
+=> Thấy lifecycle mới nó đỡ code lặp hơn nhưng có vẻ nó không linh hoạt lắm. Nghe nói lên v17 vứt hẳn luôn thì sống sao?.
+
+Tuy nhiên mình biết còn nhiều cách khác nhưng đây là cách duy nhất mình nghĩ ra. Cách này là sử dụng controller component, Cách hay nhấy vẫn là sử dụng uncontroller vì tốt về performace.
+
 ```javascript
 import React from 'react';
 
