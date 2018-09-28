@@ -157,7 +157,8 @@ export default class Parent extends React.PureComponent { // Giả sử đây l�
 ```
 
 ```javascript
-cach su dung uncontroller
+// cach su dung uncontroller
+// Su dung isFetching để xem có đang đang fetch data hay không, Nếu đang fetch thì unMount Cái form đi, fetching xong mì mount ra lại, đó là lí do defaultValue hoạt động như mong muốn. Và đây là cách mình recomment dùng vì performance tốt hơn cái trên
 import React from 'react';
 
 class Child extends React.Component { // Giả sử đây là cái Form Update
