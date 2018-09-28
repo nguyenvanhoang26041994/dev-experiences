@@ -63,7 +63,7 @@ LƯU Ý: Với lifecycle mới thì chưa tìm được cách nào. Cách này c
 Tuy nhiên mình biết còn nhiều cách khác nhưng đây là cách duy nhất mình nghĩ ra. Cách này là sử dụng controller component, Cách hay nhấy vẫn là sử dụng uncontroller vì tốt về performace.
 
 ```javascript
-// Cach su dung uncontroller
+// Cach su dung controller
 import React from 'react';
 
 class Child extends React.Component { // Giả sử đây là cái Form Update
@@ -157,6 +157,7 @@ export default class Parent extends React.PureComponent { // Giả sử đây l�
 ```
 
 ```javascript
+cach su dung uncontroller
 import React from 'react';
 
 class Child extends React.Component { // Giả sử đây là cái Form Update
@@ -232,7 +233,10 @@ export default class Parent extends React.PureComponent { // Giả sử đây l�
     setTimeout(() => this.setState({ name: 'Nguyễn Văn Hoàng', isFetching: false }), 2000)
   }
 
-  changeValue = name => setTimeout(() => this.setState({ isFetching: true }, () => this.setState({ name, isFetching: false })), 2000)
+  changeValue = name => {
+    setTimeout(() => this.setState({ isFetching: true }), 0)
+    setTimeout(() => this.setState({ isFetching: false, name }), 4000)
+  };
 
   render() {
     return (
@@ -250,5 +254,6 @@ export default class Parent extends React.PureComponent { // Giả sử đây l�
     );
   }
 }
+
 
 ```
