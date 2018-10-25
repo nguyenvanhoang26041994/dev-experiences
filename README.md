@@ -176,3 +176,5 @@ Bác nào muốn hiệu ứng cho slick slider có thể dùng thêm thằng bê
 - https://www.fancyapps.com/fancybox/3/
 20. Plugin Anime JS (Tạo hiệu ứng cho phần tử) :
 - http://animejs.com/
+
+http://cssnext.io/features/
