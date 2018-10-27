@@ -14,6 +14,7 @@ Các bài viết về React
  
 #-------Dưới đây chỉ là nháp cá nhân thôi, các bạn không cần phải quan tâm---
 https://stackoverflow.com/questions/37937984/git-refusing-to-merge-unrelated-histories-on-rebase
+https://stackoverflow.com/questions/10697463/resolve-git-merge-conflicts-in-favor-of-their-changes-during-a-pull
 Draff:
 - Check eslint trước khi commit
   pre-commit
