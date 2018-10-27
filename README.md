@@ -13,6 +13,7 @@ Các bài viết về React
 - PureComponent vs Component: https://github.com/nguyenvanhoang26041994/dev-experiences/blob/master/React/component_vs_purecomponent.md
  
 #-------Dưới đây chỉ là nháp cá nhân thôi, các bạn không cần phải quan tâm---
+https://stackoverflow.com/questions/37937984/git-refusing-to-merge-unrelated-histories-on-rebase
 Draff:
 - Check eslint trước khi commit
   pre-commit
