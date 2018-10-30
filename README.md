@@ -16,6 +16,7 @@ Các bài viết về React
 https://stackoverflow.com/questions/37937984/git-refusing-to-merge-unrelated-histories-on-rebase
 https://stackoverflow.com/questions/10697463/resolve-git-merge-conflicts-in-favor-of-their-changes-during-a-pull
 https://stackoverflow.com/questions/32370994/how-to-pass-props-to-this-props-children
+https://devhints.io/sass
 Draff:
 - Check eslint trước khi commit
   pre-commit
