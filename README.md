@@ -182,3 +182,6 @@ Bác nào muốn hiệu ứng cho slick slider có thể dùng thêm thằng bê
 - http://animejs.com/
 
 http://cssnext.io/features/
+_______________________________________________
+Install `nvm` in macOS
+https://www.codementor.io/mercurial/how-to-install-node-js-on-macos-sierra-mphz41ekk
