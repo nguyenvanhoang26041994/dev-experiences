@@ -4,28 +4,24 @@
     <th>Hooks</th>
   </tr>
   <tr>
-    <td>
-      <pre lang="javascript">
+    <td><pre lang="javascript">
 function getSomeThing() {
   API.getSomeThing()
 }
 componentDidMount() {
   this.getSomeThing();
 }
-      </pre>
-    </td>
-    <td>
-<pre lang="javascript">
+    </pre></td>
+    <td><pre lang="javascript">
 const getSomeThing = () => API.getSomeThing();
 useEffect(() => {
   getSomeThing();
 }, []);
-</pre>
-    </td>
+    </pre></td>
   </tr>
     <tr>
     <td>
-<pre lang="javascript">
+      <pre lang="javascript">
 onBodyClick() {}
 componentDidMount() {
   document.body
@@ -34,9 +30,9 @@ componentDidMount() {
 
 componentWillUnmount() {
   document.body
-  .removeEventListener('click', this.onBodyClick);
+    .removeEventListener('click', this.onBodyClick);
 }
-</pre>
+      </pre>
     </td>
     <td>
       <pre lang="javascript">
@@ -44,10 +40,11 @@ const onBodyClick = () => {};
 useEffect(() => {
   document.body
     .addEventListener('click', onBodyClick);
+ 
   return () => document
     .body.removeEventListener('click', onBodyClick);
 }, []);
-</pre>
+      </pre>
     </td>
   </tr>
 <table>
