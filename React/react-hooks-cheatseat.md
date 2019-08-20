@@ -1,50 +1,22 @@
-<table>
-  <tr>
-    <th>Classes</th>
-    <th>Hooks</th>
-  </tr>
-  <tr>
-    <td><pre lang="javascript">
-function getSomeThing() {
-  API.getSomeThing()
-}
-componentDidMount() {
-  this.getSomeThing();
-}
-    </pre></td>
-    <td><pre lang="javascript">
-const getSomeThing = () => API.getSomeThing();
-useEffect(() => {
-  getSomeThing();
-}, []);
-    </pre></td>
-  </tr>
+  <table>
     <tr>
-    <td>
-      <pre lang="javascript">
-onBodyClick() {}
+      <td>Classes</td>
+      <td>Hooks</td>
+    </tr>
+    <tr class="1">
+      <td>
+        <pre lang="javascript">
 componentDidMount() {
-  document.body
-    .addEventListener('click', this.onBodyClick);
+  API.getSomeThing();
 }
-
-componentWillUnmount() {
-  document.body
-    .removeEventListener('click', this.onBodyClick);
-}
-      </pre>
-    </td>
-    <td>
-      <pre lang="javascript">
-const onBodyClick = () => {};
+        </pre>
+      </td>
+      <td>
+        <pre lang="javascript">
 useEffect(() => {
-  document.body
-    .addEventListener('click', onBodyClick);
- 
-  return () => document
-    .body.removeEventListener('click', onBodyClick);
+  API.getSomeThing();
 }, []);
-      </pre>
-    </td>
-  </tr>
-<table>
+        </pre>
+      </td>
+    </tr>
+  </table>
