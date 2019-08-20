@@ -5,36 +5,38 @@
   </tr>
   <tr>
     <td>
-      <pre lang="javascript">
+<pre lang="javascript">
 function getSomeThing() {
   API.getSomeThing()
 }
 componentDidMount() {
   this.getSomeThing();
 }
-      </pre>
+</pre>
     </td>
     <td>
-      <pre lang="javascript">
+<pre lang="javascript">
 const getSomeThing = () => API.getSomeThing();
 useEffect(() => {
   getSomeThing();
 }, []);
-      </pre>
+</pre>
     </td>
   </tr>
     <tr>
     <td>
-      <pre lang="javascript">
+<pre lang="javascript">
 onBodyClick() {}
 componentDidMount() {
-  document.body.addEventListener('click', this.onBodyClick);
+  document.body
+    .addEventListener('click', this.onBodyClick);
 }
 
 componentWillUnmount() {
-  document.body.removeEventListener('click', this.onBodyClick);
+  document.body
+  .removeEventListener('click', this.onBodyClick);
 }
-      </pre>
+</pre>
     </td>
     <td>
       <pre lang="javascript">
@@ -45,7 +47,7 @@ useEffect(() => {
   return () => document
     .body.removeEventListener('click', onBodyClick);
 }, []);
-      </pre>
+</pre>
     </td>
   </tr>
 <table>
