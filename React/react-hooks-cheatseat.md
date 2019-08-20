@@ -5,14 +5,14 @@
   </tr>
   <tr>
     <td>
-<pre lang="javascript">
+      <pre lang="javascript">
 function getSomeThing() {
   API.getSomeThing()
 }
 componentDidMount() {
   this.getSomeThing();
 }
-</pre>
+      </pre>
     </td>
     <td>
 <pre lang="javascript">
