@@ -13,6 +13,7 @@ Theo mình, để xây dựng một trang web chạy nhanh, mượt và đáp �
 11. Một số mẹo khi code js để tối ưu(comming soon in chapter 2)
 12. Một số mẹo khi code css để tối ưu(comming soon in chapter 2)
 13. Một số mẹo khi code html để tối ưu(comming soon in chapter 2)
+14. Chơi một vòng với React hooks
 
 > Hey, để tiện demo thì mình giới thiệu một repo có tên là next-boilerplate tại https://www.github.com/nguyenvanhoang26041994/next-boilerplate và live tại https://youtube-musics.herokuapp.com/ nhé!
 
