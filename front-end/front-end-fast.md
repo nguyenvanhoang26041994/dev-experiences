@@ -107,8 +107,9 @@ Cứ nghỉ nó phức tạp, nhưng thật ra nó là js basic. Để miêu t�
 const cacheStorage = {};
 
 const getProfile = id => async (dispatch, getState) => {
-  if (cacheStorage[`getProfileSuccess(${id})`]) {
-    return dispatch(actions.getProfileSuccess(data));
+  const dataFromCache = cacheStorage[`getProfileSuccess(${id})`];
+  if (dataFromCache) {
+    return dispatch(actions.getProfileSuccess(dataFromCache));
   }
 
   try {
