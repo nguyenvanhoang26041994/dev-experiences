@@ -87,7 +87,7 @@ class Demo extends React.PureComponent {
   }
 }
 ```
-_Thế là xong!, đơn giản!. Vậy là đã tránh re-render không cần thiết ở mức độ shallow level. Tuy nhiên, tuy nhiên, Vì javascript là dynamic type nên bạn không biết props ở runtime là kiểu gì. Nên `React.PureComponent` vẫn compare cả những `props` mình không cần quan tâm đến, khiến render vô tội vạ. Ví dụ ở nơi nào đó sử dụng Component Demo như sau:_  
+_Thế là xong!, đơn giản!. Vậy là đã tránh re-render không cần thiết ở mức độ shallow level. Tuy nhiên, Vì javascript là dynamic type nên bạn không biết props ở runtime là kiểu gì. Nên `React.PureComponent` vẫn compare cả những `props` mình không cần quan tâm đến, khiến render vô tội vạ. Ví dụ ở nơi nào đó sử dụng Component Demo như sau:_  
   
 **_☞ Step 4:_**
 ```javascript
