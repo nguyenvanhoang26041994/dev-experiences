@@ -162,7 +162,7 @@ componentDidUpdate(prevProps, prevState) {
   }
 }
 componentWillUnmount() {
-  API.sayGoodByMyLove(this.state.girlId);
+  API.sayGoodByeMyLove(this.state.girlId);
 }
         </pre>
       </td>
@@ -171,7 +171,7 @@ componentWillUnmount() {
 const [girlId, setGirlId] = useState('001');
 useEffect(() => {
   API.sayILoveThisGirl(girlId);
-  return API.sayGoodByMyLove(girlId);
+  return () => API.sayGoodByeMyLove(girlId);
 }, [girlId]);// [girlId] để ko bị gọi API liên tục nếu girlId trước và sau re-render không thay đổi
         </pre>
       </td>
