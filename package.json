@@ -1,0 +1,15 @@
+{
+  "name": "dev-experiences",
+  "version": "3.6.0",
+  "description": "dev-experiences and best practices",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nguyenvanhoang26041994/dev-experiences.git"
+  },
+  "engines": {
+    "npm": ">=5",
+    "node": ">=8"
+  },
+  "author": "Nguyen Van Hoang",
+  "scripts": {}
+}
