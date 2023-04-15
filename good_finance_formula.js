@@ -1,5 +1,5 @@
 // Copy all of this file and paste to console. then enter
-(({
+function good_xrp_finance_formular({
   your_birth_date,
   current_date,
   your_age_what_you_suppose_to_run_out_of_xrp,
@@ -8,7 +8,7 @@
   current_usd_vnd_price,
   vnd_amount_you_want_to_get_monthy,
   your_xrp_wallet_address,
-}) => {
+}) {
   const current_xrp_vnd_price = current_xrp_usd_price * current_usd_vnd_price;
   const your_current_age = current_date.getFullYear() - your_birth_date.getFullYear();
   const your_current_xrp_worth_as_usd = your_current_xrp_amount * current_xrp_usd_price;
@@ -69,7 +69,9 @@
     - XRP/USD: https://www.binance.com/vi/trade/XRP_USDT
     - USD/VND: https://www.google.com/finance/quote/USD-VND
     `, `color: ${current_xrp_that_you_can_sell_to_keep_good_finance > 0 ? '#10d853' : '#f3083a'}; font-size: 18px`)
-})({
+}
+
+good_xrp_finance_formular({
   your_birth_date: new Date('06/05/1994'), // mm/DD/yyyy
   current_date: new Date(Date.now()), // new Date('03/15/2023')
   your_age_what_you_suppose_to_run_out_of_xrp: 80, // age of retirement
