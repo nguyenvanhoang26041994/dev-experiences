@@ -71,7 +71,7 @@ function good_xrp_finance_formular({
       }
     
       const first_line = `=> Bạn cần mua thêm ${xrp_amount} XRP(${vnd(xrp_amount_worth_as_vnd)}) vào thời điểm này!`;
-      const second_line = xrp_amount_you_need_to_buy_monthly_in_next_24_months_until_you_reach_good_finance > 0
+      const second_line = xrp_amount_you_need_to_buy_monthly_in_next_12_months_until_you_reach_good_finance > 0
         ? `=> Hoặc với target giá XRP là ${usd(your_target_xrp_usd_price)} thì bạn cần mua ${Math.abs(xrp_amount_you_need_to_buy_monthly_in_next_12_months_until_you_reach_good_finance.toFixed(2))} XRP(${vnd(xrp_amount_worth_as_vnd_you_need_to_buy_monthly_in_next_12_months_until_you_reach_good_finance)}) mỗi tháng trong suốt 12 tháng tiếp theo để đạt sở hữu tổng cộng ${(your_current_xrp_amount + xrp_amount_that_you_need_to_buy_until_xrp_reach_to_target_price).toFixed(0)} XRP!`
         : '';
       return `${first_line}
