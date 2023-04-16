@@ -83,7 +83,7 @@ function good_xrp_finance_formular({
     - Your XRP balance: https://xrpscan.com/account/${your_xrp_wallet_address}
     - XRP/USD: https://www.binance.com/vi/trade/XRP_USDT
     - USD/VND: https://www.google.com/finance/quote/USD-VND
-    `, `color: ${current_xrp_that_you_can_sell_to_keep_good_finance > 0 ? '#10d853' : '#f3083a'}; font-size: 18px`)
+    `, `color: ${current_xrp_that_you_can_sell_to_keep_good_finance > 0 ? '#10d853' : '#f3083a'}; font-size: 18px; font-family: monospace`)
 }
 
 good_xrp_finance_formular({
