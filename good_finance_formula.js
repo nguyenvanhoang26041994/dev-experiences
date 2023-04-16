@@ -53,8 +53,8 @@ function good_xrp_finance_formular({
   const vnd = (amount) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
   const usd = (amount) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 3 }).format(amount);
   console.log(`%c
-    ${current_date.toDateString()}
-    
+    ${current_date.toDateString()} - ${the_date_that_you_suppose_to_run_out_of_xrp.toDateString()}
+    %c
     Bạn hiện tại đã ${your_current_age} tuổi và đang có ${your_current_xrp_amount.toFixed(0)} XRP(${vnd(your_current_xrp_worth_as_vnd)})
     Với giá XRP hiện tại là ${usd(current_xrp_usd_price)}, bạn sẽ nhận ${vnd(current_vnd_amount_monthly_till_you_run_out_of_xrp)}(bằng cách bán ${current_selling_xrp_amount_monthly_till_you_run_out_of_xrp.toFixed(2)} XRP) mỗi tháng cho đến khi bạn đủ ${your_age_that_you_suppose_to_run_out_of_xrp} tuổi(${month_count_till_you_suppose_to_run_out_of_xrp.toFixed(0)} tháng nữa).
     Giá XRP phải từ ${usd(the_idealy_xrp_usd_price_that_you_need_to_keep_finance_plan_still_look_good)} trở lên để nhận tối thiểu ${vnd(vnd_amount_you_want_to_get_monthy)} mỗi tháng cho đến khi bạn đủ ${your_age_that_you_suppose_to_run_out_of_xrp} tuổi(${month_count_till_you_suppose_to_run_out_of_xrp.toFixed(0)} tháng nữa).
@@ -85,7 +85,7 @@ function good_xrp_finance_formular({
     - Your XRP balance: https://xrpscan.com/account/${your_xrp_wallet_address}
     - XRP/USD: https://www.binance.com/vi/trade/XRP_USDT
     - USD/VND: https://www.google.com/finance/quote/USD-VND
-    `, `color: ${current_xrp_that_you_can_sell_to_keep_good_finance > 0 ? '#10d853' : '#f3083a'}; font-size: 18px; font-family: monospace`)
+    `, 'color: yellow; font-size: 18px; font-family: monospace', `color: ${current_xrp_that_you_can_sell_to_keep_good_finance > 0 ? '#10d853' : '#f3083a'}; font-size: 18px; font-family: monospace`)
 }
 
 good_xrp_finance_formular({
