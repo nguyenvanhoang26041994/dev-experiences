@@ -91,5 +91,5 @@ good_xrp_finance_formular({
   current_usd_vnd_price: 23500,
   vnd_amount_you_want_to_get_monthy: 20000000,
   your_xrp_wallet_address: localStorage.getItem('MY_XRP_WALLET_ADDRESS'),
-  your_target_xrp_usd_price: 13,
+  your_target_xrp_usd_price: 10,
 });
