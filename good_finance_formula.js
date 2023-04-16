@@ -8,6 +8,7 @@ function good_xrp_finance_formular({
   current_usd_vnd_price,
   vnd_amount_you_want_to_get_monthy,
   your_xrp_wallet_address,
+  your_target_xrp_usd_price,
 }) {
   const current_xrp_vnd_price = current_xrp_usd_price * current_usd_vnd_price;
   const your_current_age = current_date.getFullYear() - your_birth_date.getFullYear();
@@ -42,6 +43,11 @@ function good_xrp_finance_formular({
   const current_selling_xrp_amount_monthly_till_you_run_out_of_xrp = your_current_xrp_amount / month_count_till_you_suppose_to_run_out_of_xrp;
   const current_vnd_amount_monthly_till_you_run_out_of_xrp = current_selling_xrp_amount_monthly_till_you_run_out_of_xrp * current_xrp_vnd_price;
 
+  const xrp_amount_that_you_need_to_buy_until_xrp_reach_to_target_price =
+    (the_idealy_vnd_amount_that_you_need_to_keep_finance_plan_still_look_good / current_xrp_vnd_price / your_target_xrp_usd_price) - your_current_xrp_amount;
+  const xrp_amount_you_need_to_buy_monthly_in_next_24_months_until_you_reach_good_finance =
+    xrp_amount_that_you_need_to_buy_until_xrp_reach_to_target_price / 24;
+
   const vnd = (amount) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
   const usd = (amount) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 3 }).format(amount);
   console.log(`%c
@@ -61,7 +67,11 @@ function good_xrp_finance_formular({
     ${second_line}
     ${third_line}`;
       }
-      return `=> Bạn cần mua thêm ${xrp_amount} XRP(${vnd(xrp_amount_worth_as_vnd)}) vào thời điểm này!`
+    
+      const first_line = `=> Bạn cần mua thêm ${xrp_amount} XRP(${vnd(xrp_amount_worth_as_vnd)}) vào thời điểm này!`;
+      const second_line = `=> Hoặc với target giá XRP là ${usd(your_target_xrp_usd_price)} thì bạn cần mua ${Math.abs(xrp_amount_you_need_to_buy_monthly_in_next_24_months_until_you_reach_good_finance.toFixed(2))} XRP mỗi tháng trong suốt 24 tháng tiếp theo!`;
+      return `${first_line}
+    ${second_line}`;
     })()}
 
 
@@ -76,9 +86,10 @@ good_xrp_finance_formular({
   your_birth_date: new Date('06/05/1994'), // mm/DD/yyyy
   current_date: new Date(Date.now()), // new Date('03/15/2023')
   your_age_that_you_suppose_to_run_out_of_xrp: 80, // age of retirement
-  your_current_xrp_amount: 50000, // LONG TERM AMOUNT
-  current_xrp_usd_price: 15, // LONG TERM PRICE
+  your_current_xrp_amount: 46500, // LONG TERM AMOUNT
+  current_xrp_usd_price: 0.52, // LONG TERM PRICE
   current_usd_vnd_price: 23500,
   vnd_amount_you_want_to_get_monthy: 20000000,
   your_xrp_wallet_address: localStorage.getItem('MY_XRP_WALLET_ADDRESS'),
+  your_target_xrp_usd_price: 13,
 });
