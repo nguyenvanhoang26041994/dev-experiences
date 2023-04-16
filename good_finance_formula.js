@@ -44,7 +44,7 @@ function good_xrp_finance_formular({
   const current_vnd_amount_monthly_till_you_run_out_of_xrp = current_selling_xrp_amount_monthly_till_you_run_out_of_xrp * current_xrp_vnd_price;
 
   const xrp_amount_that_you_need_to_buy_until_xrp_reach_to_target_price =
-    (((vnd_amount_you_want_to_get_monthy * month_count_till_you_suppose_to_run_out_of_xrp) / current_xrp_vnd_price / your_target_xrp_usd_price) - your_current_xrp_amount)
+    ((vnd_amount_you_want_to_get_monthy * month_count_till_you_suppose_to_run_out_of_xrp) / (current_xrp_vnd_price * your_target_xrp_usd_price)) - your_current_xrp_amount
   const xrp_amount_you_need_to_buy_monthly_in_next_24_months_until_you_reach_good_finance =
     xrp_amount_that_you_need_to_buy_until_xrp_reach_to_target_price / 24;
 
