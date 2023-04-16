@@ -52,8 +52,8 @@ function good_xrp_finance_formular({
   const usd = (amount) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 3 }).format(amount);
   console.log(`%c
     Bạn hiện tại đã ${your_current_age} tuổi và đang có ${your_current_xrp_amount.toFixed(0)} XRP(${vnd(your_current_xrp_worth_as_vnd)})
-    Với giá XRP hiện tại là ${usd(current_xrp_usd_price)}, bạn sẽ nhận ${vnd(current_vnd_amount_monthly_till_you_run_out_of_xrp)}(bằng cách bán ${current_selling_xrp_amount_monthly_till_you_run_out_of_xrp.toFixed(2)} XRP) mỗi tháng cho đến khi bạn đủ ${your_age_that_you_suppose_to_run_out_of_xrp} tuổi.
-    Giá XRP phải từ ${usd(the_idealy_xrp_usd_price_that_you_need_to_keep_finance_plan_still_look_good)} trở lên để nhận tối thiểu ${vnd(vnd_amount_you_want_to_get_monthy)} mỗi tháng cho đến khi bạn đủ ${your_age_that_you_suppose_to_run_out_of_xrp} tuổi.
+    Với giá XRP hiện tại là ${usd(current_xrp_usd_price)}, bạn sẽ nhận ${vnd(current_vnd_amount_monthly_till_you_run_out_of_xrp)}(bằng cách bán ${current_selling_xrp_amount_monthly_till_you_run_out_of_xrp.toFixed(2)} XRP) mỗi tháng cho đến khi bạn đủ ${your_age_that_you_suppose_to_run_out_of_xrp} tuổi(${month_count_till_you_suppose_to_run_out_of_xrp.toFixed(0)} tháng nữa).
+    Giá XRP phải từ ${usd(the_idealy_xrp_usd_price_that_you_need_to_keep_finance_plan_still_look_good)} trở lên để nhận tối thiểu ${vnd(vnd_amount_you_want_to_get_monthy)} mỗi tháng cho đến khi bạn đủ ${your_age_that_you_suppose_to_run_out_of_xrp} tuổi(${month_count_till_you_suppose_to_run_out_of_xrp.toFixed(0)} tháng nữa).
 
     Để thực hiện an toàn mục tiêu này, bạn cần:
     ${(() => {
