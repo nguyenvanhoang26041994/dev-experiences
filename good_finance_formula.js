@@ -45,10 +45,10 @@ function good_xrp_finance_formular({
 
   const xrp_amount_that_you_need_to_buy_until_xrp_reach_to_target_price =
     (((vnd_amount_you_want_to_get_monthy * month_count_till_you_suppose_to_run_out_of_xrp) / (your_target_xrp_usd_price * current_usd_vnd_price)) - your_current_xrp_amount);
-  const xrp_amount_you_need_to_buy_monthly_in_next_24_months_until_you_reach_good_finance =
-    xrp_amount_that_you_need_to_buy_until_xrp_reach_to_target_price / 24;
-  const xrp_amount_worth_as_vnd_you_need_to_buy_monthly_in_next_24_months_until_you_reach_good_finance =
-    xrp_amount_you_need_to_buy_monthly_in_next_24_months_until_you_reach_good_finance * current_xrp_vnd_price;
+  const xrp_amount_you_need_to_buy_monthly_in_next_12_months_until_you_reach_good_finance =
+    xrp_amount_that_you_need_to_buy_until_xrp_reach_to_target_price / 12;
+  const xrp_amount_worth_as_vnd_you_need_to_buy_monthly_in_next_12_months_until_you_reach_good_finance =
+    xrp_amount_you_need_to_buy_monthly_in_next_12_months_until_you_reach_good_finance * current_xrp_vnd_price;
 
   const vnd = (amount) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
   const usd = (amount) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 3 }).format(amount);
@@ -72,7 +72,7 @@ function good_xrp_finance_formular({
     
       const first_line = `=> Bạn cần mua thêm ${xrp_amount} XRP(${vnd(xrp_amount_worth_as_vnd)}) vào thời điểm này!`;
       const second_line = xrp_amount_you_need_to_buy_monthly_in_next_24_months_until_you_reach_good_finance > 0
-        ? `=> Hoặc với target giá XRP là ${usd(your_target_xrp_usd_price)} thì bạn cần mua ${Math.abs(xrp_amount_you_need_to_buy_monthly_in_next_24_months_until_you_reach_good_finance.toFixed(2))} XRP(${vnd(xrp_amount_worth_as_vnd_you_need_to_buy_monthly_in_next_24_months_until_you_reach_good_finance)}) mỗi tháng trong suốt 24 tháng tiếp theo để đạt sở hữu tổng cộng ${(your_current_xrp_amount + xrp_amount_that_you_need_to_buy_until_xrp_reach_to_target_price).toFixed(0)} XRP!`
+        ? `=> Hoặc với target giá XRP là ${usd(your_target_xrp_usd_price)} thì bạn cần mua ${Math.abs(xrp_amount_you_need_to_buy_monthly_in_next_12_months_until_you_reach_good_finance.toFixed(2))} XRP(${vnd(xrp_amount_worth_as_vnd_you_need_to_buy_monthly_in_next_12_months_until_you_reach_good_finance)}) mỗi tháng trong suốt 12 tháng tiếp theo để đạt sở hữu tổng cộng ${(your_current_xrp_amount + xrp_amount_that_you_need_to_buy_until_xrp_reach_to_target_price).toFixed(0)} XRP!`
         : '';
       return `${first_line}
     ${second_line}`;
