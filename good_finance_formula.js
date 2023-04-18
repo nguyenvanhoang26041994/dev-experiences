@@ -98,11 +98,11 @@ good_xrp_finance_formular({
   your_birth_date: new Date('06/05/1994'), // mm/DD/yyyy
   current_date: new Date('06/05/2024'),
   your_age_that_you_suppose_to_run_out_of_xrp: 60,
-  your_current_xrp_amount: 48190 + 820,
+  your_current_xrp_amount: 49830,
   current_xrp_usd_price: 0.52,
   current_usd_vnd_price: 23500,
   vnd_amount_you_want_to_get_monthy: 1000000 * 20,
-  vnd_amount_that_you_used_to_buy_xrp: 1000000* (715 + 10),
+  vnd_amount_that_you_used_to_buy_xrp: 1000000 * 735,
   your_xrp_wallet_address: localStorage.getItem('MY_XRP_WALLET_ADDRESS'),
   your_target_xrp_usd_price: 5.89, // LONG TERM PRICE
 });
