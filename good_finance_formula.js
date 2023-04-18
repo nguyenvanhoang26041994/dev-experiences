@@ -96,7 +96,7 @@ function good_xrp_finance_formular({
 
 good_xrp_finance_formular({
   your_birth_date: new Date('06/05/1994'), // mm/DD/yyyy
-  current_date: new Date('06/05/2025'),
+  current_date: new Date('06/05/2024'),
   your_age_that_you_suppose_to_run_out_of_xrp: 60,
   your_current_xrp_amount: 50650,
   current_xrp_usd_price: 0.52,
