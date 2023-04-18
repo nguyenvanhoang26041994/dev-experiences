@@ -102,7 +102,7 @@ good_xrp_finance_formular({
   current_xrp_usd_price: 0.52,
   current_usd_vnd_price: 23500,
   vnd_amount_you_want_to_get_monthy: 1000000 * 20,
-  vnd_amount_that_you_used_to_buy_xrp: 1000000 * 735,
+  vnd_amount_that_you_used_to_buy_xrp: 1000000 * 745,
   your_xrp_wallet_address: localStorage.getItem('MY_XRP_WALLET_ADDRESS'),
   your_target_xrp_usd_price: 5.89, // LONG TERM PRICE
 });
