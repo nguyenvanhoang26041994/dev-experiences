@@ -17,7 +17,7 @@ function good_xrp_finance_formular({
   const your_current_xrp_worth_as_vnd = your_current_xrp_worth_as_usd * current_usd_vnd_price;
   const your_average_xrp_vnd_price = vnd_amount_that_you_used_to_buy_xrp / your_current_xrp_amount;
   const your_average_xrp_usd_price = your_average_xrp_vnd_price / current_usd_vnd_price;
-  const your_lose_as_vnd = your_current_xrp_worth_as_vnd - vnd_amount_that_you_used_to_buy_xrp;
+  const your_lose_as_vnd = vnd_amount_that_you_used_to_buy_xrp - your_current_xrp_worth_as_vnd;
   const the_date_that_you_suppose_to_run_out_of_xrp = (() => {
     const date = new Date(your_birth_date.getTime());
     date.setFullYear(current_date.getFullYear() + your_age_that_you_suppose_to_run_out_of_xrp - your_current_age);
