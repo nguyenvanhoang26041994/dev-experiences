@@ -58,7 +58,6 @@ function good_xrp_finance_formular({
   const usd = (amount) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 3 }).format(amount);
   console.log(`%c
     ${current_date.toDateString()} - ${the_date_that_you_suppose_to_run_out_of_xrp.toDateString()}
-    %c
     Bạn hiện tại đã ${your_current_age} tuổi và đang có ${your_current_xrp_amount.toFixed(0)} XRP(${vnd(your_current_xrp_worth_as_vnd)}) với trung bình giá là ${usd(your_average_xrp_usd_price)}
     %c
     Hiện tại đang ${your_lose_as_vnd > 0 ? `lỗ`: `lãi`} ${vnd(Math.abs(your_lose_as_vnd))}
@@ -92,7 +91,7 @@ function good_xrp_finance_formular({
     - Your XRP balance: https://xrpscan.com/account/${your_xrp_wallet_address}
     - XRP/USD: https://www.binance.com/vi/trade/XRP_USDT
     - USD/VND: https://www.google.com/finance/quote/USD-VND
-    `, 'color: yellow; font-size: 18px; font-family: monospace', 'color: #e708f5; font-size: 24px; font-family: monospace', `color: ${current_xrp_that_you_can_sell_to_keep_good_finance > 0 ? '#10d853' : '#f3083a'}; font-size: 18px; font-family: monospace`)
+    `, 'color: yellow; font-size: 18px; font-family: monospace', `color: ${current_xrp_that_you_can_sell_to_keep_good_finance > 0 ? '#10d853' : '#f3083a'}; font-size: 18px; font-family: monospace`)
 }
 
 good_xrp_finance_formular({
