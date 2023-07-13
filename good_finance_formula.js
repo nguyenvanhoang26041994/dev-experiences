@@ -99,7 +99,7 @@ good_xrp_finance_formular({
   current_date: new Date(Date.now()),
   your_age_that_you_suppose_to_run_out_of_xrp: 60,
   your_current_xrp_amount: 55555,
-  current_xrp_usd_price: 0.48,
+  current_xrp_usd_price: 0.8,
   current_usd_vnd_price: 23456,
   vnd_amount_you_want_to_get_monthy: 1000000 * 20,
   vnd_amount_that_you_used_to_buy_xrp: 1000000 * 800,
