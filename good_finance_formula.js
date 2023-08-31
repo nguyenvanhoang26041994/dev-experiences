@@ -94,15 +94,25 @@ function good_xrp_finance_formular({
     `, 'color: yellow; font-size: 18px; font-family: monospace', `color: ${current_xrp_that_you_can_sell_to_keep_good_finance > 0 ? '#10d853' : '#f3083a'}; font-size: 18px; font-family: monospace`)
 }
 
-good_xrp_finance_formular({
-  your_birth_date: new Date('06/05/1994'), // mm/DD/yyyy
-  current_date: new Date(Date.now()),
-  your_age_that_you_suppose_to_run_out_of_xrp: 60,
-  your_current_xrp_amount: 60539,
-  current_xrp_usd_price: 0.524,
-  current_usd_vnd_price: 24000,
-  vnd_amount_you_want_to_get_monthy: 1000000 * 20,
-  vnd_amount_that_you_used_to_buy_xrp: 1000000 * 861,
-  your_xrp_wallet_address: localStorage.getItem('MY_XRP_WALLET_ADDRESS'),
-  your_target_xrp_usd_price: 5.89, // LONG TERM PRICE
-});
+fetch(`https://svc.blockdaemon.com/universal/v1/xrp/mainnet/account/${localStorage.getItem('MY_XRP_WALLET_ADDRESS')}`, {
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem('API_TOKEN')}`
+  }
+})
+  .then(res => res.json())
+  .then((data) => {
+    const xrp_record = data[data.findIndex(item => item.currency.type === 'native')];
+    xrp_record && good_xrp_finance_formular({
+      your_birth_date: new Date('06/05/1994'), // mm/DD/yyyy
+      current_date: new Date(Date.now()),
+      your_age_that_you_suppose_to_run_out_of_xrp: 60,
+      your_current_xrp_amount: +xrp_record.confirmed_balance / 1000000,
+      current_xrp_usd_price: 0.524,
+      current_usd_vnd_price: 24000,
+      vnd_amount_you_want_to_get_monthy: 1000000 * 20,
+      vnd_amount_that_you_used_to_buy_xrp: 1000000 * 861,
+      your_xrp_wallet_address: localStorage.getItem('MY_XRP_WALLET_ADDRESS'),
+      your_target_xrp_usd_price: 5.89, // LONG TERM PRICE
+    });
+  });
+
