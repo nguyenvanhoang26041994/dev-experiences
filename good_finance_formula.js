@@ -103,7 +103,7 @@ Promise.all([
   fetch("https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=XRP", {
     headers: {
       Accept: "application/json",
-      "X-Cmc_pro_api_key": "2da4294d-b035-418d-8111-0f4566eab3fe"
+      "X-Cmc_pro_api_key": ""
     }
   })
 ])
