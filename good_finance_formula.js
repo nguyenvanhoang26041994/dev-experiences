@@ -1,4 +1,6 @@
-// Copy all of this file and paste to console. then enter
+const fetch = require('cross-fetch');
+const chalk = require('chalk');
+
 function good_xrp_finance_formular({
   your_birth_date,
   current_date,
@@ -7,7 +9,6 @@ function good_xrp_finance_formular({
   current_xrp_usd_price,
   current_usd_vnd_price,
   vnd_amount_you_want_to_get_monthy,
-  your_xrp_wallet_address,
   your_target_xrp_usd_price,
   vnd_amount_that_you_used_to_buy_xrp,
 }) {
@@ -56,13 +57,12 @@ function good_xrp_finance_formular({
 
   const vnd = (amount) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
   const usd = (amount) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 3 }).format(amount);
-  console.log(`%c
-    ${current_date.toDateString()} - ${the_date_that_you_suppose_to_run_out_of_xrp.toDateString()}
-    Bạn hiện tại đang có ${your_current_xrp_amount.toFixed(0)} XRP(${vnd(your_current_xrp_worth_as_vnd)}) với trung bình giá là ${usd(your_average_xrp_usd_price)}
-    %c
-    Hiện tại đang ${your_lose_as_vnd > 0 ? `lỗ`: `lãi`} ${vnd(Math.abs(your_lose_as_vnd))}
+  console.log(`
+    ${current_date.toDateString()} - ${the_date_that_you_suppose_to_run_out_of_xrp.toDateString()}.
+    
+    Bạn hiện tại đang có ${chalk.green(your_current_xrp_amount.toFixed(0))} XRP(${vnd(your_current_xrp_worth_as_vnd)}) với trung bình giá là ${chalk.yellow(usd(your_average_xrp_usd_price))}. Với giá XRP hiện tại là ${chalk.yellow(usd(current_xrp_usd_price))}, đang ${your_lose_as_vnd > 0 ? `lỗ ${chalk.red(vnd(Math.abs(your_lose_as_vnd)))}`: `lãi ${chalk.green(vnd(Math.abs(your_lose_as_vnd)))}`}
  
-    Với giá XRP hiện tại là ${usd(current_xrp_usd_price)}, bạn sẽ nhận ${vnd(current_vnd_amount_monthly_till_you_run_out_of_xrp)}(bằng cách bán ${current_selling_xrp_amount_monthly_till_you_run_out_of_xrp.toFixed(2)} XRP) mỗi tháng cho đến khi bạn đủ ${your_age_that_you_suppose_to_run_out_of_xrp} tuổi(${month_count_till_you_suppose_to_run_out_of_xrp.toFixed(0)} tháng nữa).
+    Bạn sẽ nhận ${vnd(current_vnd_amount_monthly_till_you_run_out_of_xrp)}(bằng cách bán ${current_selling_xrp_amount_monthly_till_you_run_out_of_xrp.toFixed(2)} XRP) mỗi tháng cho đến khi bạn đủ ${your_age_that_you_suppose_to_run_out_of_xrp} tuổi(${month_count_till_you_suppose_to_run_out_of_xrp.toFixed(0)} tháng nữa).
     Giá XRP phải từ ${usd(the_idealy_xrp_usd_price_that_you_need_to_keep_finance_plan_still_look_good)} trở lên để nhận tối thiểu ${vnd(vnd_amount_you_want_to_get_monthy)} mỗi tháng cho đến khi bạn đủ ${your_age_that_you_suppose_to_run_out_of_xrp} tuổi(${month_count_till_you_suppose_to_run_out_of_xrp.toFixed(0)} tháng nữa).
 
     Để thực hiện an toàn mục tiêu này, bạn cần:
@@ -84,43 +84,34 @@ function good_xrp_finance_formular({
         : '';
       return `${first_line}
     ${second_line}`;
-    })()}
-
-
-    Quick link:
-    - Your XRP balance: https://xrpscan.com/account/${your_xrp_wallet_address}
-    - XRP/USD: https://www.binance.com/vi/trade/XRP_USDT
-    - USD/VND: https://www.google.com/finance/quote/USD-VND
-    `, 'color: yellow; font-size: 18px; font-family: monospace', `color: ${current_xrp_that_you_can_sell_to_keep_good_finance > 0 ? '#10d853' : '#f3083a'}; font-size: 18px; font-family: monospace`)
+    })()}`)
 }
 
 Promise.all([
-  fetch(`https://svc.blockdaemon.com/universal/v1/xrp/mainnet/account/${localStorage.getItem('MY_XRP_WALLET_ADDRESS')}`, {
+  fetch(`https://svc.blockdaemon.com/universal/v1/xrp/mainnet/account/...`, {
     headers: {
-      Authorization: `Bearer ${localStorage.getItem('API_TOKEN')}`
+      Authorization: `Bearer ...`
     }
   }),
   fetch("https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=XRP", {
     headers: {
       Accept: "application/json",
-      "X-Cmc_pro_api_key": ""
+      "X-Cmc_pro_api_key": "..."
     }
   })
 ])
-  .then([res1, res2] => [res1.json(), res2.json()])
-  .then([data1, data2] => {
-    const xrp_record = data1[data1.findIndex(item => item.currency.type === 'native')];
-    xrp_record && good_xrp_finance_formular({
-      your_birth_date: new Date('06/05/1994'), // mm/DD/yyyy
-      current_date: new Date(Date.now()),
-      your_age_that_you_suppose_to_run_out_of_xrp: 60,
-      your_current_xrp_amount: +xrp_record.confirmed_balance / 1000000,
-      current_xrp_usd_price: data2.data.XRP.quote.USD.price,
-      current_usd_vnd_price: 24000,
-      vnd_amount_you_want_to_get_monthy: 1000000 * 20,
-      vnd_amount_that_you_used_to_buy_xrp: 1000000 * 861,
-      your_xrp_wallet_address: localStorage.getItem('MY_XRP_WALLET_ADDRESS'),
-      your_target_xrp_usd_price: 5.89, // LONG TERM PRICE
-    });
+.then(async ([res1, res2]) => [await res1.json(), await res2.json()])
+.then(([data1, data2]) => {
+  const xrp_record = data1[data1.findIndex(item => item.currency.type === 'native')];
+  xrp_record && good_xrp_finance_formular({
+    your_birth_date: new Date('06/05/1994'), // mm/DD/yyyy
+    current_date: new Date(Date.now()),
+    your_age_that_you_suppose_to_run_out_of_xrp: 60,
+    your_current_xrp_amount: +xrp_record.confirmed_balance / 1000000,
+    current_xrp_usd_price: data2.data.XRP.quote.USD.price,
+    current_usd_vnd_price: 24000,
+    vnd_amount_you_want_to_get_monthy: 1000000 * 20,
+    vnd_amount_that_you_used_to_buy_xrp: 1000000 * 861,
+    your_target_xrp_usd_price: 5.89, // LONG TERM PRICE
   });
-
+});
