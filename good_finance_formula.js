@@ -111,7 +111,7 @@ Promise.all([
     current_xrp_usd_price: data2.data.XRP.quote.USD.price,
     current_usd_vnd_price: 24000,
     vnd_amount_you_want_to_get_monthy: 1000000 * 20,
-    vnd_amount_that_you_used_to_buy_xrp: 1000000 * 900,
+    vnd_amount_that_you_used_to_buy_xrp: 1000000 * 1000,
     your_target_xrp_usd_price: 5.89, // LONG TERM PRICE
   });
 });
