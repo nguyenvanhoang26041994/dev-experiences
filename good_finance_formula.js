@@ -88,20 +88,25 @@ function good_xrp_finance_formular({
 }
 
 Promise.all([
-  fetch(`https://svc.blockdaemon.com/universal/v1/xrp/mainnet/account/...`, {
+  fetch(`https://svc.blockdaemon.com/universal/v1/xrp/mainnet/account/ADDRESS`, {
     headers: {
-      Authorization: `Bearer ...`
+      Authorization: `Bearer APIKEY`
     }
   }),
   fetch("https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=XRP", {
     headers: {
       Accept: "application/json",
-      "X-Cmc_pro_api_key": "..."
+      "X-Cmc_pro_api_key": "APIKEY"
+    }
+  }),
+  fetch("http://api.exchangeratesapi.io/v1/latest?access_key=APIKEY&base=EUR&symbols=VND,USD", {
+    headers: {
+      Accept: "application/json",
     }
   })
 ])
-.then(async ([res1, res2]) => [await res1.json(), await res2.json()])
-.then(([data1, data2]) => {
+.then(async ([res1, res2, res3]) => [await res1.json(), await res2.json(), await res3.json()])
+.then(([data1, data2, data3]) => {
   const xrp_record = data1[data1.findIndex(item => item.currency.type === 'native')];
   xrp_record && good_xrp_finance_formular({
     your_birth_date: new Date('06/05/1994'), // mm/DD/yyyy
@@ -109,7 +114,7 @@ Promise.all([
     your_age_that_you_suppose_to_run_out_of_xrp: 60,
     your_current_xrp_amount: +xrp_record.confirmed_balance / 1000000,
     current_xrp_usd_price: data2.data.XRP.quote.USD.price,
-    current_usd_vnd_price: 24000,
+    current_usd_vnd_price: (data3.rates.VND / data3.rates.USD),
     vnd_amount_you_want_to_get_monthy: 1000000 * 20,
     vnd_amount_that_you_used_to_buy_xrp: 1000000 * 1000,
     your_target_xrp_usd_price: 5.89, // LONG TERM PRICE
