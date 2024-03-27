@@ -25,22 +25,22 @@ function amm_finance_formular({
   const initial_XRP_USD_rate = initial_my_usd_in_pool/initial_my_xrp_in_pool
   const next_my_xrp_in_pool=next_xrp_pool_amount*next_lp_percentage
   const next_my_usd_in_pool=next_usd_pool_amount*next_lp_percentage
-  const next_my_my_worth_as_usd_in_pool=2*next_my_usd_in_pool
+  const next_my_worth_as_usd_in_pool=2*next_my_usd_in_pool
   const next_my_XRP_USD_rate = next_my_usd_in_pool/next_my_xrp_in_pool
-  const ROI = (next_my_my_worth_as_usd_in_pool - initial_my_worth_as_usd_in_pool)/initial_my_worth_as_usd_in_pool
+  const ROI = (next_my_worth_as_usd_in_pool - initial_my_worth_as_usd_in_pool)/initial_my_worth_as_usd_in_pool
 
   const k2 = next_my_xrp_in_pool*next_my_usd_in_pool
   const k1 = initial_my_xrp_in_pool*initial_my_usd_in_pool
-  const intertest_rate = Math.sqrt(k2/k1)-1
+  const intertest_rate = 1-Math.sqrt(k1/k2)
 
   const day_earned_count=(current_date.getTime()-start_date.getTime())/ (1000 * 60 * 60 * 24)
 
-  const your_worth_as_vnd = next_my_my_worth_as_usd_in_pool*current_usd_vnd_price
-  const earned_from_fee_worth_as_vnd = (Math.sqrt(k2/k1)-1)*initial_my_worth_as_usd_in_pool*current_usd_vnd_price
+  const your_worth_as_vnd = next_my_worth_as_usd_in_pool*current_usd_vnd_price
+  const earned_from_fee_worth_as_vnd = next_my_worth_as_usd_in_pool*intertest_rate*current_usd_vnd_price
   const show_log = () => console.log(`
-    ${chalk.green(`AMM Analysis: ${vnd(your_worth_as_vnd)}`)}
+    ${chalk.green(`XRP/Gatehub USD AMM Analysis: ${vnd(your_worth_as_vnd)}`)}
     Với giá XRP/USD lúc đầu là: ${chalk.yellow(usd(initial_XRP_USD_rate))}, và giá hiện tại là ${chalk.yellow(usd(next_my_XRP_USD_rate))}
-    Bạn đang có ${vnd(your_worth_as_vnd)}(~${(next_lp_percentage*100).toFixed(2)}% AMM pool) và ${ROI > 0 ? 'lãi' : 'lỗ' } ${chalk[ROI > 0 ? 'green' : 'red'](vnd(vnd_amount_that_you_used - next_my_my_worth_as_usd_in_pool* current_usd_vnd_price))}
+    Bạn đang có ${vnd(your_worth_as_vnd)}(~${(next_lp_percentage*100).toFixed(2)}% AMM pool) và ${ROI > 0 ? 'lãi' : 'lỗ' } ${chalk[ROI > 0 ? 'green' : 'red'](vnd(vnd_amount_that_you_used - next_my_worth_as_usd_in_pool* current_usd_vnd_price))}
 
     Từ ngày ${start_date.toDateString()} - ${current_date.toDateString()}
     Lợi nhuận từ fee là ~${(intertest_rate*100).toFixed(5)}% = ${chalk.green(vnd(earned_from_fee_worth_as_vnd))}
@@ -160,7 +160,7 @@ Promise.all([
   const { data: { your_worth_as_vnd, next_my_XRP_USD_rate }, show_log: show_log_2 } = amm_finance_formular({
     start_date: new Date('03/27/2024'),
     current_date: new Date(Date.now()),
-    vnd_amount_that_you_used: 100000000,
+    vnd_amount_that_you_used: 0,
     current_usd_vnd_price,
     initial_lp: amm.value,
     initial_total_lp: 11222518.217677,
@@ -171,7 +171,7 @@ Promise.all([
     next_usd_pool_amount: +ammPoolData.amount2.value,
   });
   const { data: { your_current_xrp_worth_as_vnd }, show_log: show_log_1 } = hold_xrp_finance_formular({
-    your_birth_date: new Date('mm/DD/yyyy'), // mm/DD/yyyy
+    your_birth_date: new Date(' mm/DD/yyyy'), // mm/DD/yyyy
     current_date: new Date(Date.now()),
     your_age_that_you_suppose_to_run_out_of_xrp: 60,
     your_current_xrp_amount: +wallet1.Balance / 1000000,
