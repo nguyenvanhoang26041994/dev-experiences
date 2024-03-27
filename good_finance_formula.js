@@ -50,7 +50,8 @@ function amm_finance_formular({
   `);
   return {
     data: {
-      your_worth_as_vnd
+      your_worth_as_vnd,
+      next_my_XRP_USD_rate,
     },
     show_log,
   };
@@ -147,36 +148,18 @@ function hold_xrp_finance_formular({
 }
 
 Promise.all([
-  fetch("https://api.xrpscan.com/api/v1/account/..."),
-  fetch("https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=XRP", {
-    headers: {
-      Accept: "application/json",
-      "X-Cmc_pro_api_key": "..."
-    }
-  }),
-  fetch("https://api.xrpscan.com/api/v1/account/.../assets"),
+  fetch("https://api.xrpscan.com/api/v1/account/rGbCT9o74NPyR5iazYPP5RTh2xqCViM2JN"),
+  fetch("https://api.xrpscan.com/api/v1/account/rGgzn7VassmMM6vSzb5UqZbYbtegrkg5KB/assets"),
   fetch("https://api.xrpscan.com/api/v1/amm/rs9ineLqrCzeAGS1bxsrW8x2n3bRJYAh3Q"),
 ])
-.then(async ([r1, r2, r3, r4]) => [await r1.json(), await r2.json(), await r3.json(), await r4.json()])
-.then(([wallet1, data2, assetwallet2, ammPoolData]) => {
+.then(async ([r1, r2, r3]) => [await r1.json(), await r2.json(), await r3.json()])
+.then(([wallet1, assetwallet2, ammPoolData]) => {
   const current_usd_vnd_price = 25800
-  const { data: { your_current_xrp_worth_as_vnd }, show_log: show_log_1 } = hold_xrp_finance_formular({
-    your_birth_date: new Date('06/05/1994'), // mm/DD/yyyy
-    current_date: new Date(Date.now()),
-    your_age_that_you_suppose_to_run_out_of_xrp: 60,
-    your_current_xrp_amount: +wallet1.Balance / 1000000,
-    current_xrp_usd_price: data2.data.XRP.quote.USD.price,
-    current_usd_vnd_price,
-    vnd_amount_you_want_to_get_monthy: 1000000 * 30,
-    vnd_amount_that_you_used_to_buy_xrp: 0 * 1000,
-    your_target_xrp_usd_price: 5.89, // LONG TERM PRICE
-  });
-  
   const amm = assetwallet2[assetwallet2.findIndex(item => item.counterparty === 'rs9ineLqrCzeAGS1bxsrW8x2n3bRJYAh3Q')]
-  const { data: { your_worth_as_vnd }, show_log: show_log_2 } = amm_finance_formular({
+  const { data: { your_worth_as_vnd, next_my_XRP_USD_rate }, show_log: show_log_2 } = amm_finance_formular({
     start_date: new Date('03/27/2024'),
     current_date: new Date(Date.now()),
-    vnd_amount_that_you_used: 0,
+    vnd_amount_that_you_used: 100000000,
     current_usd_vnd_price,
     initial_lp: amm.value,
     initial_total_lp: 11222518.217677,
@@ -186,6 +169,18 @@ Promise.all([
     next_xrp_pool_amount: +ammPoolData.amount/1000000,
     next_usd_pool_amount: +ammPoolData.amount2.value,
   });
+  const { data: { your_current_xrp_worth_as_vnd }, show_log: show_log_1 } = hold_xrp_finance_formular({
+    your_birth_date: new Date('mm/DD/yyyy'), // mm/DD/yyyy
+    current_date: new Date(Date.now()),
+    your_age_that_you_suppose_to_run_out_of_xrp: 60,
+    your_current_xrp_amount: +wallet1.Balance / 1000000,
+    current_xrp_usd_price: next_my_XRP_USD_rate,
+    current_usd_vnd_price,
+    vnd_amount_you_want_to_get_monthy: 1000000 * 30,
+    vnd_amount_that_you_used_to_buy_xrp: 0 * 1000,
+    your_target_xrp_usd_price: 5.89, // LONG TERM PRICE
+  });
+
   const cash_worth_as_vnd = 0;
   const for_borrow_worth_as_vnd = 0;
 
