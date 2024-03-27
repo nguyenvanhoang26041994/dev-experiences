@@ -120,3 +120,58 @@ Promise.all([
     your_target_xrp_usd_price: 5.89, // LONG TERM PRICE
   });
 });
+
+
+const rs = (({
+  initial_lp,
+  initial_total_lp,
+  initial_xrp_pool_amount,
+  initial_usd_pool_amount,
+  next_total_lp,
+  next_xrp_pool_amount,
+  next_usd_pool_amount,
+}) => {
+  const initial_lp_percentage=initial_lp/initial_total_lp
+  const next_lp_percentage=initial_lp/next_total_lp
+  const initial_my_xrp_in_pool=initial_xrp_pool_amount*initial_lp_percentage
+  const initial_my_usd_in_pool=initial_usd_pool_amount*initial_lp_percentage
+  const initial_my_worth_as_usd_in_pool=2*initial_my_usd_in_pool
+  const initial_XRP_USD_rate = initial_my_usd_in_pool/initial_my_xrp_in_pool
+  const next_my_xrp_in_pool=next_xrp_pool_amount*next_lp_percentage
+  const next_my_usd_in_pool=next_usd_pool_amount*next_lp_percentage
+  const next_my_my_worth_as_usd_in_pool=2*next_my_usd_in_pool
+  const next_my_XRP_USD_rate = next_my_usd_in_pool/next_my_xrp_in_pool
+  const ROI = (next_my_my_worth_as_usd_in_pool - initial_my_worth_as_usd_in_pool)/initial_my_worth_as_usd_in_pool
+
+  const k2 = next_my_xrp_in_pool*next_my_usd_in_pool
+  const k1 = initial_my_xrp_in_pool*initial_my_usd_in_pool
+  const intertest_rate = Math.sqrt(k2/k1)-1
+  return {
+    initial_XRP_USD_rate: usd(initial_XRP_USD_rate),
+    next_my_XRP_USD_rate: usd(next_my_XRP_USD_rate),
+    next_my_my_worth_as_usd_in_pool: usd(next_my_my_worth_as_usd_in_pool),
+    next_my_my_worth_as_vnd_in_pool: vnd(next_my_my_worth_as_usd_in_pool*26000),
+    initial_my_worth_as_usd_in_pool: usd(initial_my_worth_as_usd_in_pool),
+    ROI_explain: `${(usd(ROI*100))}%, ${usd(next_my_my_worth_as_usd_in_pool - initial_my_worth_as_usd_in_pool)}`,
+    initial_my_xrp_in_pool: usd(initial_my_xrp_in_pool),
+    initial_my_usd_in_pool: usd(initial_my_usd_in_pool),
+    next_my_xrp_in_pool: usd(next_my_xrp_in_pool),
+    next_my_usd_in_pool: usd(next_my_usd_in_pool),
+    k1,
+    k2,
+    intertest_rate,
+    intertest_rate_percentage: `${usd(intertest_rate*100)}%`,
+    intertest_as_usd: usd((Math.sqrt(k2/k1)-1)*initial_my_worth_as_usd_in_pool),
+  }
+})({
+  initial_lp: 2340386.713389,
+  initial_total_lp: 11222518.217677,
+  initial_xrp_pool_amount: 14737.944086,
+  initial_usd_pool_amount: 9190.613056,
+  next_total_lp: 11222518.217677,
+  next_xrp_pool_amount: 14846.000237,
+  next_usd_pool_amount: 9124.378621,
+});
+
+console.log(rs);
+
