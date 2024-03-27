@@ -39,7 +39,7 @@ function amm_finance_formular({
   const earned_from_fee_worth_as_vnd = (Math.sqrt(k2/k1)-1)*initial_my_worth_as_usd_in_pool*current_usd_vnd_price
   const show_log = () => console.log(`
     ${chalk.green(`AMM Analysis: ${vnd(your_worth_as_vnd)}`)}
-    Với giá XRP/USD lúc đầu là: ${chalk.yellow(usd(initial_XRP_USD_rate))},  và giá hiện tại là ${chalk.yellow(usd(next_my_XRP_USD_rate))}
+    Với giá XRP/USD lúc đầu là: ${chalk.yellow(usd(initial_XRP_USD_rate))}, và giá hiện tại là ${chalk.yellow(usd(next_my_XRP_USD_rate))}
     Bạn đang có ${vnd(your_worth_as_vnd)}(~${(next_lp_percentage*100).toFixed(2)}% AMM pool) và ${ROI > 0 ? 'lãi' : 'lỗ' } ${chalk[ROI > 0 ? 'green' : 'red'](vnd(vnd_amount_that_you_used - next_my_my_worth_as_usd_in_pool* current_usd_vnd_price))}
 
     Từ ngày ${start_date.toDateString()} - ${current_date.toDateString()}
