@@ -5,6 +5,10 @@ const vnd = (amount) => new Intl.NumberFormat('vi-VN', { style: 'currency', curr
 const usd = (amount) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 3 }).format(amount);
 
 function amm_finance_formular({
+  start_date,
+  current_date,
+  vnd_amount_that_you_used,
+  current_usd_vnd_price,
   initial_lp,
   initial_total_lp,
   initial_xrp_pool_amount,
@@ -13,7 +17,6 @@ function amm_finance_formular({
   next_xrp_pool_amount,
   next_usd_pool_amount,
 }) {
-  const initial_date = new Date('27/03/1994')
   const initial_lp_percentage=initial_lp/initial_total_lp
   const next_lp_percentage=initial_lp/next_total_lp
   const initial_my_xrp_in_pool=initial_xrp_pool_amount*initial_lp_percentage
@@ -29,23 +32,22 @@ function amm_finance_formular({
   const k2 = next_my_xrp_in_pool*next_my_usd_in_pool
   const k1 = initial_my_xrp_in_pool*initial_my_usd_in_pool
   const intertest_rate = Math.sqrt(k2/k1)-1
-  console.log({
-    initial_XRP_USD_rate: usd(initial_XRP_USD_rate),
-    next_my_XRP_USD_rate: usd(next_my_XRP_USD_rate),
-    next_my_my_worth_as_usd_in_pool: usd(next_my_my_worth_as_usd_in_pool),
-    next_my_my_worth_as_vnd_in_pool: vnd(next_my_my_worth_as_usd_in_pool*26000),
-    initial_my_worth_as_usd_in_pool: usd(initial_my_worth_as_usd_in_pool),
-    ROI_explain: `${(usd(ROI*100))}%, ${usd(next_my_my_worth_as_usd_in_pool - initial_my_worth_as_usd_in_pool)}`,
-    initial_my_xrp_in_pool: usd(initial_my_xrp_in_pool),
-    initial_my_usd_in_pool: usd(initial_my_usd_in_pool),
-    next_my_xrp_in_pool: usd(next_my_xrp_in_pool),
-    next_my_usd_in_pool: usd(next_my_usd_in_pool),
-    k1,
-    k2,
-    intertest_rate,
-    intertest_rate_percentage: `${usd(intertest_rate*100)}%`,
-    intertest_as_usd: usd((Math.sqrt(k2/k1)-1)*initial_my_worth_as_usd_in_pool),
-  });
+
+  const your_worth_as_vnd = next_my_my_worth_as_usd_in_pool*current_usd_vnd_price
+  const show_log = () => console.log(`
+    ${chalk.green('AMM Analysis')}
+    Với giá XRP/USD lúc đầu là: ${chalk.yellow(usd(initial_XRP_USD_rate))},  và giá hiện tại là ${chalk.yellow(usd(next_my_XRP_USD_rate))}
+    Bạn đang có ${vnd(your_worth_as_vnd)}(~${(next_lp_percentage*100).toFixed(2)}% AMM pool) và ${ROI > 0 ? 'lãi' : 'lỗ' } ${chalk[ROI > 0 ? 'green' : 'red'](vnd(vnd_amount_that_you_used - next_my_my_worth_as_usd_in_pool* current_usd_vnd_price))}
+
+    Từ ngày ${start_date.toDateString()} - ${current_date.toDateString()}
+    Lợi nhuận từ fee là ~${(intertest_rate*100).toFixed(2)}% = ${chalk.green(vnd((Math.sqrt(k2/k1)-1)*initial_my_worth_as_usd_in_pool*current_usd_vnd_price))}
+  `);
+  return {
+    data: {
+      your_worth_as_vnd
+    },
+    show_log,
+  };
 }
 function hold_xrp_finance_formular({
   your_birth_date,
@@ -100,8 +102,8 @@ function hold_xrp_finance_formular({
     xrp_amount_that_you_need_to_buy_until_xrp_reach_to_target_price / 12;
   const xrp_amount_worth_as_vnd_you_need_to_buy_monthly_in_next_12_months_until_you_reach_good_finance =
     xrp_amount_you_need_to_buy_monthly_in_next_12_months_until_you_reach_good_finance * current_xrp_vnd_price;
-
-  console.log(`
+    const show_log = () => console.log(`
+    ${chalk.green('HOLDING Analysis')}
     ${current_date.toDateString()} - ${the_date_that_you_suppose_to_run_out_of_xrp.toDateString()}.
     
     Bạn hiện tại đang có ${chalk.green(your_current_xrp_amount.toFixed(0))} XRP(${vnd(your_current_xrp_worth_as_vnd)}) với trung bình giá là ${chalk.yellow(usd(your_average_xrp_usd_price))}. Với giá XRP hiện tại là ${chalk.yellow(usd(current_xrp_usd_price))}, đang ${your_lose_as_vnd > 0 ? `lỗ ${chalk.red(vnd(Math.abs(your_lose_as_vnd)))}`: `lãi ${chalk.green(vnd(Math.abs(your_lose_as_vnd)))}`}
@@ -128,53 +130,65 @@ function hold_xrp_finance_formular({
         : '';
       return `${first_line}
     ${second_line}`;
-    })()}`)
+    })()}`);
+
+  return {
+    data: {
+      your_current_xrp_worth_as_vnd,
+    },
+    show_log,
+  };
 }
 
 Promise.all([
-  fetch(`https://svc.blockdaemon.com/universal/v1/xrp/mainnet/account/...`, {
-    headers: {
-      Authorization: `Bearer ...`
-    }
-  }),
+  fetch("https://api.xrpscan.com/api/v1/account/..."),
   fetch("https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=XRP", {
     headers: {
       Accept: "application/json",
-      "X-Cmc_pro_api_key": "..."
+      "X-Cmc_pro_api_key": "2da4294d-b035-418d-8111-0f4566eab3fe"
     }
   }),
-  // fetch("http://api.exchangeratesapi.io/v1/latest?access_key=...&base=EUR&symbols=VND,USD", {
-  //   headers: {
-  //     Accept: "application/json",
-  //   }
-  // })
+  fetch("https://api.xrpscan.com/api/v1/account/.../assets"),
+  fetch("https://api.xrpscan.com/api/v1/amm/rs9ineLqrCzeAGS1bxsrW8x2n3bRJYAh3Q"),
 ])
-// .then(async ([res1, res3, res4]) => [await res1.json(), await res3.json(), await res4.json()])
-// .then(([wallet1, data2, data3]) => {
-.then(async ([res1, res3]) => [await res1.json(), await res3.json()])
-.then(([wallet1, data2]) => {
-  const wallet1_xrp = wallet1[wallet1.findIndex(item => item.currency.type === 'native')];
-  // const current_usd_vnd_price = (data3.rates.VND / data3.rates.USD);
+.then(async ([res1, res3, res4, ammPool]) => [await res1.json(), await res3.json(), await res4.json(), await ammPool.json()])
+.then(([wallet1, data2, assetwallet2, ammPoolData]) => {
   const current_usd_vnd_price = 26000
-  console.log(chalk.green(`    Current VND/USD rate: ${vnd(current_usd_vnd_price)}`))
-  hold_xrp_finance_formular({
+  const { data: { your_current_xrp_worth_as_vnd }, show_log: show_log_1 } = hold_xrp_finance_formular({
     your_birth_date: new Date(''), // mm/DD/yyyy
     current_date: new Date(Date.now()),
     your_age_that_you_suppose_to_run_out_of_xrp: 60,
-    your_current_xrp_amount: +wallet1_xrp.confirmed_balance / 1000000,
+    your_current_xrp_amount: +wallet1.Balance / 1000000,
     current_xrp_usd_price: data2.data.XRP.quote.USD.price,
     current_usd_vnd_price,
     vnd_amount_you_want_to_get_monthy: 1000000 * 30,
-    vnd_amount_that_you_used_to_buy_xrp: 1000000 * 1000,
+    vnd_amount_that_you_used_to_buy_xrp: 0,
     your_target_xrp_usd_price: 5.89, // LONG TERM PRICE
-  })
-  amm_finance_formular({
-    initial_lp: 2340386.713389,
-    initial_total_lp: 11222518.217677,
-    initial_xrp_pool_amount: 14737.944086,
-    initial_usd_pool_amount: 9190.613056,
-    next_total_lp: 11222518.217677,
-    next_xrp_pool_amount: 14746.588699,
-    next_usd_pool_amount: 9186.068175,
   });
+  
+  const amm = assetwallet2[assetwallet2.findIndex(item => item.counterparty === 'rs9ineLqrCzeAGS1bxsrW8x2n3bRJYAh3Q')]
+  const { data: { your_worth_as_vnd }, show_log: show_log_2 } = amm_finance_formular({
+    start_date: new Date('03/27/2024'),
+    current_date: new Date(Date.now()),
+    vnd_amount_that_you_used: 0,
+    current_usd_vnd_price,
+    initial_lp: amm.value,
+    initial_total_lp: 0,
+    initial_xrp_pool_amount: 0,
+    initial_usd_pool_amount: 0,
+    next_total_lp: ammPoolData.lp_token.value,
+    next_xrp_pool_amount: +ammPoolData.amount/1000000,
+    next_usd_pool_amount: +ammPoolData.amount2.value,
+  });
+  const cash_worth_as_vnd = 0;
+  const for_borrow_worth_as_vnd = 0 + 0 + 0;
+  console.log(chalk.green(`    Current VND/USD rate: ${vnd(current_usd_vnd_price)}`))
+  console.log(chalk.green(`    Tổng tài sản: ${vnd(your_worth_as_vnd + your_current_xrp_worth_as_vnd + cash_worth_as_vnd + for_borrow_worth_as_vnd)}`))
+  console.log(chalk.green(`------------------------------------------------------------------------------------------------------------------------------------------------`))
+  show_log_1();
+  console.log(chalk.green(`------------------------------------------------------------------------------------------------------------------------------------------------`))
+  show_log_2();
+  console.log(chalk.green(`------------------------------------------------------------------------------------------------------------------------------------------------`))
+  console.log(chalk.green(`    Tiền mặt: ${vnd(cash_worth_as_vnd)}`))
+  console.log(chalk.green(`    Nợ: ${vnd(for_borrow_worth_as_vnd)}`))
 });
