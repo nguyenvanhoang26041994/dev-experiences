@@ -35,7 +35,7 @@ function amm_finance_formular({
 
   const your_worth_as_vnd = next_my_my_worth_as_usd_in_pool*current_usd_vnd_price
   const show_log = () => console.log(`
-    ${chalk.green('AMM Analysis')}
+    ${chalk.green(`AMM Analysis: ${vnd(your_worth_as_vnd)}`)}
     Với giá XRP/USD lúc đầu là: ${chalk.yellow(usd(initial_XRP_USD_rate))},  và giá hiện tại là ${chalk.yellow(usd(next_my_XRP_USD_rate))}
     Bạn đang có ${vnd(your_worth_as_vnd)}(~${(next_lp_percentage*100).toFixed(2)}% AMM pool) và ${ROI > 0 ? 'lãi' : 'lỗ' } ${chalk[ROI > 0 ? 'green' : 'red'](vnd(vnd_amount_that_you_used - next_my_my_worth_as_usd_in_pool* current_usd_vnd_price))}
 
@@ -103,7 +103,7 @@ function hold_xrp_finance_formular({
   const xrp_amount_worth_as_vnd_you_need_to_buy_monthly_in_next_12_months_until_you_reach_good_finance =
     xrp_amount_you_need_to_buy_monthly_in_next_12_months_until_you_reach_good_finance * current_xrp_vnd_price;
     const show_log = () => console.log(`
-    ${chalk.green('HOLDING Analysis')}
+    ${chalk.green(`HOLDING Analysis: ${vnd(your_current_xrp_worth_as_vnd)}`)}
     ${current_date.toDateString()} - ${the_date_that_you_suppose_to_run_out_of_xrp.toDateString()}.
     
     Bạn hiện tại đang có ${chalk.green(your_current_xrp_amount.toFixed(0))} XRP(${vnd(your_current_xrp_worth_as_vnd)}) với trung bình giá là ${chalk.yellow(usd(your_average_xrp_usd_price))}. Với giá XRP hiện tại là ${chalk.yellow(usd(current_xrp_usd_price))}, đang ${your_lose_as_vnd > 0 ? `lỗ ${chalk.red(vnd(Math.abs(your_lose_as_vnd)))}`: `lãi ${chalk.green(vnd(Math.abs(your_lose_as_vnd)))}`}
