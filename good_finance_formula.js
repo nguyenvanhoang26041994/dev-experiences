@@ -151,7 +151,7 @@ Promise.all([
   fetch("https://api.xrpscan.com/api/v1/account/.../assets"),
   fetch("https://api.xrpscan.com/api/v1/amm/rs9ineLqrCzeAGS1bxsrW8x2n3bRJYAh3Q"),
 ])
-.then(async ([res1, res3, res4, ammPool]) => [await res1.json(), await res3.json(), await res4.json(), await ammPool.json()])
+.then(async ([r1, r2, r3, r4]) => [await r1.json(), await r2.json(), await r3.json(), await r4.json()])
 .then(([wallet1, data2, assetwallet2, ammPoolData]) => {
   const current_usd_vnd_price = 26000
   const { data: { your_current_xrp_worth_as_vnd }, show_log: show_log_1 } = hold_xrp_finance_formular({
