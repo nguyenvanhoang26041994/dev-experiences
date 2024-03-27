@@ -33,6 +33,8 @@ function amm_finance_formular({
   const k1 = initial_my_xrp_in_pool*initial_my_usd_in_pool
   const intertest_rate = Math.sqrt(k2/k1)-1
 
+  const day_earned_count=(current_date.getTime()-start_date.getTime())/ (1000 * 60 * 60 * 24)
+
   const your_worth_as_vnd = next_my_my_worth_as_usd_in_pool*current_usd_vnd_price
   const show_log = () => console.log(`
     ${chalk.green(`AMM Analysis: ${vnd(your_worth_as_vnd)}`)}
@@ -41,6 +43,9 @@ function amm_finance_formular({
 
     Từ ngày ${start_date.toDateString()} - ${current_date.toDateString()}
     Lợi nhuận từ fee là ~${(intertest_rate*100).toFixed(2)}% = ${chalk.green(vnd((Math.sqrt(k2/k1)-1)*initial_my_worth_as_usd_in_pool*current_usd_vnd_price))}
+    APR: ${(100*365*(intertest_rate/day_earned_count)).toFixed(2)}%
+    APM: ${(100*(365/12)*(intertest_rate/day_earned_count)).toFixed(2)}%
+    APK: ${(100*7*(intertest_rate/day_earned_count)).toFixed(2)}%
   `);
   return {
     data: {
@@ -145,7 +150,7 @@ Promise.all([
   fetch("https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=XRP", {
     headers: {
       Accept: "application/json",
-      "X-Cmc_pro_api_key": "2da4294d-b035-418d-8111-0f4566eab3fe"
+      "X-Cmc_pro_api_key": ""
     }
   }),
   fetch("https://api.xrpscan.com/api/v1/account/.../assets"),
@@ -153,16 +158,16 @@ Promise.all([
 ])
 .then(async ([r1, r2, r3, r4]) => [await r1.json(), await r2.json(), await r3.json(), await r4.json()])
 .then(([wallet1, data2, assetwallet2, ammPoolData]) => {
-  const current_usd_vnd_price = 26000
+  const current_usd_vnd_price = 25800
   const { data: { your_current_xrp_worth_as_vnd }, show_log: show_log_1 } = hold_xrp_finance_formular({
-    your_birth_date: new Date(''), // mm/DD/yyyy
+    your_birth_date: new Date('mm/DD/yyyy'), // mm/DD/yyyy
     current_date: new Date(Date.now()),
     your_age_that_you_suppose_to_run_out_of_xrp: 60,
     your_current_xrp_amount: +wallet1.Balance / 1000000,
     current_xrp_usd_price: data2.data.XRP.quote.USD.price,
     current_usd_vnd_price,
     vnd_amount_you_want_to_get_monthy: 1000000 * 30,
-    vnd_amount_that_you_used_to_buy_xrp: 0,
+    vnd_amount_that_you_used_to_buy_xrp: 0 * 1000,
     your_target_xrp_usd_price: 5.89, // LONG TERM PRICE
   });
   
@@ -181,7 +186,8 @@ Promise.all([
     next_usd_pool_amount: +ammPoolData.amount2.value,
   });
   const cash_worth_as_vnd = 0;
-  const for_borrow_worth_as_vnd = 0 + 0 + 0;
+  const for_borrow_worth_as_vnd = 0;
+
   show_log_1();
   show_log_2();
   console.log(chalk.green(`    Tiền mặt: ${vnd(cash_worth_as_vnd)}`))
