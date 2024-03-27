@@ -1,7 +1,53 @@
 const fetch = require('cross-fetch');
 const chalk = require('chalk');
 
-function good_xrp_finance_formular({
+const vnd = (amount) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+const usd = (amount) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 3 }).format(amount);
+
+function amm_finance_formular({
+  initial_lp,
+  initial_total_lp,
+  initial_xrp_pool_amount,
+  initial_usd_pool_amount,
+  next_total_lp,
+  next_xrp_pool_amount,
+  next_usd_pool_amount,
+}) {
+  const initial_date = new Date('27/03/1994')
+  const initial_lp_percentage=initial_lp/initial_total_lp
+  const next_lp_percentage=initial_lp/next_total_lp
+  const initial_my_xrp_in_pool=initial_xrp_pool_amount*initial_lp_percentage
+  const initial_my_usd_in_pool=initial_usd_pool_amount*initial_lp_percentage
+  const initial_my_worth_as_usd_in_pool=2*initial_my_usd_in_pool
+  const initial_XRP_USD_rate = initial_my_usd_in_pool/initial_my_xrp_in_pool
+  const next_my_xrp_in_pool=next_xrp_pool_amount*next_lp_percentage
+  const next_my_usd_in_pool=next_usd_pool_amount*next_lp_percentage
+  const next_my_my_worth_as_usd_in_pool=2*next_my_usd_in_pool
+  const next_my_XRP_USD_rate = next_my_usd_in_pool/next_my_xrp_in_pool
+  const ROI = (next_my_my_worth_as_usd_in_pool - initial_my_worth_as_usd_in_pool)/initial_my_worth_as_usd_in_pool
+
+  const k2 = next_my_xrp_in_pool*next_my_usd_in_pool
+  const k1 = initial_my_xrp_in_pool*initial_my_usd_in_pool
+  const intertest_rate = Math.sqrt(k2/k1)-1
+  console.log({
+    initial_XRP_USD_rate: usd(initial_XRP_USD_rate),
+    next_my_XRP_USD_rate: usd(next_my_XRP_USD_rate),
+    next_my_my_worth_as_usd_in_pool: usd(next_my_my_worth_as_usd_in_pool),
+    next_my_my_worth_as_vnd_in_pool: vnd(next_my_my_worth_as_usd_in_pool*26000),
+    initial_my_worth_as_usd_in_pool: usd(initial_my_worth_as_usd_in_pool),
+    ROI_explain: `${(usd(ROI*100))}%, ${usd(next_my_my_worth_as_usd_in_pool - initial_my_worth_as_usd_in_pool)}`,
+    initial_my_xrp_in_pool: usd(initial_my_xrp_in_pool),
+    initial_my_usd_in_pool: usd(initial_my_usd_in_pool),
+    next_my_xrp_in_pool: usd(next_my_xrp_in_pool),
+    next_my_usd_in_pool: usd(next_my_usd_in_pool),
+    k1,
+    k2,
+    intertest_rate,
+    intertest_rate_percentage: `${usd(intertest_rate*100)}%`,
+    intertest_as_usd: usd((Math.sqrt(k2/k1)-1)*initial_my_worth_as_usd_in_pool),
+  });
+}
+function hold_xrp_finance_formular({
   your_birth_date,
   current_date,
   your_age_that_you_suppose_to_run_out_of_xrp,
@@ -55,8 +101,6 @@ function good_xrp_finance_formular({
   const xrp_amount_worth_as_vnd_you_need_to_buy_monthly_in_next_12_months_until_you_reach_good_finance =
     xrp_amount_you_need_to_buy_monthly_in_next_12_months_until_you_reach_good_finance * current_xrp_vnd_price;
 
-  const vnd = (amount) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
-  const usd = (amount) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 3 }).format(amount);
   console.log(`
     ${current_date.toDateString()} - ${the_date_that_you_suppose_to_run_out_of_xrp.toDateString()}.
     
@@ -88,90 +132,49 @@ function good_xrp_finance_formular({
 }
 
 Promise.all([
-  fetch(`https://svc.blockdaemon.com/universal/v1/xrp/mainnet/account/ADDRESS`, {
+  fetch(`https://svc.blockdaemon.com/universal/v1/xrp/mainnet/account/...`, {
     headers: {
-      Authorization: `Bearer APIKEY`
+      Authorization: `Bearer ...`
     }
   }),
   fetch("https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=XRP", {
     headers: {
       Accept: "application/json",
-      "X-Cmc_pro_api_key": "APIKEY"
+      "X-Cmc_pro_api_key": "..."
     }
   }),
-  fetch("http://api.exchangeratesapi.io/v1/latest?access_key=APIKEY&base=EUR&symbols=VND,USD", {
-    headers: {
-      Accept: "application/json",
-    }
-  })
+  // fetch("http://api.exchangeratesapi.io/v1/latest?access_key=...&base=EUR&symbols=VND,USD", {
+  //   headers: {
+  //     Accept: "application/json",
+  //   }
+  // })
 ])
-.then(async ([res1, res2, res3]) => [await res1.json(), await res2.json(), await res3.json()])
-.then(([data1, data2, data3]) => {
-  const xrp_record = data1[data1.findIndex(item => item.currency.type === 'native')];
-  xrp_record && good_xrp_finance_formular({
-    your_birth_date: new Date('06/05/1994'), // mm/DD/yyyy
+// .then(async ([res1, res3, res4]) => [await res1.json(), await res3.json(), await res4.json()])
+// .then(([wallet1, data2, data3]) => {
+.then(async ([res1, res3]) => [await res1.json(), await res3.json()])
+.then(([wallet1, data2]) => {
+  const wallet1_xrp = wallet1[wallet1.findIndex(item => item.currency.type === 'native')];
+  // const current_usd_vnd_price = (data3.rates.VND / data3.rates.USD);
+  const current_usd_vnd_price = 26000
+  console.log(chalk.green(`    Current VND/USD rate: ${vnd(current_usd_vnd_price)}`))
+  hold_xrp_finance_formular({
+    your_birth_date: new Date(''), // mm/DD/yyyy
     current_date: new Date(Date.now()),
     your_age_that_you_suppose_to_run_out_of_xrp: 60,
-    your_current_xrp_amount: +xrp_record.confirmed_balance / 1000000,
+    your_current_xrp_amount: +wallet1_xrp.confirmed_balance / 1000000,
     current_xrp_usd_price: data2.data.XRP.quote.USD.price,
-    current_usd_vnd_price: (data3.rates.VND / data3.rates.USD),
-    vnd_amount_you_want_to_get_monthy: 1000000 * 20,
+    current_usd_vnd_price,
+    vnd_amount_you_want_to_get_monthy: 1000000 * 30,
     vnd_amount_that_you_used_to_buy_xrp: 1000000 * 1000,
     your_target_xrp_usd_price: 5.89, // LONG TERM PRICE
+  })
+  amm_finance_formular({
+    initial_lp: 2340386.713389,
+    initial_total_lp: 11222518.217677,
+    initial_xrp_pool_amount: 14737.944086,
+    initial_usd_pool_amount: 9190.613056,
+    next_total_lp: 11222518.217677,
+    next_xrp_pool_amount: 14746.588699,
+    next_usd_pool_amount: 9186.068175,
   });
 });
-
-
-const rs = (({
-  initial_lp,
-  initial_total_lp,
-  initial_xrp_pool_amount,
-  initial_usd_pool_amount,
-  next_total_lp,
-  next_xrp_pool_amount,
-  next_usd_pool_amount,
-}) => {
-  const initial_lp_percentage=initial_lp/initial_total_lp
-  const next_lp_percentage=initial_lp/next_total_lp
-  const initial_my_xrp_in_pool=initial_xrp_pool_amount*initial_lp_percentage
-  const initial_my_usd_in_pool=initial_usd_pool_amount*initial_lp_percentage
-  const initial_my_worth_as_usd_in_pool=2*initial_my_usd_in_pool
-  const initial_XRP_USD_rate = initial_my_usd_in_pool/initial_my_xrp_in_pool
-  const next_my_xrp_in_pool=next_xrp_pool_amount*next_lp_percentage
-  const next_my_usd_in_pool=next_usd_pool_amount*next_lp_percentage
-  const next_my_my_worth_as_usd_in_pool=2*next_my_usd_in_pool
-  const next_my_XRP_USD_rate = next_my_usd_in_pool/next_my_xrp_in_pool
-  const ROI = (next_my_my_worth_as_usd_in_pool - initial_my_worth_as_usd_in_pool)/initial_my_worth_as_usd_in_pool
-
-  const k2 = next_my_xrp_in_pool*next_my_usd_in_pool
-  const k1 = initial_my_xrp_in_pool*initial_my_usd_in_pool
-  const intertest_rate = Math.sqrt(k2/k1)-1
-  return {
-    initial_XRP_USD_rate: usd(initial_XRP_USD_rate),
-    next_my_XRP_USD_rate: usd(next_my_XRP_USD_rate),
-    next_my_my_worth_as_usd_in_pool: usd(next_my_my_worth_as_usd_in_pool),
-    next_my_my_worth_as_vnd_in_pool: vnd(next_my_my_worth_as_usd_in_pool*26000),
-    initial_my_worth_as_usd_in_pool: usd(initial_my_worth_as_usd_in_pool),
-    ROI_explain: `${(usd(ROI*100))}%, ${usd(next_my_my_worth_as_usd_in_pool - initial_my_worth_as_usd_in_pool)}`,
-    initial_my_xrp_in_pool: usd(initial_my_xrp_in_pool),
-    initial_my_usd_in_pool: usd(initial_my_usd_in_pool),
-    next_my_xrp_in_pool: usd(next_my_xrp_in_pool),
-    next_my_usd_in_pool: usd(next_my_usd_in_pool),
-    k1,
-    k2,
-    intertest_rate,
-    intertest_rate_percentage: `${usd(intertest_rate*100)}%`,
-    intertest_as_usd: usd((Math.sqrt(k2/k1)-1)*initial_my_worth_as_usd_in_pool),
-  }
-})({
-  initial_lp: 2340386.713389,
-  initial_total_lp: 11222518.217677,
-  initial_xrp_pool_amount: 14737.944086,
-  initial_usd_pool_amount: 9190.613056,
-  next_total_lp: 11222518.217677,
-  next_xrp_pool_amount: 14846.000237,
-  next_usd_pool_amount: 9124.378621,
-});
-
-console.log(rs);
-
