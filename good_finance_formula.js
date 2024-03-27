@@ -47,6 +47,7 @@ function amm_finance_formular({
     APR: ~${(100*365*(intertest_rate/day_earned_count)).toFixed(2)}% = ${chalk.green(vnd(365*(earned_from_fee_worth_as_vnd/day_earned_count)))}
     APM: ~${(100*(365/12)*(intertest_rate/day_earned_count)).toFixed(2)}% = ${chalk.green(vnd((365/12)*(earned_from_fee_worth_as_vnd/day_earned_count)))}
     APK: ~${(100*7*(intertest_rate/day_earned_count)).toFixed(2)}% = ${chalk.green(vnd(7*(earned_from_fee_worth_as_vnd/day_earned_count)))}
+    APD: ~${(100*(intertest_rate/day_earned_count)).toFixed(2)}% = ${chalk.green(vnd((earned_from_fee_worth_as_vnd/day_earned_count)))}
   `);
   return {
     data: {
@@ -148,8 +149,8 @@ function hold_xrp_finance_formular({
 }
 
 Promise.all([
-  fetch("https://api.xrpscan.com/api/v1/account/rGbCT9o74NPyR5iazYPP5RTh2xqCViM2JN"),
-  fetch("https://api.xrpscan.com/api/v1/account/rGgzn7VassmMM6vSzb5UqZbYbtegrkg5KB/assets"),
+  fetch("https://api.xrpscan.com/api/v1/account/..."),
+  fetch("https://api.xrpscan.com/api/v1/account/.../assets"),
   fetch("https://api.xrpscan.com/api/v1/amm/rs9ineLqrCzeAGS1bxsrW8x2n3bRJYAh3Q"),
 ])
 .then(async ([r1, r2, r3]) => [await r1.json(), await r2.json(), await r3.json()])
