@@ -182,13 +182,11 @@ Promise.all([
   });
   const cash_worth_as_vnd = 0;
   const for_borrow_worth_as_vnd = 0 + 0 + 0;
-  console.log(chalk.green(`    Current VND/USD rate: ${vnd(current_usd_vnd_price)}`))
-  console.log(chalk.green(`    Tổng tài sản: ${vnd(your_worth_as_vnd + your_current_xrp_worth_as_vnd + cash_worth_as_vnd + for_borrow_worth_as_vnd)}`))
-  console.log(chalk.green(`------------------------------------------------------------------------------------------------------------------------------------------------`))
   show_log_1();
-  console.log(chalk.green(`------------------------------------------------------------------------------------------------------------------------------------------------`))
   show_log_2();
-  console.log(chalk.green(`------------------------------------------------------------------------------------------------------------------------------------------------`))
   console.log(chalk.green(`    Tiền mặt: ${vnd(cash_worth_as_vnd)}`))
   console.log(chalk.green(`    Nợ: ${vnd(for_borrow_worth_as_vnd)}`))
+  console.log(chalk.green(`------------------------------------------------------------------------------------------------------------------------------------------------`))
+  console.log(chalk.green(`    Current VND/USD rate: ${vnd(current_usd_vnd_price)}`))
+  console.log(chalk.green(`    Tổng tài sản: ${vnd(your_worth_as_vnd + your_current_xrp_worth_as_vnd + cash_worth_as_vnd + for_borrow_worth_as_vnd)}`))
 });
