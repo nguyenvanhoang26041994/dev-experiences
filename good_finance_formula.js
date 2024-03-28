@@ -36,18 +36,20 @@ function amm_finance_formular({
   const day_earned_count=(current_date.getTime()-start_date.getTime())/ (1000 * 60 * 60 * 24)
 
   const your_worth_as_vnd = next_my_worth_as_usd_in_pool*current_usd_vnd_price
-  const earned_from_fee_worth_as_vnd = next_my_worth_as_usd_in_pool*intertest_rate*current_usd_vnd_price
+  const earned_from_fee_worth_as_usd = next_my_worth_as_usd_in_pool*intertest_rate
+  const earned_from_fee_worth_as_vnd = earned_from_fee_worth_as_usd*current_usd_vnd_price
   const show_log = () => console.log(`
     ${chalk.green(`XRP/Gatehub USD AMM Analysis: ${vnd(your_worth_as_vnd)}`)}
     Với giá XRP/USD lúc đầu là: ${chalk.yellow(usd(initial_XRP_USD_rate))}, và giá hiện tại là ${chalk.yellow(usd(next_my_XRP_USD_rate))}
-    Bạn đang có ${vnd(your_worth_as_vnd)}(~${(next_lp_percentage*100).toFixed(2)}% AMM pool) và ${ROI > 0 ? 'lãi' : 'lỗ' } ${chalk[ROI > 0 ? 'green' : 'red'](vnd(vnd_amount_that_you_used - next_my_worth_as_usd_in_pool* current_usd_vnd_price))}
+    Bạn đang có ${vnd(your_worth_as_vnd)}(${(next_lp_percentage*100).toFixed(2)}% AMM pool) và ${ROI > 0 ? 'lãi' : 'lỗ' } ${chalk[ROI > 0 ? 'green' : 'red'](vnd(vnd_amount_that_you_used - next_my_worth_as_usd_in_pool* current_usd_vnd_price))}
 
     Từ ngày ${start_date.toDateString()} - ${current_date.toDateString()}
-    Lợi nhuận từ fee là ~${(intertest_rate*100).toFixed(5)}% = ${chalk.green(vnd(earned_from_fee_worth_as_vnd))}
-    APR: ~${(100*365*(intertest_rate/day_earned_count)).toFixed(5)}% = ${chalk.green(vnd(365*(earned_from_fee_worth_as_vnd/day_earned_count)))}
-    APM: ~${(100*(365/12)*(intertest_rate/day_earned_count)).toFixed(5)}% = ${chalk.green(vnd((365/12)*(earned_from_fee_worth_as_vnd/day_earned_count)))}
-    APK: ~${(100*7*(intertest_rate/day_earned_count)).toFixed(5)}% = ${chalk.green(vnd(7*(earned_from_fee_worth_as_vnd/day_earned_count)))}
-    APD: ~${(100*(intertest_rate/day_earned_count)).toFixed(5)}% = ${chalk.green(vnd((earned_from_fee_worth_as_vnd/day_earned_count)))}
+    Lợi nhuận từ fee là ${(intertest_rate*100).toFixed(5)}% = ${chalk.green(`${(intertest_rate*next_my_xrp_in_pool).toFixed(2)} XRP`)} + ${chalk.green(usd(intertest_rate*next_my_usd_in_pool))}, tương đương ${chalk.green(vnd(earned_from_fee_worth_as_vnd))}
+    -------------------------------------------------------------------------------------
+    ${chalk.yellow(`APR: ${(100*365*(intertest_rate/day_earned_count)).toFixed(5)}% = ${usd(365*(earned_from_fee_worth_as_usd/day_earned_count))}(${vnd(365*(earned_from_fee_worth_as_vnd/day_earned_count))})`)}
+    APM: ${(100*(365/12)*(intertest_rate/day_earned_count)).toFixed(5)}% = ${usd((365/12)*(earned_from_fee_worth_as_usd/day_earned_count))}(${vnd((365/12)*(earned_from_fee_worth_as_vnd/day_earned_count))})
+    APK: ${(100*7*(intertest_rate/day_earned_count)).toFixed(5)}% = ${usd(7*(earned_from_fee_worth_as_usd/day_earned_count))}(${vnd(7*(earned_from_fee_worth_as_vnd/day_earned_count))})
+    APD: ${(100*(intertest_rate/day_earned_count)).toFixed(5)}% = ${usd(earned_from_fee_worth_as_usd/day_earned_count)}(${vnd(earned_from_fee_worth_as_vnd/day_earned_count)})
   `);
   return {
     data: {
@@ -171,7 +173,7 @@ Promise.all([
     next_usd_pool_amount: +ammPoolData.amount2.value,
   });
   const { data: { your_current_xrp_worth_as_vnd }, show_log: show_log_1 } = hold_xrp_finance_formular({
-    your_birth_date: new Date(' mm/DD/yyyy'), // mm/DD/yyyy
+    your_birth_date: new Date('mm/DD/yyyy'), // mm/DD/yyyy
     current_date: new Date(Date.now()),
     your_age_that_you_suppose_to_run_out_of_xrp: 60,
     your_current_xrp_amount: +wallet1.Balance / 1000000,
@@ -186,7 +188,9 @@ Promise.all([
   const for_borrow_worth_as_vnd = 0;
 
   show_log_1();
+  console.log('\n\n')
   show_log_2();
+  console.log('\n\n')
   console.log(chalk.green(`    Tiền mặt: ${vnd(cash_worth_as_vnd)}`))
   console.log(chalk.green(`    Nợ: ${vnd(for_borrow_worth_as_vnd)}`))
   console.log(chalk.green(`------------------------------------------------------------------------------------------------------------------------------------------------`))
