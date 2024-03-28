@@ -41,15 +41,20 @@ function amm_finance_formular({
   const show_log = () => console.log(`
     ${chalk.green(`XRP/Gatehub USD AMM Analysis: ${vnd(your_worth_as_vnd)}`)}
     Với giá XRP/USD lúc đầu là: ${chalk.yellow(usd(initial_XRP_USD_rate))}, và giá hiện tại là ${chalk.yellow(usd(next_my_XRP_USD_rate))}
-    Bạn đang có ${vnd(your_worth_as_vnd)}(${(next_lp_percentage*100).toFixed(2)}% AMM pool) và ${ROI > 0 ? 'lãi' : 'lỗ' } ${chalk[ROI > 0 ? 'green' : 'red'](vnd(vnd_amount_that_you_used - next_my_worth_as_usd_in_pool* current_usd_vnd_price))}
+    Bạn đang có ${vnd(your_worth_as_vnd)}(${(next_lp_percentage*100).toFixed(2)}% AMM pool) và ${ROI > 0 ? 'lãi' : 'lỗ' } ${chalk[ROI > 0 ? 'green' : 'red'](vnd(Math.abs(vnd_amount_that_you_used - next_my_worth_as_usd_in_pool*current_usd_vnd_price)))}
 
     Từ ngày ${start_date.toDateString()} - ${current_date.toDateString()}
-    Lợi nhuận từ fee là ${(intertest_rate*100).toFixed(5)}% = ${chalk.green(`${(intertest_rate*next_my_xrp_in_pool).toFixed(2)} XRP`)} + ${chalk.green(usd(intertest_rate*next_my_usd_in_pool))}, tương đương ${chalk.green(vnd(earned_from_fee_worth_as_vnd))}
+    Tổng lợi nhuận từ fee là ${(intertest_rate*100).toFixed(5)}% = ${chalk.green(`${(intertest_rate*next_my_xrp_in_pool).toFixed(2)} XRP`)} + ${chalk.green(usd(intertest_rate*next_my_usd_in_pool))}, tương đương ${chalk.green(vnd(earned_from_fee_worth_as_vnd))}
     -------------------------------------------------------------------------------------
     ${chalk.yellow(`APR: ${(100*365*(intertest_rate/day_earned_count)).toFixed(5)}% = ${usd(365*(earned_from_fee_worth_as_usd/day_earned_count))}(${vnd(365*(earned_from_fee_worth_as_vnd/day_earned_count))})`)}
     APM: ${(100*(365/12)*(intertest_rate/day_earned_count)).toFixed(5)}% = ${usd((365/12)*(earned_from_fee_worth_as_usd/day_earned_count))}(${vnd((365/12)*(earned_from_fee_worth_as_vnd/day_earned_count))})
     APK: ${(100*7*(intertest_rate/day_earned_count)).toFixed(5)}% = ${usd(7*(earned_from_fee_worth_as_usd/day_earned_count))}(${vnd(7*(earned_from_fee_worth_as_vnd/day_earned_count))})
     APD: ${(100*(intertest_rate/day_earned_count)).toFixed(5)}% = ${usd(earned_from_fee_worth_as_usd/day_earned_count)}(${vnd(earned_from_fee_worth_as_vnd/day_earned_count)})
+
+    initial_total_lp: ${next_total_lp},
+    initial_xrp_pool_amount: ${next_xrp_pool_amount},
+    initial_usd_pool_amount: ${next_usd_pool_amount},
+    start_date: new Date(${Date.now()}),
   `);
   return {
     data: {
@@ -157,20 +162,20 @@ Promise.all([
 ])
 .then(async ([r1, r2, r3]) => [await r1.json(), await r2.json(), await r3.json()])
 .then(([wallet1, assetwallet2, ammPoolData]) => {
-  const current_usd_vnd_price = 25800
+  const current_usd_vnd_price = 25700
   const amm = assetwallet2[assetwallet2.findIndex(item => item.counterparty === 'rs9ineLqrCzeAGS1bxsrW8x2n3bRJYAh3Q')]
   const { data: { your_worth_as_vnd, next_my_XRP_USD_rate }, show_log: show_log_2 } = amm_finance_formular({
-    start_date: new Date('03/27/2024'),
     current_date: new Date(Date.now()),
     vnd_amount_that_you_used: 0,
     current_usd_vnd_price,
     initial_lp: amm.value,
-    initial_total_lp: 11222518.217677,
-    initial_xrp_pool_amount: 14737.944086,
-    initial_usd_pool_amount: 9190.613056,
+    initial_total_lp: 8688330.130193409,
+    initial_xrp_pool_amount: 11415.846816,
+    initial_usd_pool_amount: 7116.992644861745,
     next_total_lp: ammPoolData.lp_token.value,
     next_xrp_pool_amount: +ammPoolData.amount/1000000,
     next_usd_pool_amount: +ammPoolData.amount2.value,
+    start_date: new Date(1711624864279),
   });
   const { data: { your_current_xrp_worth_as_vnd }, show_log: show_log_1 } = hold_xrp_finance_formular({
     your_birth_date: new Date('mm/DD/yyyy'), // mm/DD/yyyy
@@ -184,8 +189,9 @@ Promise.all([
     your_target_xrp_usd_price: 5.89, // LONG TERM PRICE
   });
 
-  const cash_worth_as_vnd = 0;
-  const for_borrow_worth_as_vnd = 0;
+  const my_usdt = 0;
+  const cash_worth_as_vnd = 0 + my_usdt*current_usd_vnd_price;
+  const for_borrow_worth_as_vnd = 0 + 0 + 0;
 
   show_log_1();
   console.log('\n\n')
