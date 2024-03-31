@@ -32,7 +32,7 @@ function amm_finance_formular({
   const k1 = initial_my_xrp_in_pool*initial_my_usd_in_pool
   const intertest_rate = 1-Math.sqrt(k1/k2)
 
-  const day_earned_count=(current_date.getTime()-start_date.getTime())/ (1000 * 60 * 60 * 24)
+  const day_earned_count=(current_date.getTime()-start_date.getTime())/(1000 * 60 * 60 * 24)
 
   const your_worth_as_vnd = next_my_worth_as_usd_in_pool*current_usd_vnd_price
   const earned_from_fee_worth_as_usd = next_my_worth_as_usd_in_pool*intertest_rate
@@ -48,10 +48,10 @@ function amm_finance_formular({
     Với giá XRP/USD lúc đầu là: ${chalk.yellow(usd(initial_XRP_USD_rate))}, và giá hiện tại là ${chalk.yellow(usd(next_my_XRP_USD_rate))}
     Bạn đang có ${vnd(your_worth_as_vnd)}(${(next_lp_percentage*100).toFixed(2)}% AMM pool) và ${current_my_profit_worth_as_vnd > 0 ? 'lãi' : 'lỗ' } ${chalk[current_my_profit_worth_as_vnd > 0 ? 'green' : 'red'](vnd(Math.abs(current_my_profit_worth_as_vnd)))}
 
-    Từ ngày ${start_date.toDateString()} - ${current_date.toDateString()}
+    Từ ngày ${start_date.toDateString()} - ${current_date.toDateString()}(${((current_date-start_date)/(1000 * 60 * 60 * 24)).toFixed(2)} days)
     Tổng lợi nhuận từ fee là ${(intertest_rate*100).toFixed(5)}% = ${chalk.green(`${(intertest_rate*next_my_xrp_in_pool).toFixed(2)} XRP`)} + ${chalk.green(usd(intertest_rate*next_my_usd_in_pool))}, tương đương ${chalk.green(vnd(earned_from_fee_worth_as_vnd))}
     -------------------------------------------------------------------------------------
-    ${chalk.yellow(`APR: ${(100*365*(intertest_rate/day_earned_count)).toFixed(5)}% = ${usd(365*(earned_from_fee_worth_as_usd/day_earned_count))}(${vnd(365*(earned_from_fee_worth_as_vnd/day_earned_count))})`)}
+    ${chalk.yellow(`APR: ${(100*365*(intertest_rate/day_earned_count)).toFixed(5)}%`)} = ${usd(365*(earned_from_fee_worth_as_usd/day_earned_count))}(${vnd(365*(earned_from_fee_worth_as_vnd/day_earned_count))})
     APM: ${(100*(365/12)*(intertest_rate/day_earned_count)).toFixed(5)}% = ${usd((365/12)*(earned_from_fee_worth_as_usd/day_earned_count))}(${vnd((365/12)*(earned_from_fee_worth_as_vnd/day_earned_count))})
     APK: ${(100*7*(intertest_rate/day_earned_count)).toFixed(5)}% = ${usd(7*(earned_from_fee_worth_as_usd/day_earned_count))}(${vnd(7*(earned_from_fee_worth_as_vnd/day_earned_count))})
     APD: ${(100*(intertest_rate/day_earned_count)).toFixed(5)}% = ${usd(earned_from_fee_worth_as_usd/day_earned_count)}(${vnd(earned_from_fee_worth_as_vnd/day_earned_count)})
@@ -191,7 +191,7 @@ Promise.all([
     recently_lp_amount_added: 0,
   });
   const { data: { your_current_xrp_worth_as_vnd }, show_log: show_log_1 } = hold_xrp_finance_formular({
-    your_birth_date: new Date('000000'), // mm/DD/yyyy
+    your_birth_date: new Date('0/0/0'), // mm/DD/yyyy
     current_date: new Date(Date.now()),
     your_age_that_you_suppose_to_run_out_of_xrp: 60,
     your_current_xrp_amount: +wallet1.Balance / 1000000,
