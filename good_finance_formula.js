@@ -16,12 +16,12 @@ function amm_finance_formular({
   next_total_lp,
   next_xrp_pool_amount,
   next_usd_pool_amount,
+  recently_lp_amount_added,
 }) {
   const initial_lp_percentage=initial_lp/initial_total_lp
   const next_lp_percentage=initial_lp/next_total_lp
   const initial_my_xrp_in_pool=initial_xrp_pool_amount*initial_lp_percentage
   const initial_my_usd_in_pool=initial_usd_pool_amount*initial_lp_percentage
-  const initial_my_worth_as_usd_in_pool=2*initial_my_usd_in_pool
   const initial_XRP_USD_rate = initial_my_usd_in_pool/initial_my_xrp_in_pool
   const next_my_xrp_in_pool=next_xrp_pool_amount*next_lp_percentage
   const next_my_usd_in_pool=next_usd_pool_amount*next_lp_percentage
@@ -38,6 +38,11 @@ function amm_finance_formular({
   const earned_from_fee_worth_as_usd = next_my_worth_as_usd_in_pool*intertest_rate
   const earned_from_fee_worth_as_vnd = earned_from_fee_worth_as_usd*current_usd_vnd_price
   const current_my_profit_worth_as_vnd = next_my_worth_as_usd_in_pool*current_usd_vnd_price - vnd_amount_that_you_used
+
+  const current_xrp_per_lp = (next_xrp_pool_amount/next_total_lp);
+  const current_usd_per_lp = (next_usd_pool_amount/next_total_lp);
+  const xx_rate = recently_lp_amount_added*intertest_rate;
+
   const show_log = () => console.log(`
     ${chalk.green(`XRP/Gatehub USD AMM Analysis: ${vnd(your_worth_as_vnd)}`)}
     Với giá XRP/USD lúc đầu là: ${chalk.yellow(usd(initial_XRP_USD_rate))}, và giá hiện tại là ${chalk.yellow(usd(next_my_XRP_USD_rate))}
@@ -55,6 +60,10 @@ function amm_finance_formular({
     initial_xrp_pool_amount: ${next_xrp_pool_amount},
     initial_usd_pool_amount: ${next_usd_pool_amount},
     start_date: new Date(${Date.now()}),
+    ${!!recently_lp_amount_added ? ` --- with recently_lp_amount_added should not acounting
+    initial_total_lp: ${initial_total_lp + xx_rate},
+    initial_xrp_pool_amount: ${initial_xrp_pool_amount+current_xrp_per_lp*xx_rate},
+    initial_usd_pool_amount: ${initial_usd_pool_amount+current_usd_per_lp*xx_rate},` : ''}
   `);
   return {
     data: {
@@ -156,8 +165,8 @@ function hold_xrp_finance_formular({
 }
 
 Promise.all([
-  fetch("https://api.xrpscan.com/api/v1/account/..."),
-  fetch("https://api.xrpscan.com/api/v1/account/.../assets"),
+  fetch("https://api.xrpscan.com/api/v1/account/0"),
+  fetch("https://api.xrpscan.com/api/v1/account/0/assets"),
   fetch("https://api.xrpscan.com/api/v1/amm/rs9ineLqrCzeAGS1bxsrW8x2n3bRJYAh3Q"),
 ])
 .then(async ([r1, r2, r3]) => [await r1.json(), await r2.json(), await r3.json()])
@@ -169,16 +178,20 @@ Promise.all([
     vnd_amount_that_you_used: 0,
     current_usd_vnd_price,
     initial_lp: amm.value,
-    initial_total_lp: 8688330.130193409,
-    initial_xrp_pool_amount: 11415.846816,
-    initial_usd_pool_amount: 7116.992644861745,
+    // initial_total_lp: 8688330.130193409,
+    // initial_xrp_pool_amount: 11415.846816,
+    // initial_usd_pool_amount: 7116.992644861745,
     next_total_lp: ammPoolData.lp_token.value,
     next_xrp_pool_amount: +ammPoolData.amount/1000000,
     next_usd_pool_amount: +ammPoolData.amount2.value,
+    initial_total_lp: 8688870.025097352,
+    initial_xrp_pool_amount: 11416.55880595533,
+    initial_usd_pool_amount: 7117.434230571451,
     start_date: new Date(1711624864279),
+    recently_lp_amount_added: 0,
   });
   const { data: { your_current_xrp_worth_as_vnd }, show_log: show_log_1 } = hold_xrp_finance_formular({
-    your_birth_date: new Date('0'), // mm/DD/yyyy
+    your_birth_date: new Date('000000'), // mm/DD/yyyy
     current_date: new Date(Date.now()),
     your_age_that_you_suppose_to_run_out_of_xrp: 60,
     your_current_xrp_amount: +wallet1.Balance / 1000000,
